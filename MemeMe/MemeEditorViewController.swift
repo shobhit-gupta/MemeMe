@@ -11,7 +11,9 @@ import UIKit
 class MemeEditorViewController: UIViewController {
 
     // MARK: IBOutlets
-    
+    @IBOutlet weak var camera: ArtKitButton!
+    @IBOutlet weak var album: ArtKitButton!
+    @IBOutlet weak var popular: ArtKitButton!
     
     
     // MARK: Public variables and types
@@ -25,6 +27,7 @@ class MemeEditorViewController: UIViewController {
     // MARK: ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
     
     
@@ -33,3 +36,28 @@ class MemeEditorViewController: UIViewController {
 
 }
 
+
+//******************************************************************************
+//                              MARK: User Interface
+//******************************************************************************
+extension MemeEditorViewController {
+    
+    func setupUI() {
+        setupView()
+        setupImageSourceSelector()
+    }
+    
+    
+    func setupView() {
+        view.backgroundColor = ArtKit.primaryColor
+    }
+    
+    
+    func setupImageSourceSelector() {
+        camera.kind = .camera(blendMode: .normal)
+        album.kind = .album(blendMode: .normal)
+        popular.kind = .popular(blendMode: .normal)
+        camera.isHidden = !UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+    
+}

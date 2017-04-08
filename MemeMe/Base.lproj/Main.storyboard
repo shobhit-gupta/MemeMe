@@ -23,20 +23,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="oIM-dT-fSO" userLabel="Image Source Stack View">
-                                <rect key="frame" x="78.5" y="220.5" width="163.5" height="39"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="oIM-dT-fSO" userLabel="Image Source Selector Stack View">
+                                <rect key="frame" x="91" y="224.5" width="139" height="31"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAr-pc-ai1" userLabel="Camera" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="38.5" height="39"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="eAr-pc-ai1" secondAttribute="height" multiplier="1:1" id="fWx-iM-Bf6"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.0" width="30.5" height="31"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPe-ev-tHQ" userLabel="Album" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="62.5" y="0.0" width="38.5" height="39"/>
+                                        <rect key="frame" x="54.5" y="0.0" width="30" height="31"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbA-u8-0sJ" userLabel="Popular" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="125" y="0.0" width="38.5" height="39"/>
+                                        <rect key="frame" x="108.5" y="0.0" width="30.5" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="vbA-u8-0sJ" secondAttribute="height" multiplier="1:1" id="1au-oX-3J2"/>
+                                        </constraints>
                                     </button>
                                 </subviews>
                                 <variation key="widthClass=compact" spacing="24"/>
@@ -45,10 +45,17 @@
                         <color key="backgroundColor" red="0.91372549020000005" green="0.10980392160000001" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="oIM-dT-fSO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="20r-6k-3IB"/>
+                            <constraint firstItem="oIM-dT-fSO" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.36" constant="48" id="62f-hX-u4E">
+                                <variation key="widthClass=compact" constant="24"/>
+                            </constraint>
                             <constraint firstItem="oIM-dT-fSO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L0R-Rj-TtC"/>
-                            <constraint firstItem="eAr-pc-ai1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.12" id="RHe-d7-vQm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="album" destination="gPe-ev-tHQ" id="RgW-z6-H2t"/>
+                        <outlet property="camera" destination="eAr-pc-ai1" id="CfF-qB-MNX"/>
+                        <outlet property="popular" destination="vbA-u8-0sJ" id="xOg-ep-zbk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
