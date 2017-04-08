@@ -16,6 +16,7 @@
 		EE894AC61E5C99AC0066A4FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE894AC41E5C99AC0066A4FE /* LaunchScreen.storyboard */; };
 		EE894AD11E5C99AC0066A4FE /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894AD01E5C99AC0066A4FE /* MemeMeTests.swift */; };
 		EE894ADC1E5C99AC0066A4FE /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */; };
+		EEDF111D1E99117700BCCF05 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EEDF111C1E99117700BCCF05 /* ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		EE894AD71E5C99AC0066A4FE /* MemeMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		EE894ADD1E5C99AC0066A4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEDF111C1E99117700BCCF05 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = Fonts/ionicons.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		EE44A7DC1E97D1B800C9C49F /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				EEDF111B1E99116100BCCF05 /* Fonts */,
 				EE894ABF1E5C99AC0066A4FE /* Main.storyboard */,
 				EE894AC21E5C99AC0066A4FE /* Assets.xcassets */,
 				EE894AC41E5C99AC0066A4FE /* LaunchScreen.storyboard */,
@@ -161,6 +164,14 @@
 				EE894ADD1E5C99AC0066A4FE /* Info.plist */,
 			);
 			path = MemeMeUITests;
+			sourceTree = "<group>";
+		};
+		EEDF111B1E99116100BCCF05 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EEDF111C1E99117700BCCF05 /* ionicons.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +286,7 @@
 			files = (
 				EE894AC61E5C99AC0066A4FE /* LaunchScreen.storyboard in Resources */,
 				EE894AC31E5C99AC0066A4FE /* Assets.xcassets in Resources */,
+				EEDF111D1E99117700BCCF05 /* ionicons.ttf in Resources */,
 				EE894AC11E5C99AC0066A4FE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
