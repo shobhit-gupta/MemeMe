@@ -17,6 +17,7 @@ class MemeEditorViewController: UIViewController {
     
     
     // MARK: Public variables and types
+   
     
     
     
@@ -42,8 +43,15 @@ class MemeEditorViewController: UIViewController {
 //******************************************************************************
 extension MemeEditorViewController {
     
+    // Not called when navigation controller displays a navigation bar.
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    
     func setupUI() {
         setupView()
+        setupNavBar()
         setupImageSourceSelector()
     }
     
@@ -53,11 +61,22 @@ extension MemeEditorViewController {
     }
     
     
+    func setupNavBar() {
+        if let navbar = navigationController?.navigationBar {
+            navbar.barTintColor = ArtKit.primaryColor
+            // To set the status bar style to lightcontent when the navigation
+            // controller displays a navigation bar.
+            navbar.barStyle = .black
+        }
+    }
+    
+    
     func setupImageSourceSelector() {
         camera.kind = .camera(blendMode: .normal)
         album.kind = .album(blendMode: .normal)
         popular.kind = .popular(blendMode: .normal)
         camera.isHidden = !UIImagePickerController.isSourceTypeAvailable(.camera)
     }
+    
     
 }
