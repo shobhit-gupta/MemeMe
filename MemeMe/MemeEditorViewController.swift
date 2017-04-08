@@ -10,15 +10,25 @@ import UIKit
 
 class MemeEditorViewController: UIViewController {
 
+    // MARK: IBOutlets
+    
+    
+    
+    // MARK: Public variables and types
+    
+    
+    
+    // MARK: Private variables and types
+    
+    
+    
+    // MARK: ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
+    
+    // MARK: IBActions
 
 
 }
