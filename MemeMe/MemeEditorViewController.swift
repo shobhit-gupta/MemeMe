@@ -58,12 +58,15 @@ class MemeEditorViewController: UIViewController {
     @IBAction func showImageSource(_ sender: ArtKitButton) {
         switch sender.kind {
         case .camera:
-            print("Camera pressed")
+            sender.kind = .camera(blendMode: .overlay)
+            pickAnImage(from: .camera)
         case .album:
-            print("Album pressed")
+            sender.kind = .album(blendMode: .overlay)
+            pickAnImage(from: .photoLibrary)
         case .popular:
-            print("Popular pressed")
+            sender.kind = .popular(blendMode: .overlay)
         }
+        
     }
     
 }
@@ -113,8 +116,52 @@ extension MemeEditorViewController {
         camera.kind = .camera(blendMode: .normal)
         album.kind = .album(blendMode: .normal)
         popular.kind = .popular(blendMode: .normal)
+        camera.backgroundColor = ArtKit.backgroundColor
+        album.backgroundColor = ArtKit.backgroundColor
+        popular.backgroundColor = ArtKit.backgroundColor
         camera.isHidden = !UIImagePickerController.isSourceTypeAvailable(.camera)
     }
     
     
+    func updateUI() {
+        
+    }
+    
+    
 }
+
+
+//******************************************************************************
+//                              MARK: Pick Image
+//******************************************************************************
+extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func pickAnImage(from sourceType: UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+        }
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+}
+
+
+
+
+
+
+
