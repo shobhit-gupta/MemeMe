@@ -32,6 +32,12 @@ class MemeEditorViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        camera.setNeedsDisplay()
+        album.setNeedsDisplay()
+        popular.setNeedsDisplay()
+    }
     
     // MARK: Actions
     @IBAction func share(_ sender: UIBarButtonItem) {
