@@ -16,14 +16,25 @@ class MemeEditorViewController: UIViewController {
     @IBOutlet weak var popular: ArtKitButton!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
-    
+    @IBOutlet weak var imageSourceSelector: UIStackView!
     
     // MARK: Public variables and types
    
     
     
     // MARK: Private variables and types
+    fileprivate enum State {
+        case selectImage
+        case selectText
+        case inputText
+        case memeReady
+    }
     
+    fileprivate var currentState: State = .selectImage {
+        didSet {
+            updateUI()
+        }
+    }
     
     
     // MARK: ViewController Methods
@@ -123,8 +134,23 @@ extension MemeEditorViewController {
     }
     
     
+    
+    
     func updateUI() {
+        switch currentState {
+        case .selectImage:
+            imageSourceSelector.isHidden = false
+            ArtKitButton.setBlendMode(of: [camera, album, popular], to: .normal)
         
+        case .selectText:
+            imageSourceSelector.isHidden = true
+            
+        case .inputText:
+            imageSourceSelector.isHidden = true
+            
+        case .memeReady:
+            imageSourceSelector.isHidden = true
+        }
     }
     
     
@@ -145,8 +171,10 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
+        if let _ = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            currentState = .selectText
+        } else {
+            currentState = .selectImage
         }
         picker.dismiss(animated: true, completion: nil)
         
@@ -155,6 +183,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+        currentState = .selectImage
     }
 
 }

@@ -100,6 +100,7 @@
                         <outlet property="album" destination="gPe-ev-tHQ" id="RgW-z6-H2t"/>
                         <outlet property="camera" destination="eAr-pc-ai1" id="CfF-qB-MNX"/>
                         <outlet property="doneButton" destination="oJ5-b1-hJu" id="5n0-t3-DNK"/>
+                        <outlet property="imageSourceSelector" destination="oIM-dT-fSO" id="rVF-hj-dZl"/>
                         <outlet property="popular" destination="vbA-u8-0sJ" id="xOg-ep-zbk"/>
                         <outlet property="shareButton" destination="oBL-ng-5Uc" id="9Xg-hH-24C"/>
                     </connections>

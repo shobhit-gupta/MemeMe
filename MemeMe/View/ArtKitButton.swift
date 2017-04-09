@@ -40,5 +40,18 @@ class ArtKitButton: UIButton {
         }
     }
     
+    
+    class func setBlendMode(of buttons: [ArtKitButton], to blendMode: BlendMode) {
+        for button in buttons {
+            if case .camera = button.kind {
+                button.kind = .camera(blendMode: blendMode)
+            } else if case .album = button.kind {
+                button.kind = .album(blendMode: blendMode)
+            } else if case .popular = button.kind {
+                button.kind = .popular(blendMode: blendMode)
+            }
+        }
+    }
+    
 
 }
