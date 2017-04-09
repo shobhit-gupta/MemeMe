@@ -14,11 +14,12 @@ class MemeEditorViewController: UIViewController {
     @IBOutlet weak var camera: ArtKitButton!
     @IBOutlet weak var album: ArtKitButton!
     @IBOutlet weak var popular: ArtKitButton!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     
     // MARK: Public variables and types
    
-    
     
     
     // MARK: Private variables and types
@@ -32,9 +33,33 @@ class MemeEditorViewController: UIViewController {
     }
     
     
-    // MARK: IBActions
+    // MARK: Actions
+    @IBAction func share(_ sender: UIBarButtonItem) {
+        print("Share pressed")
+    }
+    
+    
+    @IBAction func done(_ sender: UIBarButtonItem) {
+        print("Done pressed")
+    }
+    
+    
+    @IBAction func close(_ sender: UIBarButtonItem) {
+        print("Close pressed")
+    }
+    
 
-
+    @IBAction func showImageSource(_ sender: ArtKitButton) {
+        switch sender.kind {
+        case .camera:
+            print("Camera pressed")
+        case .album:
+            print("Album pressed")
+        case .popular:
+            print("Popular pressed")
+        }
+    }
+    
 }
 
 
@@ -57,16 +82,18 @@ extension MemeEditorViewController {
     
     
     func setupView() {
-        view.backgroundColor = ArtKit.primaryColor
+        view.backgroundColor = ArtKit.backgroundColor
     }
     
     
     func setupNavBar() {
         if let navbar = navigationController?.navigationBar {
             navbar.barTintColor = ArtKit.primaryColor
+            navbar.tintColor = ArtKit.secondaryColor
             // To set the status bar style to lightcontent when the navigation
             // controller displays a navigation bar.
             navbar.barStyle = .black
+            title = "Create"
         }
     }
     

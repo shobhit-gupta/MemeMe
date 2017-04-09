@@ -17,6 +17,11 @@
 		EE894AD11E5C99AC0066A4FE /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894AD01E5C99AC0066A4FE /* MemeMeTests.swift */; };
 		EE894ADC1E5C99AC0066A4FE /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */; };
 		EEDF111D1E99117700BCCF05 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EEDF111C1E99117700BCCF05 /* ionicons.ttf */; };
+		EEDF11241E99F41900BCCF05 /* Convenience - Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF111F1E99F41900BCCF05 /* Convenience - Array.swift */; };
+		EEDF11251E99F41900BCCF05 /* Convenience - BarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF11201E99F41900BCCF05 /* Convenience - BarButtonItem.swift */; };
+		EEDF11261E99F41900BCCF05 /* Convenience - CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF11211E99F41900BCCF05 /* Convenience - CALayer.swift */; };
+		EEDF11271E99F41900BCCF05 /* Convenience - Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF11221E99F41900BCCF05 /* Convenience - Color.swift */; };
+		EEDF11281E99F41900BCCF05 /* Convenience - String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF11231E99F41900BCCF05 /* Convenience - String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,11 @@
 		EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		EE894ADD1E5C99AC0066A4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEDF111C1E99117700BCCF05 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = Fonts/ionicons.ttf; sourceTree = "<group>"; };
+		EEDF111F1E99F41900BCCF05 /* Convenience - Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Convenience - Array.swift"; path = "Reusable/Convenience/Convenience - Array.swift"; sourceTree = "<group>"; };
+		EEDF11201E99F41900BCCF05 /* Convenience - BarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Convenience - BarButtonItem.swift"; path = "Reusable/Convenience/Convenience - BarButtonItem.swift"; sourceTree = "<group>"; };
+		EEDF11211E99F41900BCCF05 /* Convenience - CALayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Convenience - CALayer.swift"; path = "Reusable/Convenience/Convenience - CALayer.swift"; sourceTree = "<group>"; };
+		EEDF11221E99F41900BCCF05 /* Convenience - Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Convenience - Color.swift"; path = "Reusable/Convenience/Convenience - Color.swift"; sourceTree = "<group>"; };
+		EEDF11231E99F41900BCCF05 /* Convenience - String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Convenience - String.swift"; path = "Reusable/Convenience/Convenience - String.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +128,7 @@
 		EE894AAF1E5C99AC0066A4FE = {
 			isa = PBXGroup;
 			children = (
+				EEDF111E1E99F37E00BCCF05 /* Reusable */,
 				EE894ABA1E5C99AC0066A4FE /* MemeMe */,
 				EE894ACF1E5C99AC0066A4FE /* MemeMeTests */,
 				EE894ADA1E5C99AC0066A4FE /* MemeMeUITests */,
@@ -172,6 +183,26 @@
 				EEDF111C1E99117700BCCF05 /* ionicons.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		EEDF111E1E99F37E00BCCF05 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				EEDF11291E99F43200BCCF05 /* Convenience Extensions */,
+			);
+			name = Reusable;
+			sourceTree = "<group>";
+		};
+		EEDF11291E99F43200BCCF05 /* Convenience Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EEDF111F1E99F41900BCCF05 /* Convenience - Array.swift */,
+				EEDF11201E99F41900BCCF05 /* Convenience - BarButtonItem.swift */,
+				EEDF11211E99F41900BCCF05 /* Convenience - CALayer.swift */,
+				EEDF11221E99F41900BCCF05 /* Convenience - Color.swift */,
+				EEDF11231E99F41900BCCF05 /* Convenience - String.swift */,
+			);
+			name = "Convenience Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,7 +345,12 @@
 			files = (
 				EE44A7E01E97D39800C9C49F /* ArtKitButton.swift in Sources */,
 				EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */,
+				EEDF11251E99F41900BCCF05 /* Convenience - BarButtonItem.swift in Sources */,
+				EEDF11241E99F41900BCCF05 /* Convenience - Array.swift in Sources */,
+				EEDF11281E99F41900BCCF05 /* Convenience - String.swift in Sources */,
 				EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */,
+				EEDF11271E99F41900BCCF05 /* Convenience - Color.swift in Sources */,
+				EEDF11261E99F41900BCCF05 /* Convenience - CALayer.swift in Sources */,
 				EE44A7DE1E97D23200C9C49F /* ArtKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

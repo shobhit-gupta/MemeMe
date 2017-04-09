@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -44,15 +45,24 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAr-pc-ai1" userLabel="Camera" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="30.5" height="31"/>
+                                        <connections>
+                                            <action selector="showImageSource:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vpk-bJ-jw6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPe-ev-tHQ" userLabel="Album" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
                                         <rect key="frame" x="54.5" y="0.0" width="30" height="31"/>
+                                        <connections>
+                                            <action selector="showImageSource:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zn0-gW-xdY"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbA-u8-0sJ" userLabel="Popular" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
                                         <rect key="frame" x="108.5" y="0.0" width="30.5" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vbA-u8-0sJ" secondAttribute="height" multiplier="1:1" id="1au-oX-3J2"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="showImageSource:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PqQ-pG-ceM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <variation key="widthClass=compact" spacing="24"/>
@@ -67,11 +77,31 @@
                             <constraint firstItem="oIM-dT-fSO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L0R-Rj-TtC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="QOW-54-a5o"/>
+                    <navigationItem key="navigationItem" id="QOW-54-a5o">
+                        <leftBarButtonItems>
+                            <barButtonItem enabled="NO" image="ShareBarButton" id="oBL-ng-5Uc" userLabel="Share">
+                                <connections>
+                                    <action selector="share:" destination="BYZ-38-t0r" id="oFH-up-LhR"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem enabled="NO" image="DoneBarButton" id="oJ5-b1-hJu" userLabel="Done">
+                                <connections>
+                                    <action selector="done:" destination="BYZ-38-t0r" id="8is-Yr-uaZ"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="CloseBarButton" id="Jhw-s4-Rbj" userLabel="Close">
+                            <connections>
+                                <action selector="close:" destination="BYZ-38-t0r" id="MQK-C8-0Eh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="album" destination="gPe-ev-tHQ" id="RgW-z6-H2t"/>
                         <outlet property="camera" destination="eAr-pc-ai1" id="CfF-qB-MNX"/>
+                        <outlet property="doneButton" destination="oJ5-b1-hJu" id="5n0-t3-DNK"/>
                         <outlet property="popular" destination="vbA-u8-0sJ" id="xOg-ep-zbk"/>
+                        <outlet property="shareButton" destination="oBL-ng-5Uc" id="9Xg-hH-24C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -79,4 +109,9 @@
             <point key="canvasLocation" x="-741" y="145"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CloseBarButton" width="22" height="22"/>
+        <image name="DoneBarButton" width="22" height="22"/>
+        <image name="ShareBarButton" width="22" height="22"/>
+    </resources>
 </document>
