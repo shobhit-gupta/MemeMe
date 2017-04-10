@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5Yu-dK-Lf3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XRk-mQ-O5k">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,6 +29,39 @@
             </objects>
             <point key="canvasLocation" x="-1694" y="146"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="n5b-J5-Bgh">
+            <objects>
+                <viewController id="XRk-mQ-O5k" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JBv-AO-v7N"/>
+                        <viewControllerLayoutGuide type="bottom" id="kpK-3G-hyl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vz0-my-687">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="u7K-nf-SdK" customClass="MemeView" customModule="MemeMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="Boromir"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="u7K-nf-SdK" firstAttribute="leading" secondItem="Vz0-my-687" secondAttribute="leadingMargin" constant="-16" id="9A3-Qo-Z9j"/>
+                            <constraint firstItem="u7K-nf-SdK" firstAttribute="bottom" secondItem="kpK-3G-hyl" secondAttribute="top" constant="-100" id="A2k-CR-jmt"/>
+                            <constraint firstItem="u7K-nf-SdK" firstAttribute="top" secondItem="JBv-AO-v7N" secondAttribute="bottom" constant="-20" id="UTe-ab-fGu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="u7K-nf-SdK" secondAttribute="trailing" constant="-16" id="ulT-hK-ICA"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4R8-g3-Ybg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1688" y="838"/>
+        </scene>
         <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -41,22 +75,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="oIM-dT-fSO" userLabel="Image Source Selector Stack View">
-                                <rect key="frame" x="91" y="224.5" width="139" height="31"/>
+                                <rect key="frame" x="90.5" y="225" width="139" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAr-pc-ai1" userLabel="Camera" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="30.5" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="30.5" height="30"/>
                                         <connections>
                                             <action selector="showImageSource:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vpk-bJ-jw6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPe-ev-tHQ" userLabel="Album" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="54.5" y="0.0" width="30" height="31"/>
+                                        <rect key="frame" x="54.5" y="0.0" width="30" height="30"/>
                                         <connections>
                                             <action selector="showImageSource:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zn0-gW-xdY"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbA-u8-0sJ" userLabel="Popular" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="108.5" y="0.0" width="30.5" height="31"/>
+                                        <rect key="frame" x="108.5" y="0.0" width="30.5" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vbA-u8-0sJ" secondAttribute="height" multiplier="1:1" id="1au-oX-3J2"/>
                                         </constraints>
@@ -67,6 +101,55 @@
                                 </subviews>
                                 <variation key="widthClass=compact" spacing="24"/>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLy-Uf-LNN" userLabel="Meme">
+                                <rect key="frame" x="16" y="72" width="288" height="416"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boromir" translatesAutoresizingMaskIntoConstraints="NO" id="JbM-tS-wry" userLabel="Image">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="416"/>
+                                        <color key="backgroundColor" red="0.08235294118" green="0.64313725489999995" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mG9-2J-IoL" userLabel="Augmented Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="416"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rv1-T2-dlM">
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="138.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TpN-Mh-dJk" userLabel="Close Image Stack View">
+                                                <rect key="frame" x="129" y="138.5" width="30" height="139"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1q-vR-RWm" userLabel="Close Image" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="52.5" width="30" height="34"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOTTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cO7-MU-NdS">
+                                                <rect key="frame" x="0.0" y="277.5" width="288" height="138.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="rv1-T2-dlM" firstAttribute="width" secondItem="mG9-2J-IoL" secondAttribute="width" id="Ioe-PX-BY5"/>
+                                            <constraint firstItem="cO7-MU-NdS" firstAttribute="width" secondItem="mG9-2J-IoL" secondAttribute="width" id="Qit-qp-a00"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="JbM-tS-wry" secondAttribute="bottom" id="GRQ-zb-7eM"/>
+                                    <constraint firstAttribute="trailing" secondItem="JbM-tS-wry" secondAttribute="trailing" id="Id1-3b-3Au"/>
+                                    <constraint firstItem="mG9-2J-IoL" firstAttribute="bottom" secondItem="JbM-tS-wry" secondAttribute="bottom" id="KGm-zG-68J"/>
+                                    <constraint firstItem="mG9-2J-IoL" firstAttribute="leading" secondItem="JbM-tS-wry" secondAttribute="leading" id="WtB-Pp-jVd"/>
+                                    <constraint firstItem="JbM-tS-wry" firstAttribute="leading" secondItem="MLy-Uf-LNN" secondAttribute="leading" id="Zww-ZV-9KP"/>
+                                    <constraint firstItem="JbM-tS-wry" firstAttribute="top" secondItem="MLy-Uf-LNN" secondAttribute="top" id="eWL-xR-CPF"/>
+                                    <constraint firstItem="mG9-2J-IoL" firstAttribute="trailing" secondItem="JbM-tS-wry" secondAttribute="trailing" id="lm7-kN-AP2"/>
+                                    <constraint firstItem="mG9-2J-IoL" firstAttribute="top" secondItem="JbM-tS-wry" secondAttribute="top" id="sDp-lR-90U"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.91372549020000005" green="0.10980392160000001" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -74,7 +157,11 @@
                             <constraint firstItem="oIM-dT-fSO" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.36" constant="48" id="62f-hX-u4E">
                                 <variation key="widthClass=compact" constant="24"/>
                             </constraint>
+                            <constraint firstItem="MLy-Uf-LNN" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="8" symbolic="YES" id="Ch0-KH-JYo"/>
                             <constraint firstItem="oIM-dT-fSO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L0R-Rj-TtC"/>
+                            <constraint firstItem="MLy-Uf-LNN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Y2m-f7-yOh"/>
+                            <constraint firstItem="MLy-Uf-LNN" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="hbt-rl-Ptf"/>
+                            <constraint firstItem="MLy-Uf-LNN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="oM3-lk-WoS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QOW-54-a5o">
@@ -107,10 +194,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-741" y="145"/>
+            <point key="canvasLocation" x="-742.5" y="145"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Boromir" width="1280" height="720"/>
         <image name="CloseBarButton" width="22" height="22"/>
         <image name="DoneBarButton" width="22" height="22"/>
         <image name="ShareBarButton" width="22" height="22"/>
