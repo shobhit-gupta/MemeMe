@@ -76,6 +76,8 @@ class MemeEditorViewController: UIViewController {
             pickAnImage(from: .photoLibrary)
         case .popular:
             sender.kind = .popular(blendMode: .overlay)
+        default:
+            break
         }
         
     }

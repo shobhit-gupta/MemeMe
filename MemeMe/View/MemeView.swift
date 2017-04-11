@@ -47,7 +47,6 @@ class DynamicImageView: UIView {
     
     
     private func commonInit() {
-        backgroundColor = UIColor.red
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = ArtKit.primaryColor
         addSubview(imageView)
@@ -65,9 +64,9 @@ class DynamicImageView: UIView {
         if shouldSetupConstraints {
             setImageViewSizeConstraints()
             imageView.autoCenterInSuperview()
-            shouldSetupConstraints = false
         }
         super.updateConstraints()
+        shouldSetupConstraints = false
     }
     
     
@@ -114,6 +113,103 @@ class DynamicImageView: UIView {
 
 
 class MemeView: DynamicImageView {
+    
+    public let augmentedStackView = UIStackView(frame: CGRect.zero)
+    public var top = UILabel(frame: CGRect.zero)
+    public var bottom = UILabel(frame: CGRect.zero)
+    public var closeImage = ArtKitButton(frame: CGRect.zero)
+    
+    
+    // MARK: Private variables and types
+    private var shouldSetupConstraints = true
+    
+    
+    // MARK: Initializers
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    
+    private func commonInit() {
+        setupView()
+    }
+    
+    
+    // MARK: View Methods
+    override func updateConstraints() {
+        if shouldSetupConstraints {
+            addConstraintsForAugmentedStackView()
+            addConstraintsForLabels()
+        }
+        super.updateConstraints()
+        shouldSetupConstraints = false
+    }
+    
+    
+    private func addConstraintsForAugmentedStackView() {
+        augmentedStackView.autoPinEdge(.top, to: .top, of: imageView)
+        augmentedStackView.autoPinEdge(.bottom, to: .bottom, of: imageView)
+        augmentedStackView.autoPinEdge(.leading, to: .leading, of: imageView)
+        augmentedStackView.autoPinEdge(.trailing, to: .trailing, of: imageView)
+    }
+    
+    
+    private func addConstraintsForLabels() {
+        top.autoMatch(.width, to: .width, of: augmentedStackView)
+        bottom.autoMatch(.width, to: .width, of: augmentedStackView)
+    }
+    
+    
+}
+
+
+//******************************************************************************
+//                              MARK: MemeView Setup
+//******************************************************************************
+extension MemeView {
+    
+    fileprivate func setupView() {
+        setupLabel(top, withText: "TOP")
+        setupCloseImage()
+        setupLabel(bottom, withText: "BOTTOM")
+        setupAugmentedStackView()
+    }
+    
+    fileprivate func setupLabel(_ label: UILabel, withText text: String) {
+        label.text = text
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+    }
+    
+    
+    fileprivate func setupAugmentedStackView() {
+        augmentedStackView.axis = .vertical
+        augmentedStackView.alignment = .center
+        augmentedStackView.distribution = .fillEqually
+        
+        let closeImageStackView = UIStackView()
+        closeImageStackView.axis = .horizontal
+        closeImageStackView.alignment = .center
+        closeImageStackView.addArrangedSubview(closeImage)
+        
+        augmentedStackView.addArrangedSubview(top)
+        augmentedStackView.addArrangedSubview(closeImageStackView)
+        augmentedStackView.addArrangedSubview(bottom)
+        
+        addSubview(augmentedStackView)
+    }
+    
+    
+    fileprivate func setupCloseImage() {
+        closeImage.kind = .closeImage
+    }
     
 }
 
