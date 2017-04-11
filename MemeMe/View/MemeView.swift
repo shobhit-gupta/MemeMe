@@ -9,118 +9,26 @@
 import UIKit
 import PureLayout
 
-
-@IBDesignable
-class DynamicImageView: UIView {
-    
-    // MARK: IBInspectables
-    @IBInspectable public var image: UIImage? {
-        didSet {
-            if let image = image {
-                imageView.image = image
-                updateImageViewSize()
-            }
-        }
-    }
-    
-    
-    // MARK: Private variables and types
-    fileprivate let imageView: UIImageView = UIImageView(frame: CGRect.zero)
-    
-    private var shouldSetupConstraints = true
-    private var imageViewSizeConstraints: [NSLayoutConstraint]?
-    private var availableSpace: CGRect {
-        return bounds
-    }
-    
-    // MARK: Initializers
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    
-    private func commonInit() {
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = ArtKit.primaryColor
-        addSubview(imageView)
-    }
-
-    
-    // MARK: View Methods
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        updateImageViewSize()
-    }
-    
-    
-    override func updateConstraints() {
-        if shouldSetupConstraints {
-            setImageViewSizeConstraints()
-            imageView.autoCenterInSuperview()
-        }
-        super.updateConstraints()
-        shouldSetupConstraints = false
-    }
-    
-    
-    // MARK: Private Methods
-    private func remove(previous constraints: [NSLayoutConstraint]?) {
-        if let constraints = constraints {
-            for constraint in constraints {
-                constraint.autoRemove()
-            }
-        }
-    }
-    
-    
-    private func setImageViewSizeConstraints() {
-        remove(previous: imageViewSizeConstraints)
-        imageViewSizeConstraints = imageView.autoSetDimensions(to: imageView.bounds.size)
-    }
-    
-    
-    private func updateImageViewSize() {
-        if let image = image {
-            imageView.bounds.size = make(size: image.size, fitIn: availableSpace.size)
-            setImageViewSizeConstraints()
-        }
-    }
-    
-    
-    // Modified from: http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
-    private func make(size originalSize: CGSize, fitIn boxSize: CGSize) -> CGSize {
-        var originalSize = originalSize
-        if originalSize.width == 0 { originalSize.width = boxSize.width }
-        if originalSize.height == 0 { originalSize.height = boxSize.height }
-        
-        let widthScale = boxSize.width / originalSize.width
-        let heightScale = boxSize.height / originalSize.height
-        
-        let scale = min(widthScale, heightScale)
-        
-        return CGSize(width: originalSize.width * scale, height: originalSize.height * scale)
-    }
-
+@objc
+protocol MemeViewDelegate: class {
+    func closeImageButtonPressed()
 }
 
 
-
+@IBDesignable
 class MemeView: DynamicImageView {
     
-    public let augmentedStackView = UIStackView(frame: CGRect.zero)
-    public var top = UILabel(frame: CGRect.zero)
-    public var bottom = UILabel(frame: CGRect.zero)
-    public var closeImage = ArtKitButton(frame: CGRect.zero)
+    // MARK: Public variables and types
+    @IBOutlet public var delegate: MemeViewDelegate? { didSet { resetTargetActionForCloseImageButton() } }
+    @IBInspectable public var topText: String? { didSet { resetLabelsText() } }
+    @IBInspectable public var bottomText: String? { didSet { resetLabelsText() } }
     
     
     // MARK: Private variables and types
+    fileprivate let augmentedStackView = UIStackView(frame: CGRect.zero)
+    fileprivate let top = UILabel(frame: CGRect.zero)
+    fileprivate let bottom = UILabel(frame: CGRect.zero)
+    fileprivate let closeImageButton = ArtKitButton(frame: CGRect.zero)
     private var shouldSetupConstraints = true
     
     
@@ -176,16 +84,34 @@ class MemeView: DynamicImageView {
 extension MemeView {
     
     fileprivate func setupView() {
-        setupLabel(top, withText: "TOP")
-        setupCloseImage()
-        setupLabel(bottom, withText: "BOTTOM")
+        setupLabels()
+        setupcloseImageButton()
         setupAugmentedStackView()
     }
     
-    fileprivate func setupLabel(_ label: UILabel, withText text: String) {
-        label.text = text
+    
+    fileprivate func setupLabels() {
+        setupLabel(top)
+        setupLabel(bottom)
+        resetLabelsText()
+    }
+    
+    
+    fileprivate func setupLabel(_ label: UILabel) {
         label.textColor = UIColor.white
         label.textAlignment = .center
+        label.numberOfLines = 0
+    }
+    
+    
+    fileprivate func resetLabelsText() {
+        resetLabel(top, withText: topText ?? "TOP")
+        resetLabel(bottom, withText: bottomText ?? "BOTTOM")
+    }
+    
+    
+    fileprivate func resetLabel(_ label: UILabel, withText text: String) {
+        label.text = text
     }
     
     
@@ -194,27 +120,146 @@ extension MemeView {
         augmentedStackView.alignment = .center
         augmentedStackView.distribution = .fillEqually
         
-        let closeImageStackView = UIStackView()
-        closeImageStackView.axis = .horizontal
-        closeImageStackView.alignment = .center
-        closeImageStackView.addArrangedSubview(closeImage)
+        let closeImageButtonStackView = UIStackView()
+        closeImageButtonStackView.axis = .horizontal
+        closeImageButtonStackView.alignment = .center
+        closeImageButtonStackView.addArrangedSubview(closeImageButton)
         
         augmentedStackView.addArrangedSubview(top)
-        augmentedStackView.addArrangedSubview(closeImageStackView)
+        augmentedStackView.addArrangedSubview(closeImageButtonStackView)
         augmentedStackView.addArrangedSubview(bottom)
         
         addSubview(augmentedStackView)
     }
     
     
-    fileprivate func setupCloseImage() {
-        closeImage.kind = .closeImage
+    fileprivate func setupcloseImageButton() {
+        closeImageButton.kind = .closeImage
+        resetTargetActionForCloseImageButton()
+    }
+    
+    
+    fileprivate func resetTargetActionForCloseImageButton() {
+        if let delegate = delegate {
+            closeImageButton.addTarget(delegate, action: #selector(MemeViewDelegate.closeImageButtonPressed), for: .touchUpInside)
+        }
     }
     
 }
 
 
 
+
+
+
+
+
+
+
+
+
+//******************************************************************************
+//                              MARK: DynamicImageView
+//******************************************************************************
+@IBDesignable
+class DynamicImageView: UIView {
+    
+    // MARK: IBInspectables
+    @IBInspectable public var image: UIImage? {
+        didSet {
+            if let image = image {
+                imageView.image = image
+                updateImageViewSize()
+            }
+        }
+    }
+    
+    
+    // MARK: Private variables and types
+    fileprivate let imageView: UIImageView = UIImageView(frame: CGRect.zero)
+    
+    private var shouldSetupConstraints = true
+    private var imageViewSizeConstraints: [NSLayoutConstraint]?
+    private var availableSpace: CGRect {
+        return bounds
+    }
+    
+    // MARK: Initializers
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    
+    private func commonInit() {
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = ArtKit.primaryColor
+        addSubview(imageView)
+    }
+    
+    
+    // MARK: View Methods
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateImageViewSize()
+    }
+    
+    
+    override func updateConstraints() {
+        if shouldSetupConstraints {
+            setImageViewSizeConstraints()
+            imageView.autoCenterInSuperview()
+        }
+        super.updateConstraints()
+        shouldSetupConstraints = false
+    }
+    
+    
+    // MARK: Private Methods
+    private func remove(previous constraints: [NSLayoutConstraint]?) {
+        if let constraints = constraints {
+            for constraint in constraints {
+                constraint.autoRemove()
+            }
+        }
+    }
+    
+    
+    private func setImageViewSizeConstraints() {
+        remove(previous: imageViewSizeConstraints)
+        imageViewSizeConstraints = imageView.autoSetDimensions(to: imageView.bounds.size)
+    }
+    
+    
+    private func updateImageViewSize() {
+        if let image = image {
+            imageView.bounds.size = make(size: image.size, fitIn: availableSpace.size)
+            setImageViewSizeConstraints()
+        }
+    }
+    
+    
+    // Modified from: http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
+    private func make(size originalSize: CGSize, fitIn boxSize: CGSize) -> CGSize {
+        var originalSize = originalSize
+        if originalSize.width == 0 { originalSize.width = boxSize.width }
+        if originalSize.height == 0 { originalSize.height = boxSize.height }
+        
+        let widthScale = boxSize.width / originalSize.width
+        let heightScale = boxSize.height / originalSize.height
+        
+        let scale = min(widthScale, heightScale)
+        
+        return CGSize(width: originalSize.width * scale, height: originalSize.height * scale)
+    }
+    
+}
 
 
 
