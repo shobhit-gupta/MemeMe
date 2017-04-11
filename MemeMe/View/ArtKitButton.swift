@@ -20,6 +20,7 @@ class ArtKitButton: UIButton {
         case camera(blendMode: BlendMode)
         case album(blendMode: BlendMode)
         case popular(blendMode: BlendMode)
+        case closeImage
     }
     
     var kind: ArtKitButtonKind = .camera(blendMode: .normal) {
@@ -28,6 +29,11 @@ class ArtKitButton: UIButton {
         }
     }
     
+    override var bounds: CGRect {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     override func draw(_ rect: CGRect) {
         switch kind {
@@ -37,6 +43,8 @@ class ArtKitButton: UIButton {
             ArtKit.drawAlbumButton(frame: bounds, isPressed: blendMode == .overlay)
         case .popular(let blendMode):
             ArtKit.drawPopularButton(frame: bounds, isPressed: blendMode == .overlay)
+        case .closeImage:
+            ArtKit.drawCloseImage(frame: bounds)
         }
     }
     
