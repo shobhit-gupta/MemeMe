@@ -18,6 +18,9 @@ class MemeEditorViewController: UIViewController {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var imageSourceSelector: UIStackView!
     
+    @IBOutlet weak var memeView: MemeView!
+    
+    
     // MARK: Public variables and types
    
     
@@ -98,9 +101,10 @@ extension MemeEditorViewController {
     
     func setupUI() {
         setupView()
-        
+        setupTitle()
         setupNavBar()
         setupImageSourceSelector()
+        setupMemeView()
     }
     
     
@@ -136,16 +140,26 @@ extension MemeEditorViewController {
     }
     
     
+    func setupMemeView() {
+        memeView.delegate = self
+    }
+    
+    
+    func updateMemeView(with image: UIImage) {
+        memeView.image = image
+    }
     
     
     func updateUI() {
         switch currentState {
         case .selectImage:
-            imageSourceSelector.isHidden = false
             ArtKitButton.setBlendMode(of: [camera, album, popular], to: .normal)
+            imageSourceSelector.isHidden = false
+            memeView.isHidden = true
         
         case .selectText:
             imageSourceSelector.isHidden = true
+            memeView.isHidden = false
             
         case .inputText:
             imageSourceSelector.isHidden = true
@@ -173,7 +187,8 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let _ = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            updateMemeView(with: image)
             currentState = .selectText
         } else {
             currentState = .selectImage
@@ -192,7 +207,17 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
 
 
 
-
+//******************************************************************************
+//                              MARK: MemeViewDelegate
+//******************************************************************************
+extension MemeEditorViewController: MemeViewDelegate {
+    
+    func closeImageButtonPressed() {
+        memeView.image = nil
+        currentState = .selectImage
+    }
+    
+}
 
 
 
