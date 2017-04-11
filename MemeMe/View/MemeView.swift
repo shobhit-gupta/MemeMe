@@ -11,25 +11,29 @@ import PureLayout
 
 
 @IBDesignable
-class MemeView: UIView {
+class DynamicImageView: UIView {
     
-    private var shouldSetupConstraints = true
-    private var imageViewSizeConstraints: [NSLayoutConstraint]?
-    
+    // MARK: IBInspectables
     @IBInspectable public var image: UIImage? {
         didSet {
             if let image = image {
-                imageView.bounds.size = make(size: image.size, fitIn: bounds.size)
                 imageView.image = image
-                shouldSetupConstraints = true
-                setNeedsUpdateConstraints()
+                updateImageViewSize()
             }
         }
     }
     
+    
+    // MARK: Private variables and types
     fileprivate let imageView: UIImageView = UIImageView(frame: CGRect.zero)
     
+    private var shouldSetupConstraints = true
+    private var imageViewSizeConstraints: [NSLayoutConstraint]?
+    private var availableSpace: CGRect {
+        return bounds
+    }
     
+    // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -42,18 +46,24 @@ class MemeView: UIView {
     }
     
     
-    func commonInit() {
+    private func commonInit() {
         backgroundColor = UIColor.red
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = ArtKit.primaryColor
         addSubview(imageView)
     }
+
+    
+    // MARK: View Methods
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateImageViewSize()
+    }
     
     
     override func updateConstraints() {
         if shouldSetupConstraints {
-            remove(previous: imageViewSizeConstraints)
-            imageViewSizeConstraints = imageView.autoSetDimensions(to: imageView.bounds.size)
+            setImageViewSizeConstraints()
             imageView.autoCenterInSuperview()
             shouldSetupConstraints = false
         }
@@ -61,16 +71,7 @@ class MemeView: UIView {
     }
     
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if let image = image {
-            imageView.bounds.size = make(size: image.size, fitIn: bounds.size)
-            shouldSetupConstraints = true
-            setNeedsUpdateConstraints()
-        }
-    }
-    
-    
+    // MARK: Private Methods
     private func remove(previous constraints: [NSLayoutConstraint]?) {
         if let constraints = constraints {
             for constraint in constraints {
@@ -80,7 +81,22 @@ class MemeView: UIView {
     }
     
     
-    fileprivate func make(size originalSize: CGSize, fitIn boxSize: CGSize) -> CGSize {
+    private func setImageViewSizeConstraints() {
+        remove(previous: imageViewSizeConstraints)
+        imageViewSizeConstraints = imageView.autoSetDimensions(to: imageView.bounds.size)
+    }
+    
+    
+    private func updateImageViewSize() {
+        if let image = image {
+            imageView.bounds.size = make(size: image.size, fitIn: availableSpace.size)
+            setImageViewSizeConstraints()
+        }
+    }
+    
+    
+    // Modified from: http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
+    private func make(size originalSize: CGSize, fitIn boxSize: CGSize) -> CGSize {
         var originalSize = originalSize
         if originalSize.width == 0 { originalSize.width = boxSize.width }
         if originalSize.height == 0 { originalSize.height = boxSize.height }
@@ -97,6 +113,9 @@ class MemeView: UIView {
 
 
 
+class MemeView: DynamicImageView {
+    
+}
 
 
 

@@ -19,6 +19,7 @@
 		EE894AC61E5C99AC0066A4FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE894AC41E5C99AC0066A4FE /* LaunchScreen.storyboard */; };
 		EE894AD11E5C99AC0066A4FE /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894AD01E5C99AC0066A4FE /* MemeMeTests.swift */; };
 		EE894ADC1E5C99AC0066A4FE /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */; };
+		EEB3C4C51E9C703900871423 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB3C4C41E9C703900871423 /* ViewController.swift */; };
 		EEDF111D1E99117700BCCF05 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EEDF111C1E99117700BCCF05 /* ionicons.ttf */; };
 		EEDF11241E99F41900BCCF05 /* Convenience - Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF111F1E99F41900BCCF05 /* Convenience - Array.swift */; };
 		EEDF11251E99F41900BCCF05 /* Convenience - BarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF11201E99F41900BCCF05 /* Convenience - BarButtonItem.swift */; };
@@ -70,6 +71,7 @@
 		EE894AD71E5C99AC0066A4FE /* MemeMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		EE894ADD1E5C99AC0066A4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEB3C4C41E9C703900871423 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
 		EEDF111C1E99117700BCCF05 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = Fonts/ionicons.ttf; sourceTree = "<group>"; };
 		EEDF111F1E99F41900BCCF05 /* Convenience - Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Convenience - Array.swift"; path = "Reusable/Convenience/Convenience - Array.swift"; sourceTree = "<group>"; };
 		EEDF11201E99F41900BCCF05 /* Convenience - BarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Convenience - BarButtonItem.swift"; path = "Reusable/Convenience/Convenience - BarButtonItem.swift"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				EE894ABD1E5C99AC0066A4FE /* MemeEditorViewController.swift */,
+				EEB3C4C41E9C703900871423 /* ViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */,
 				EEDF11251E99F41900BCCF05 /* Convenience - BarButtonItem.swift in Sources */,
 				EEDF11241E99F41900BCCF05 /* Convenience - Array.swift in Sources */,
+				EEB3C4C51E9C703900871423 /* ViewController.swift in Sources */,
 				EEDF11281E99F41900BCCF05 /* Convenience - String.swift in Sources */,
 				EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */,
 				EEDF112D1E9BAD0200BCCF05 /* MemeView.swift in Sources */,

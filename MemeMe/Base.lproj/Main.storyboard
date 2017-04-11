@@ -32,7 +32,7 @@
         <!--View Controller-->
         <scene sceneID="n5b-J5-Bgh">
             <objects>
-                <viewController id="XRk-mQ-O5k" sceneMemberID="viewController">
+                <viewController id="XRk-mQ-O5k" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JBv-AO-v7N"/>
                         <viewControllerLayoutGuide type="bottom" id="kpK-3G-hyl"/>
@@ -42,21 +42,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="u7K-nf-SdK" customClass="MemeView" customModule="MemeMe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="360"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="Boromir"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pFg-mR-YTJ">
+                                <rect key="frame" x="0.5" y="416" width="320" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQ8-iw-mcY">
+                                        <rect key="frame" x="0.0" y="0.0" width="99" height="30"/>
+                                        <state key="normal" title="Change Image"/>
+                                        <connections>
+                                            <action selector="changeImage:" destination="XRk-mQ-O5k" eventType="touchUpInside" id="Ti4-Rt-ORY"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image Size" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmd-jK-B4Y">
+                                        <rect key="frame" x="107" y="0.0" width="213" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="u7K-nf-SdK" firstAttribute="leading" secondItem="Vz0-my-687" secondAttribute="leadingMargin" constant="-16" id="9A3-Qo-Z9j"/>
+                            <constraint firstItem="u7K-nf-SdK" firstAttribute="leading" secondItem="Vz0-my-687" secondAttribute="leading" id="9A3-Qo-Z9j"/>
+                            <constraint firstItem="pFg-mR-YTJ" firstAttribute="width" secondItem="Vz0-my-687" secondAttribute="width" id="9WH-6m-8lg"/>
                             <constraint firstItem="u7K-nf-SdK" firstAttribute="bottom" secondItem="kpK-3G-hyl" secondAttribute="top" constant="-100" id="A2k-CR-jmt"/>
-                            <constraint firstItem="u7K-nf-SdK" firstAttribute="top" secondItem="JBv-AO-v7N" secondAttribute="bottom" constant="-20" id="UTe-ab-fGu"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="u7K-nf-SdK" secondAttribute="trailing" constant="-16" id="ulT-hK-ICA"/>
+                            <constraint firstItem="u7K-nf-SdK" firstAttribute="top" secondItem="JBv-AO-v7N" secondAttribute="bottom" id="UTe-ab-fGu"/>
+                            <constraint firstItem="pFg-mR-YTJ" firstAttribute="top" secondItem="u7K-nf-SdK" secondAttribute="bottom" constant="36" id="c9t-w1-Dd5"/>
+                            <constraint firstItem="u7K-nf-SdK" firstAttribute="trailing" secondItem="Vz0-my-687" secondAttribute="trailing" id="ulT-hK-ICA"/>
+                            <constraint firstItem="pFg-mR-YTJ" firstAttribute="centerX" secondItem="Vz0-my-687" secondAttribute="centerX" id="usA-L7-KFp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageSize" destination="bmd-jK-B4Y" id="yIb-PO-XaK"/>
+                        <outlet property="memeView" destination="u7K-nf-SdK" id="rSK-KT-sdY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4R8-g3-Ybg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
