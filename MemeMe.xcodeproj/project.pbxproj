@@ -14,7 +14,7 @@
 		EE44A7E01E97D39800C9C49F /* ArtKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */; };
 		EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6885A01E9CE9160021F696 /* MemeView.swift */; };
 		EE6C54A41E9F52F40014A102 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C549D1E9F52F40014A102 /* TextField.swift */; };
-		EE6C54A51E9F52F40014A102 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A01E9F52F40014A102 /* Constant.swift */; };
+		EE6C54A51E9F52F40014A102 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A01E9F52F40014A102 /* Default.swift */; };
 		EE6C54A61E9F52F40014A102 /* Error_.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A11E9F52F40014A102 /* Error_.swift */; };
 		EE6C54A71E9F52F40014A102 /* UIView+Fadeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */; };
 		EE6C54A91E9F54A10014A102 /* CGSize+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A81E9F54A10014A102 /* CGSize+Ease.swift */; };
@@ -62,7 +62,7 @@
 		EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKitButton.swift; path = View/ArtKitButton.swift; sourceTree = "<group>"; };
 		EE6885A01E9CE9160021F696 /* MemeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemeView.swift; path = View/MemeView.swift; sourceTree = "<group>"; };
 		EE6C549D1E9F52F40014A102 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		EE6C54A01E9F52F40014A102 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		EE6C54A01E9F52F40014A102 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		EE6C54A11E9F52F40014A102 /* Error_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error_.swift; sourceTree = "<group>"; };
 		EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Fadeable.swift"; sourceTree = "<group>"; };
 		EE6C54A81E9F54A10014A102 /* CGSize+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Ease.swift"; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		EE6C549F1E9F52F40014A102 /* MustImport */ = {
 			isa = PBXGroup;
 			children = (
-				EE6C54A01E9F52F40014A102 /* Constant.swift */,
+				EE6C54A01E9F52F40014A102 /* Default.swift */,
 				EE6C54A11E9F52F40014A102 /* Error_.swift */,
 			);
 			name = MustImport;
@@ -570,7 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE6C54A51E9F52F40014A102 /* Constant.swift in Sources */,
+				EE6C54A51E9F52F40014A102 /* Default.swift in Sources */,
 				EE6C54A61E9F52F40014A102 /* Error_.swift in Sources */,
 				EE6C54A71E9F52F40014A102 /* UIView+Fadeable.swift in Sources */,
 				EE44A7E01E97D39800C9C49F /* ArtKitButton.swift in Sources */,
