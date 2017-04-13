@@ -88,25 +88,11 @@ class DynamicImageView: UIView {
     
     private func updateImageViewSize() {
         if let image = image {
-            imageView.bounds.size = make(size: image.size, fitIn: availableSpace.size)
+            imageView.bounds.size = CGSize.scale(image.size, toFitIn: availableSpace.size)
             setImageViewSizeConstraints()
         }
     }
     
-    
-    // Modified from: http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
-    private func make(size originalSize: CGSize, fitIn boxSize: CGSize) -> CGSize {
-        var originalSize = originalSize
-        if originalSize.width == 0 { originalSize.width = boxSize.width }
-        if originalSize.height == 0 { originalSize.height = boxSize.height }
-        
-        let widthScale = boxSize.width / originalSize.width
-        let heightScale = boxSize.height / originalSize.height
-        
-        let scale = min(widthScale, heightScale)
-        
-        return CGSize(width: originalSize.width * scale, height: originalSize.height * scale)
-    }
     
 }
 
