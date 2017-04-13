@@ -67,10 +67,17 @@ extension FocusOnContentView: Overlay {
     
     
     func animate(from initialFrame: CGRect, to finalFrame: CGRect) {
-        textView.frame = initialFrame
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
-            self.textView.frame = finalFrame
-        }, completion: nil)
+        textView.isHidden = true
+        self.textView.frame = initialFrame
+        textView.fadeIn(duration: 0.3, delay: 0.0) { (finished) in
+            if (finished) {
+                UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                    self.textView.frame = finalFrame
+                }, completion: nil)
+            }
+        }
+        
+        
     }
     
 }

@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     
     
     
-    @IBOutlet weak var focussedView: FocussedInputTextView!
+    @IBOutlet weak var focussedView: FocusOnContentView!
     
     @IBAction func animate(_ sender: Any) {
         let initialFrame = CGRect(x: view.bounds.midX - 100, y: view.bounds.midY * 1.5, width: 200, height: 75)

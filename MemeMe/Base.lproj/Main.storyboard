@@ -142,7 +142,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EY7-dG-0eA">
                                 <rect key="frame" x="0.0" y="20" width="320" height="468"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmU-Vv-Juv" customClass="FocussedInputTextView" customModule="MemeMe" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmU-Vv-Juv" customClass="FocusOnContentView" customModule="MemeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="430"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
