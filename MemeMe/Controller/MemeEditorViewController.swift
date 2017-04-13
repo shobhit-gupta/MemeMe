@@ -53,6 +53,7 @@ class MemeEditorViewController: UIViewController {
         popular.setNeedsDisplay()
     }
     
+    
     // MARK: Actions
     @IBAction func share(_ sender: UIBarButtonItem) {
         print("Share pressed")
