@@ -19,6 +19,7 @@
 		EE6C54A71E9F52F40014A102 /* UIView+Fadeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */; };
 		EE6C54A91E9F54A10014A102 /* CGSize+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A81E9F54A10014A102 /* CGSize+Ease.swift */; };
 		EE6C54AB1E9FA0760014A102 /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54AA1E9FA0760014A102 /* Overlay.swift */; };
+		EE6C54AD1EA068E90014A102 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54AC1EA068E90014A102 /* Keyboard.swift */; };
 		EE6C54AF1EA08DF50014A102 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */; };
 		EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ABB1E5C99AC0066A4FE /* AppDelegate.swift */; };
 		EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ABD1E5C99AC0066A4FE /* MemeEditorViewController.swift */; };
@@ -69,6 +70,7 @@
 		EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Fadeable.swift"; sourceTree = "<group>"; };
 		EE6C54A81E9F54A10014A102 /* CGSize+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Ease.swift"; sourceTree = "<group>"; };
 		EE6C54AA1E9FA0760014A102 /* Overlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
+		EE6C54AC1EA068E90014A102 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Reusable/Keyboard.swift; sourceTree = "<group>"; };
 		EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		EE894AB81E5C99AC0066A4FE /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE894ABB1E5C99AC0066A4FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -210,9 +212,9 @@
 		EE6C54A21E9F52F40014A102 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */,
 				EE6C54AA1E9FA0760014A102 /* Overlay.swift */,
 				EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */,
+				EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */,
 			);
 			name = UIView;
 			path = Reusable/UIView;
@@ -287,6 +289,7 @@
 				EE6C549C1E9F52F40014A102 /* CustomViews */,
 				EE6C549E1E9F52F40014A102 /* EaseExtensions */,
 				EE6C54A21E9F52F40014A102 /* UIView */,
+				EE6C54AC1EA068E90014A102 /* Keyboard.swift */,
 			);
 			name = Reusable;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				EE6C54AB1E9FA0760014A102 /* Overlay.swift in Sources */,
 				EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */,
 				EEB3C4C51E9C703900871423 /* ViewController.swift in Sources */,
+				EE6C54AD1EA068E90014A102 /* Keyboard.swift in Sources */,
 				EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */,
 				EE6C54AF1EA08DF50014A102 /* UIView+Animations.swift in Sources */,
 				EEDF112D1E9BAD0200BCCF05 /* DynamicImageView.swift in Sources */,
