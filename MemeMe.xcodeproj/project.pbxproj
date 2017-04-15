@@ -29,7 +29,7 @@
 		EE894AD11E5C99AC0066A4FE /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894AD01E5C99AC0066A4FE /* MemeMeTests.swift */; };
 		EE894ADC1E5C99AC0066A4FE /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */; };
 		EEB3C4C51E9C703900871423 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB3C4C41E9C703900871423 /* ViewController.swift */; };
-		EEDA3F7A1E9D1D83006ABCCC /* FocusOnContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA3F791E9D1D83006ABCCC /* FocusOnContentView.swift */; };
+		EEDA3F7A1E9D1D83006ABCCC /* FocusOnTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */; };
 		EEDF111D1E99117700BCCF05 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EEDF111C1E99117700BCCF05 /* ionicons.ttf */; };
 		EEDF112D1E9BAD0200BCCF05 /* DynamicImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDF112C1E9BAD0200BCCF05 /* DynamicImageView.swift */; };
 /* End PBXBuildFile section */
@@ -86,7 +86,7 @@
 		EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		EE894ADD1E5C99AC0066A4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEB3C4C41E9C703900871423 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
-		EEDA3F791E9D1D83006ABCCC /* FocusOnContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusOnContentView.swift; path = View/FocusOnContentView.swift; sourceTree = "<group>"; };
+		EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusOnTextView.swift; path = View/FocusOnTextView.swift; sourceTree = "<group>"; };
 		EEDF111C1E99117700BCCF05 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = Fonts/ionicons.ttf; sourceTree = "<group>"; };
 		EEDF112C1E9BAD0200BCCF05 /* DynamicImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicImageView.swift; path = View/DynamicImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,7 +165,7 @@
 				EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */,
 				EEDF112C1E9BAD0200BCCF05 /* DynamicImageView.swift */,
 				EE6885A01E9CE9160021F696 /* MemeView.swift */,
-				EEDA3F791E9D1D83006ABCCC /* FocusOnContentView.swift */,
+				EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -593,7 +593,7 @@
 				EE6C54A91E9F54A10014A102 /* CGSize+Ease.swift in Sources */,
 				EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */,
 				EE6C54A41E9F52F40014A102 /* TextField.swift in Sources */,
-				EEDA3F7A1E9D1D83006ABCCC /* FocusOnContentView.swift in Sources */,
+				EEDA3F7A1E9D1D83006ABCCC /* FocusOnTextView.swift in Sources */,
 				EE44A7DE1E97D23200C9C49F /* ArtKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
