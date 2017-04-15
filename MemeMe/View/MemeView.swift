@@ -36,17 +36,12 @@ class MemeView: DynamicImageView {
     // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        setupView()
     }
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    
-    private func commonInit() {
         setupView()
     }
     
