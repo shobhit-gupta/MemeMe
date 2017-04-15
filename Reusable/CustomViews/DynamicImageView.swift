@@ -47,8 +47,8 @@ class DynamicImageView: UIView {
     
     
     private func setupView() {
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = ArtKit.primaryColor
+        imageView.contentMode = Default.DynamicImageView.ContentMode
+        imageView.backgroundColor = Default.DynamicImageView.BackgroundColor
         addSubview(imageView)
     }
     
@@ -96,6 +96,13 @@ class DynamicImageView: UIView {
     
 }
 
+
+extension Default {
+    enum DynamicImageView {
+        static let ContentMode: UIViewContentMode = .scaleAspectFit
+        static let BackgroundColor: UIColor = ArtKit.primaryColor
+    }
+}
 
 
 
