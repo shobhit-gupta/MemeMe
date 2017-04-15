@@ -184,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				EEDF112C1E9BAD0200BCCF05 /* DynamicImageView.swift */,
+				EE6C54AA1E9FA0760014A102 /* Overlay.swift */,
 				EE6C549D1E9F52F40014A102 /* TextField.swift */,
 			);
 			name = CustomViews;
@@ -212,7 +213,6 @@
 		EE6C54A21E9F52F40014A102 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				EE6C54AA1E9FA0760014A102 /* Overlay.swift */,
 				EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */,
 				EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */,
 			);
