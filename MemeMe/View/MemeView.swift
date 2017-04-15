@@ -28,7 +28,7 @@ class MemeView: DynamicImageView {
     // MARK: Private variables and types
     fileprivate let augmentedStackView = UIStackView(frame: CGRect.zero)
     fileprivate let top = UILabel(frame: CGRect.zero)
-    fileprivate let bottom = UILabel(frame: CGRect.zero)
+    public let bottom = UILabel(frame: CGRect.zero)
     fileprivate let closeImageButton = ArtKitButton(frame: CGRect.zero)
     private var shouldSetupConstraints = true
     
@@ -67,7 +67,7 @@ class MemeView: DynamicImageView {
     
     private func addConstraintsForLabels() {
         top.autoMatch(.width, to: .width, of: augmentedStackView)
-        bottom.autoMatch(.width, to: .width, of: augmentedStackView)
+        //bottom.autoMatch(.width, to: .width, of: augmentedStackView)
     }
     
     
@@ -116,6 +116,13 @@ extension MemeView {
         augmentedStackView.alignment = .center
         augmentedStackView.distribution = .fillEqually
         
+        // TODO: TopStackView
+        
+        let bottomStackView = UIStackView()
+        bottomStackView.axis = .horizontal
+        bottomStackView.alignment = .center
+        bottomStackView.addArrangedSubview(bottom)
+        
         let closeImageButtonStackView = UIStackView()
         closeImageButtonStackView.axis = .horizontal
         closeImageButtonStackView.alignment = .center
@@ -123,7 +130,7 @@ extension MemeView {
         
         augmentedStackView.addArrangedSubview(top)
         augmentedStackView.addArrangedSubview(closeImageButtonStackView)
-        augmentedStackView.addArrangedSubview(bottom)
+        augmentedStackView.addArrangedSubview(bottomStackView)
         
         addSubview(augmentedStackView)
     }
