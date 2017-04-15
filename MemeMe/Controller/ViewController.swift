@@ -25,12 +25,34 @@ class ViewController: UIViewController {
     
     
     
-    @IBOutlet weak var focussedView: FocusOnContentView!
+    @IBOutlet weak var memeView: MemeView!
+    @IBOutlet weak var focussedView: FocusOnTextView!
     
-    @IBAction func animate(_ sender: Any) {
-        let initialFrame = CGRect(x: view.bounds.midX - 100, y: view.bounds.midY * 1.5, width: 200, height: 75)
-        let finalFrame = CGRect(x: 16, y: 32, width: view.bounds.width - 32, height: 50)
-        focussedView.animate(from: initialFrame, to: finalFrame)
+    
+    override func viewDidLoad() {
+        focussedView.alpha = 0.0
+    }
+    
+    @IBAction func start(_ sender: Any) {
+        print("Start pressed")
+        
+        if let initialFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
+            focussedView.textView.text = memeView.bottom.text
+            
+            focussedView.fadeIn(duration: 0.2, delay: 0.0) { _ in
+                self.focussedView.start(from: initialFrame)
+            }
+        }
+    }
+    
+    
+    @IBAction func end(_ sender: Any) {
+        print("End pressed")
+        if let finalFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
+            memeView.bottom.text = focussedView.textView.text
+            focussedView.end(on: finalFrame)
+            focussedView.fadeOut()
+        }
     }
     
     
