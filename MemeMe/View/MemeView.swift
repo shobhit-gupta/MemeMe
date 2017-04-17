@@ -46,7 +46,7 @@ class MemeView: DynamicImageView {
     }
     
     
-    // MARK: View Methods & Constraints
+    // MARK: UIView Methods & Constraints
     override func updateConstraints() {
         if shouldSetupConstraints {
             addConstraintsForAugmentedStackView()
@@ -75,7 +75,7 @@ class MemeView: DynamicImageView {
 
 
 //******************************************************************************
-//                              MARK: MemeView Setup
+//                              MARK: Setup
 //******************************************************************************
 extension MemeView {
     

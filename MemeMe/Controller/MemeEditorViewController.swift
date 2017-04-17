@@ -40,7 +40,7 @@ class MemeEditorViewController: UIViewController {
     }
     
     
-    // MARK: ViewController Methods
+    // MARK: UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

@@ -12,7 +12,7 @@ import UIKit
 
 public extension CGSize {
     
-    // Modified from: http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
+    // Modified from: http://stackoverflow.com/a/24899319/471960
     public static func scale(_ originalSize: CGSize, toFitIn boxSize: CGSize) -> CGSize {
         var originalSize = originalSize
         if originalSize.width == 0 { originalSize.width = boxSize.width }

@@ -53,7 +53,7 @@ class DynamicImageView: UIView {
     }
     
     
-    // MARK: View Methods
+    // MARK: UIView Methods
     override func layoutSubviews() {
         super.layoutSubviews()
         updateImageViewSize()
