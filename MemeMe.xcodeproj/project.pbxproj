@@ -12,6 +12,8 @@
 		9DBECDFED26305EE09318B3A /* Pods_MemeMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFF7A5F879F0FF5DA3C47DE4 /* Pods_MemeMeTests.framework */; };
 		EE44A7DE1E97D23200C9C49F /* ArtKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DD1E97D23200C9C49F /* ArtKit.swift */; };
 		EE44A7E01E97D39800C9C49F /* ArtKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */; };
+		EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */; };
+		EE4C810F1EA39C0A009CA8EA /* FocusOnContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4C810E1EA39C0A009CA8EA /* FocusOnContentView.swift */; };
 		EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6885A01E9CE9160021F696 /* MemeView.swift */; };
 		EE6C54A41E9F52F40014A102 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C549D1E9F52F40014A102 /* TextField.swift */; };
 		EE6C54A51E9F52F40014A102 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A01E9F52F40014A102 /* Default.swift */; };
@@ -21,6 +23,7 @@
 		EE6C54AB1E9FA0760014A102 /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54AA1E9FA0760014A102 /* Overlay.swift */; };
 		EE6C54AD1EA068E90014A102 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54AC1EA068E90014A102 /* Keyboard.swift */; };
 		EE6C54AF1EA08DF50014A102 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */; };
+		EE758CCC1EA26E1100F2E794 /* CGRect+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */; };
 		EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ABB1E5C99AC0066A4FE /* AppDelegate.swift */; };
 		EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ABD1E5C99AC0066A4FE /* MemeEditorViewController.swift */; };
 		EE894AC11E5C99AC0066A4FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE894ABF1E5C99AC0066A4FE /* Main.storyboard */; };
@@ -63,6 +66,8 @@
 		D8F1827E8842EC82D86E8300 /* Pods_MemeMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE44A7DD1E97D23200C9C49F /* ArtKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKit.swift; path = View/ArtKit.swift; sourceTree = "<group>"; };
 		EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKitButton.swift; path = View/ArtKitButton.swift; sourceTree = "<group>"; };
+		EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Convert.swift"; sourceTree = "<group>"; };
+		EE4C810E1EA39C0A009CA8EA /* FocusOnContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusOnContentView.swift; sourceTree = "<group>"; };
 		EE6885A01E9CE9160021F696 /* MemeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemeView.swift; path = View/MemeView.swift; sourceTree = "<group>"; };
 		EE6C549D1E9F52F40014A102 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		EE6C54A01E9F52F40014A102 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
@@ -72,6 +77,7 @@
 		EE6C54AA1E9FA0760014A102 /* Overlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		EE6C54AC1EA068E90014A102 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Reusable/Keyboard.swift; sourceTree = "<group>"; };
 		EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
+		EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Ease.swift"; sourceTree = "<group>"; };
 		EE894AB81E5C99AC0066A4FE /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE894ABB1E5C99AC0066A4FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE894ABD1E5C99AC0066A4FE /* MemeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemeEditorViewController.swift; path = Controller/MemeEditorViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +92,7 @@
 		EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		EE894ADD1E5C99AC0066A4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEB3C4C41E9C703900871423 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
-		EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusOnTextView.swift; path = View/FocusOnTextView.swift; sourceTree = "<group>"; };
+		EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusOnTextView.swift; sourceTree = "<group>"; };
 		EEDF111C1E99117700BCCF05 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = Fonts/ionicons.ttf; sourceTree = "<group>"; };
 		EEDF112C1E9BAD0200BCCF05 /* DynamicImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,7 +170,6 @@
 				EE44A7DD1E97D23200C9C49F /* ArtKit.swift */,
 				EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */,
 				EE6885A01E9CE9160021F696 /* MemeView.swift */,
-				EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -184,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				EEDF112C1E9BAD0200BCCF05 /* DynamicImageView.swift */,
+				EE4C810E1EA39C0A009CA8EA /* FocusOnContentView.swift */,
+				EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */,
 				EE6C54AA1E9FA0760014A102 /* Overlay.swift */,
 				EE6C549D1E9F52F40014A102 /* TextField.swift */,
 			);
@@ -195,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				EE6C54A81E9F54A10014A102 /* CGSize+Ease.swift */,
+				EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */,
 			);
 			name = EaseExtensions;
 			path = Reusable/EaseExtensions;
@@ -215,6 +223,7 @@
 			children = (
 				EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */,
 				EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */,
+				EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */,
 			);
 			name = UIView;
 			path = Reusable/UIView;
@@ -587,10 +596,13 @@
 				EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */,
 				EEB3C4C51E9C703900871423 /* ViewController.swift in Sources */,
 				EE6C54AD1EA068E90014A102 /* Keyboard.swift in Sources */,
+				EE4C810F1EA39C0A009CA8EA /* FocusOnContentView.swift in Sources */,
 				EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */,
 				EE6C54AF1EA08DF50014A102 /* UIView+Animations.swift in Sources */,
 				EEDF112D1E9BAD0200BCCF05 /* DynamicImageView.swift in Sources */,
 				EE6C54A91E9F54A10014A102 /* CGSize+Ease.swift in Sources */,
+				EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */,
+				EE758CCC1EA26E1100F2E794 /* CGRect+Ease.swift in Sources */,
 				EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */,
 				EE6C54A41E9F52F40014A102 /* TextField.swift in Sources */,
 				EEDA3F7A1E9D1D83006ABCCC /* FocusOnTextView.swift in Sources */,

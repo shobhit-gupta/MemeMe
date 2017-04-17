@@ -26,28 +26,31 @@ class ViewController: UIViewController {
     
     
     @IBOutlet weak var memeView: MemeView!
-    @IBOutlet weak var focussedView: FocusOnTextView!
+    @IBOutlet weak var focussedStackView: UIStackView!
+    let focussedView = FocusOnTextView()
     
     
     override func viewDidLoad() {
         focussedView.alpha = 0.0
+        focussedStackView.insertArrangedSubview(focussedView, at: 0)
     }
     
     @IBAction func start(_ sender: Any) {
-        print("Start pressed")
+        //print("Start pressed")
         
         if let initialFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
+            focussedView.textView.delegate = self
             focussedView.textView.text = memeView.bottom.text
-            
-            focussedView.fadeIn(duration: 0.2, delay: 0.0) { _ in
-                self.focussedView.start(from: initialFrame)
+            focussedView.textView.textAlignment = memeView.bottom.textAlignment
+            focussedView.fadeIn(duration: 0.01, delay: 0.0) { _ in
+                self.focussedView.start(from: initialFrame, completion: nil)
             }
         }
     }
     
     
     @IBAction func end(_ sender: Any) {
-        print("End pressed")
+        //print("End pressed")
         if let finalFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
             memeView.bottom.text = focussedView.textView.text
             focussedView.end(on: finalFrame)
@@ -55,5 +58,16 @@ class ViewController: UIViewController {
         }
     }
     
+}
+
+
+extension ViewController: UITextViewDelegate {
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if let finalFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
+            memeView.bottom.text = focussedView.textView.text
+            focussedView.end(on: finalFrame)
+            focussedView.fadeOut()
+        }
+    }
 }
