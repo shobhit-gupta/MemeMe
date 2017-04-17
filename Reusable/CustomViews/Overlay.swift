@@ -10,50 +10,96 @@ import UIKit
 
 
 public enum OverlayType {
-    case plain
-    case blurred(blurView: UIVisualEffectView)
-    case vibrant(blurView: UIVisualEffectView, vibrancyView: UIVisualEffectView)
+
+    public struct VisualEffectViews {
+        let blur: UIVisualEffectView
+        let vibrancy: UIVisualEffectView?
+    }
+    
+    public struct Properties {
+        public struct Blur {
+            let style: UIBlurEffectStyle
+            let isVibrant: Bool
+        }
+        
+        let color: UIColor
+        let blur: Blur?
+    }
+    
+    case plain(with: Properties)
+    case blurred(with: Properties, visualEffectViews: VisualEffectViews?)
+    case vibrant(with: Properties, visualEffectViews: VisualEffectViews?)
+    
+    var properties: Properties {
+        switch self {
+        case .plain(let properties), .blurred(let properties, _), .vibrant(let properties, _):
+            return properties
+        }
+    }
+    
+    var visualEffectViews: VisualEffectViews? {
+        switch self {
+        case .plain:
+            return nil
+        case .blurred(_, let visualEffectViews), .vibrant(_, let visualEffectViews):
+            return visualEffectViews
+        }
+    }
+    
 }
 
 
 public protocol Overlay: class {
-    func setupOverlay(with style: UIBlurEffectStyle, andVibrancy isVibrant: Bool) -> OverlayType
+    func setupOverlay(withDesired properties: OverlayType.Properties) -> OverlayType
 }
 
 
 public extension Overlay where Self: UIView {
     
-    func setupOverlay(with style: UIBlurEffectStyle, andVibrancy isVibrant: Bool) -> OverlayType {
-        guard !UIAccessibilityIsReduceTransparencyEnabled() else {
-            backgroundColor = Default.Overlay.PlainBackgroundColor
-            return .plain
-        }
-        return setupBlurredOverlay(with: style, andVibrancy: isVibrant)
-    }
-    
-    
-    private func setupBlurredOverlay(with style: UIBlurEffectStyle, andVibrancy isVibrant: Bool) -> OverlayType {
+    func setupOverlay(withDesired properties: OverlayType.Properties) -> OverlayType {
+        
         let overlayType: OverlayType
-        backgroundColor = Default.Overlay.BackgroundColor
+        backgroundColor = properties.color
         
-        // Blur
-        let blurEffect = UIBlurEffect(style: style)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = bounds
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(blurView)
+        guard !UIAccessibilityIsReduceTransparencyEnabled() else {
+            return .plain(with: OverlayType.Properties(color: properties.color, blur: nil))
+        }
         
-        // Vibrancy
-        if isVibrant {
-            let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-            let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
-            blurView.contentView.addSubview(vibrancyView)
-            overlayType = .vibrant(blurView: blurView, vibrancyView: vibrancyView)
+        if let blurProperties = properties.blur {
+            let blurEffect = UIBlurEffect(style: blurProperties.style)
+            let blurView = setupBlurView(with: blurEffect)
+            
+            if blurProperties.isVibrant {
+                let vibrancyView = setupVibrancyView(with: blurEffect, in: blurView)
+                overlayType = .blurred(with: properties,
+                                       visualEffectViews: OverlayType.VisualEffectViews(blur: blurView, vibrancy: vibrancyView))
+            } else {
+                overlayType = .blurred(with: properties,
+                                       visualEffectViews: OverlayType.VisualEffectViews(blur: blurView, vibrancy: nil))
+            }
+            
         } else {
-            overlayType = .blurred(blurView: blurView)
+            overlayType = .plain(with: properties)
         }
         
         return overlayType
+    }
+    
+    
+    private func setupBlurView(with effect: UIBlurEffect) -> UIVisualEffectView {
+        let blurView = UIVisualEffectView(effect: effect)
+        blurView.frame = bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurView)
+        return blurView
+    }
+    
+    
+    private func setupVibrancyView(with blurEffect: UIBlurEffect, in blurView: UIVisualEffectView) -> UIVisualEffectView {
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
+        blurView.contentView.addSubview(vibrancyView)
+        return vibrancyView
     }
     
 }
@@ -61,7 +107,7 @@ public extension Overlay where Self: UIView {
 
 public extension Default {
     enum Overlay {
-        static let PlainBackgroundColor = ArtKit.primaryColor  // UIColor.black
+        static let BlurEffectStyle: UIBlurEffectStyle = .dark
         static let BackgroundColor = ArtKit.primaryColor.withAlphaComponent(0.5)    // UIColor.clear
     }
 }

@@ -58,6 +58,7 @@ open class FocusOnContentView<T: ContentView>: UIView {
         }
     }
     
+    fileprivate var _overlayType: OverlayType?
     
     // MARK: Initializers
     override init(frame: CGRect) {
@@ -74,21 +75,10 @@ open class FocusOnContentView<T: ContentView>: UIView {
     
     // MARK: Setup
     private func setupView() {
-        setupOverlay()
+        addSubview(contentView)
     }
     
-    // Note: When subclassing override this Overlay protocol method for custom behaviour
-    public func setupOverlay() {
-        let overlayType = setupOverlay(with: .dark, andVibrancy: true)
-        switch overlayType {
-        case .plain:
-            addSubview(contentView)
-        case .blurred(let blurView):
-            blurView.contentView.addSubview(contentView)
-        case let .vibrant(blurView, _):
-            blurView.contentView.addSubview(contentView)
-        }
-    }
+    
     
     
     // MARK: UIView Methods
@@ -161,4 +151,49 @@ open class FocusOnContentView<T: ContentView>: UIView {
 }
 
 
-extension FocusOnContentView: Overlay {}
+extension FocusOnContentView: Overlay {
+    
+    public var overlayType: OverlayType? {
+        get {
+            return _overlayType
+        }
+    }
+    
+    
+    public var overlayProperties: OverlayType.Properties? {
+        get {
+            return overlayType?.properties
+        }
+        set {
+            guard _overlayType == nil else {
+                return
+            }
+            if let newValue = newValue {
+                _overlayType = setupOverlay(withDesired: newValue)
+                setupOverlay()
+            }
+        }
+    }
+    
+    
+    // Override this method to change set the type of overlay.
+    private func setupOverlay() {
+        if let overlayType = overlayType {
+            //contentView.removeFromSuperview()
+            switch overlayType {
+            case .plain:
+                addSubview(contentView)
+            case let .blurred(_, visualEffectViews):
+                if let visualEffectViews = visualEffectViews {
+                    visualEffectViews.blur.contentView.addSubview(contentView)
+                }
+            case let .vibrant(_, visualEffectViews):
+                if let visualEffectViews = visualEffectViews {
+                    visualEffectViews.blur.contentView.addSubview(contentView)
+                }
+            }
+        }
+    }
+    
+    
+}

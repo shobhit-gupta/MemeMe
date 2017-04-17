@@ -42,6 +42,9 @@ class ViewController: UIViewController {
             focussedView.textView.delegate = self
             focussedView.textView.text = memeView.bottom.text
             focussedView.textView.textAlignment = memeView.bottom.textAlignment
+            let properties = OverlayType.Properties(color: Default.Overlay.BackgroundColor,
+                                                    blur: OverlayType.Properties.Blur(style: Default.Overlay.BlurEffectStyle, isVibrant: true))
+            self.focussedView.overlayProperties = properties
             focussedView.fadeIn(duration: 0.01, delay: 0.0) { _ in
                 self.focussedView.start(from: initialFrame, completion: nil)
             }

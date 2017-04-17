@@ -139,6 +139,7 @@ extension FocusOnTextView {
                 currentState = .end(on: finalRect, duration: info.animationDuration, options: info.animationOptions, completion: completion)
             }
             availableHeight = info.endFrame.origin.y
+            
         }
     }
     
