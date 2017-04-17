@@ -14,6 +14,7 @@ public extension UIView {
 
     public func fadeIn(duration: TimeInterval = Default.UIView_.Fade.In.Duration,
                        delay: TimeInterval = Default.UIView_.Fade.In.Delay,
+                       options: UIViewAnimationOptions = Default.UIView_.Fade.In.AnimationOptions,
                        completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
         
         if isHidden {
@@ -21,7 +22,7 @@ public extension UIView {
             isHidden = false
         }
         
-        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
             self.alpha = 1.0
         }, completion: completion)
         
@@ -30,9 +31,10 @@ public extension UIView {
     
     public func fadeOut(duration: TimeInterval = Default.UIView_.Fade.Out.Duration,
                         delay: TimeInterval = Default.UIView_.Fade.Out.Delay,
+                        options: UIViewAnimationOptions = Default.UIView_.Fade.Out.AnimationOptions,
                         completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
         
-        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
             self.alpha = 0.0
         }, completion: completion)
         
@@ -57,15 +59,17 @@ public extension UIView {
 public extension Default.UIView_ {
     
     enum Fade {
-        
+
         enum In {
             static let Duration: TimeInterval = 1.0
             static let Delay: TimeInterval = 0.0
+            static let AnimationOptions: UIViewAnimationOptions = .curveEaseInOut
         }
         
         enum Out {
             static let Duration: TimeInterval = 1.0
             static let Delay: TimeInterval = 0.0
+            static let AnimationOptions: UIViewAnimationOptions = .curveEaseInOut
         }
     }
     
