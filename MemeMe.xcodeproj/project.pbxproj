@@ -10,6 +10,7 @@
 		609513A90E8BC8BECE57410E /* Pods_MemeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47DD830E6178553D3228309E /* Pods_MemeMe.framework */; };
 		74A6B8C00859CEC1AE95F473 /* Pods_MemeMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F1827E8842EC82D86E8300 /* Pods_MemeMeUITests.framework */; };
 		9DBECDFED26305EE09318B3A /* Pods_MemeMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFF7A5F879F0FF5DA3C47DE4 /* Pods_MemeMeTests.framework */; };
+		EE2BA6321EA5D03900FD211A /* UIView+StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2BA6311EA5D03900FD211A /* UIView+StackView.swift */; };
 		EE44A7DE1E97D23200C9C49F /* ArtKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DD1E97D23200C9C49F /* ArtKit.swift */; };
 		EE44A7E01E97D39800C9C49F /* ArtKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */; };
 		EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */; };
@@ -64,6 +65,7 @@
 		94E4233EFE3F4A0EB967850B /* Pods-MemeMeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeMeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemeMeUITests/Pods-MemeMeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFF7A5F879F0FF5DA3C47DE4 /* Pods_MemeMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8F1827E8842EC82D86E8300 /* Pods_MemeMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE2BA6311EA5D03900FD211A /* UIView+StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+StackView.swift"; sourceTree = "<group>"; };
 		EE44A7DD1E97D23200C9C49F /* ArtKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKit.swift; path = View/ArtKit.swift; sourceTree = "<group>"; };
 		EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKitButton.swift; path = View/ArtKitButton.swift; sourceTree = "<group>"; };
 		EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Convert.swift"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */,
 				EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */,
 				EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */,
+				EE2BA6311EA5D03900FD211A /* UIView+StackView.swift */,
 			);
 			name = UIView;
 			path = Reusable/UIView;
@@ -606,6 +609,7 @@
 				EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */,
 				EE6C54A41E9F52F40014A102 /* TextField.swift in Sources */,
 				EEDA3F7A1E9D1D83006ABCCC /* FocusOnTextView.swift in Sources */,
+				EE2BA6321EA5D03900FD211A /* UIView+StackView.swift in Sources */,
 				EE44A7DE1E97D23200C9C49F /* ArtKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

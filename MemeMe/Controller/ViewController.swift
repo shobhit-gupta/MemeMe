@@ -36,8 +36,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func start(_ sender: Any) {
-        //print("Start pressed")
-        
         if let initialFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
             focussedView.textView.delegate = self
             focussedView.textView.text = memeView.bottom.text

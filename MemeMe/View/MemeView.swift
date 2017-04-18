@@ -116,22 +116,11 @@ extension MemeView {
         augmentedStackView.alignment = .center
         augmentedStackView.distribution = .fillEqually
         
-        // TODO: TopStackView
+        let topStackView = top.encompassInStackView(axis: .horizontal, alignment: .top)
+        let closeImageButtonStackView = closeImageButton.encompassInStackView(axis: .horizontal, alignment: .center)
+        let bottomStackView = bottom.encompassInStackView(axis: .horizontal, alignment: .bottom)
         
-        let bottomStackView = UIStackView()
-        bottomStackView.axis = .horizontal
-        bottomStackView.alignment = .center
-        bottomStackView.addArrangedSubview(bottom)
-        
-        let closeImageButtonStackView = UIStackView()
-        closeImageButtonStackView.axis = .horizontal
-        closeImageButtonStackView.alignment = .center
-        closeImageButtonStackView.addArrangedSubview(closeImageButton)
-        
-        augmentedStackView.addArrangedSubview(top)
-        augmentedStackView.addArrangedSubview(closeImageButtonStackView)
-        augmentedStackView.addArrangedSubview(bottomStackView)
-        
+        [topStackView, closeImageButtonStackView, bottomStackView].forEach() { augmentedStackView.addArrangedSubview($0) }
         addSubview(augmentedStackView)
     }
     
