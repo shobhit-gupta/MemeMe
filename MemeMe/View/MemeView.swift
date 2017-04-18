@@ -13,6 +13,7 @@ import PureLayout
 @objc
 protocol MemeViewDelegate: class {
     func closeImageButtonPressed()
+    func memeLabelTapped(sender: UITapGestureRecognizer)
 }
 
 
@@ -20,14 +21,14 @@ protocol MemeViewDelegate: class {
 class MemeView: DynamicImageView {
     
     // MARK: Public variables and types
-    @IBOutlet public var delegate: MemeViewDelegate? { didSet { resetTargetActionForCloseImageButton() } }
+    @IBOutlet public var delegate: MemeViewDelegate? { didSet { setupDelegate() } }
     @IBInspectable public var topText: String? { didSet { resetLabelsText() } }
     @IBInspectable public var bottomText: String? { didSet { resetLabelsText() } }
     
     
     // MARK: Private variables and types
     fileprivate let augmentedStackView = UIStackView(frame: CGRect.zero)
-    fileprivate let top = UILabel(frame: CGRect.zero)
+    public let top = UILabel(frame: CGRect.zero)
     public let bottom = UILabel(frame: CGRect.zero)
     fileprivate let closeImageButton = ArtKitButton(frame: CGRect.zero)
     private var shouldSetupConstraints = true
@@ -83,6 +84,7 @@ extension MemeView {
         setupLabels()
         setupcloseImageButton()
         setupAugmentedStackView()
+        setupDelegate()
     }
     
     
@@ -127,13 +129,18 @@ extension MemeView {
     
     fileprivate func setupcloseImageButton() {
         closeImageButton.kind = .closeImage
-        resetTargetActionForCloseImageButton()
     }
     
     
-    fileprivate func resetTargetActionForCloseImageButton() {
+    fileprivate func setupDelegate() {
         if let delegate = delegate {
+            for label in [top, bottom] {
+                label.isUserInteractionEnabled = true
+                let tap = UITapGestureRecognizer(target: delegate, action: #selector(MemeViewDelegate.memeLabelTapped(sender:)))
+                label.addGestureRecognizer(tap)
+            }
             closeImageButton.addTarget(delegate, action: #selector(MemeViewDelegate.closeImageButtonPressed), for: .touchUpInside)
+            
         }
     }
     

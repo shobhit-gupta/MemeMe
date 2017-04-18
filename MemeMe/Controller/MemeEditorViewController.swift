@@ -218,6 +218,14 @@ extension MemeEditorViewController: MemeViewDelegate {
         currentState = .selectImage
     }
     
+    func memeLabelTapped(sender: UITapGestureRecognizer) {
+        if memeView.top === sender.view {
+            print("Top Pressed")
+        } else if memeView.bottom === sender.view {
+            print("Bottom Pressed")
+        }
+    }
+    
 }
 
 

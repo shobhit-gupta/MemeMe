@@ -31,8 +31,10 @@ class ViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        memeView.delegate = self
         focussedView.alpha = 0.0
         focussedStackView.insertArrangedSubview(focussedView, at: 0)
+        focussedStackView.isHidden = true
     }
     
     @IBAction func start(_ sender: Any) {
@@ -69,6 +71,22 @@ extension ViewController: UITextViewDelegate {
             memeView.bottom.text = focussedView.textView.text
             focussedView.end(on: finalFrame)
             focussedView.fadeOut()
+        }
+    }
+}
+
+
+extension ViewController: MemeViewDelegate {
+    
+    func closeImageButtonPressed() {
+        print("Close Pressed")
+    }
+    
+    func memeLabelTapped(sender: UITapGestureRecognizer) {
+        if memeView.top === sender.view {
+            print("Top Pressed")
+        } else if memeView.bottom === sender.view {
+            print("Bottom Pressed")
         }
     }
 }
