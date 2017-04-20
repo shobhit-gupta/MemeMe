@@ -28,36 +28,49 @@ class ViewController: UIViewController {
     @IBOutlet weak var memeView: MemeView!
     @IBOutlet weak var focussedStackView: UIStackView!
     let focussedView = FocusOnTextView()
-    
+    fileprivate var currentLabel: UILabel?
     
     override func viewDidLoad() {
         memeView.delegate = self
-        focussedView.alpha = 0.0
         focussedStackView.insertArrangedSubview(focussedView, at: 0)
         focussedStackView.isHidden = true
+        setup()
     }
     
-    @IBAction func start(_ sender: Any) {
-        if let initialFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
-            focussedView.textView.delegate = self
-            focussedView.textView.text = memeView.bottom.text
-            focussedView.textView.textAlignment = memeView.bottom.textAlignment
-            let properties = OverlayType.Properties(color: Default.Overlay.BackgroundColor,
-                                                    blur: OverlayType.Properties.Blur(style: Default.Overlay.BlurEffectStyle, isVibrant: true))
-            self.focussedView.overlayProperties = properties
+    
+    fileprivate func setup() {
+        focussedView.textView.delegate = self
+        let properties = OverlayType.Properties(color: Default.Overlay.BackgroundColor,
+                                                blur: OverlayType.Properties.Blur(style: Default.Overlay.BlurEffectStyle, isVibrant: true))
+        self.focussedView.overlayProperties = properties
+        
+    }
+    
+    fileprivate func start() {
+        if let currentLabel = currentLabel,
+            let initialFrame = currentLabel.superview?.convert(currentLabel.frame, to: focussedView) {
+            focussedStackView.isHidden = false
             focussedView.fadeIn(duration: 0.01, delay: 0.0) { _ in
-                self.focussedView.start(from: initialFrame, completion: nil)
+                self.focussedView.start(from: initialFrame, in: 0.25) {
+                    self.focussedView.textView.text = currentLabel.text
+                    self.focussedView.textView.textAlignment = currentLabel.textAlignment
+                }
+                //self.focussedView.start(from: initialFrame, completion: nil)
             }
         }
     }
     
     
-    @IBAction func end(_ sender: Any) {
-        //print("End pressed")
-        if let finalFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
-            memeView.bottom.text = focussedView.textView.text
+    fileprivate func end() {
+        if let currentLabel = currentLabel,
+            let finalFrame = currentLabel.superview?.convert(currentLabel.frame, to: focussedView) {
+            
+            currentLabel.text = focussedView.textView.text
+            focussedView.textView.text = nil
             focussedView.end(on: finalFrame)
-            focussedView.fadeOut()
+            focussedView.fadeOut(duration: Default.UIView_.Fade.Out.Duration) { _ in
+                self.focussedStackView.isHidden = true
+            }
         }
     }
     
@@ -67,11 +80,7 @@ class ViewController: UIViewController {
 extension ViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if let finalFrame = memeView.bottom.superview?.convert(memeView.bottom.frame, to: focussedView) {
-            memeView.bottom.text = focussedView.textView.text
-            focussedView.end(on: finalFrame)
-            focussedView.fadeOut()
-        }
+        end()
     }
 }
 
@@ -84,9 +93,11 @@ extension ViewController: MemeViewDelegate {
     
     func memeLabelTapped(sender: UITapGestureRecognizer) {
         if memeView.top === sender.view {
-            print("Top Pressed")
+            currentLabel = memeView.top
+            
         } else if memeView.bottom === sender.view {
-            print("Bottom Pressed")
+            currentLabel = memeView.bottom
         }
+        start()
     }
 }
