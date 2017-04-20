@@ -348,5 +348,37 @@ extension MemeEditorViewController: UITextViewDelegate {
 //******************************************************************************
 //                              MARK: Meme Ready
 //******************************************************************************
-
+extension MemeEditorViewController {
+    
+    fileprivate func generateMeme() -> UIImage? {
+        // Render view to image
+        let scale = memeView.image!.size.width / memeView.imageView.frame.width
+        let rectToDraw = memeView.bounds
+        
+        memeView.closeImageButton.isHidden = true
+        defer {
+            memeView.closeImageButton.isHidden = false
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(rectToDraw.size, false, scale)
+        memeView.drawHierarchy(in: rectToDraw, afterScreenUpdates: true)
+        var meme = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        
+        // Crop
+        let imageContentRect = memeView.imageView.frame
+        let scaledRect = CGRect(x: ceil(imageContentRect.origin.x * scale),
+                                y: ceil(imageContentRect.origin.y * scale),
+                                width: floor(imageContentRect.width * scale),
+                                height: floor(imageContentRect.height * scale))
+        
+        if let cgImage = meme?.cgImage?.cropping(to: scaledRect) {
+            meme = UIImage(cgImage: cgImage, scale: UIScreen.main.scale, orientation: .up)
+        }
+        
+        return meme
+    }
+    
+}
 
