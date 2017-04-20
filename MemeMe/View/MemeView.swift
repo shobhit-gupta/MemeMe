@@ -30,7 +30,7 @@ class MemeView: DynamicImageView {
     fileprivate let augmentedStackView = UIStackView(frame: CGRect.zero)
     public let top = UILabel(frame: CGRect.zero)
     public let bottom = UILabel(frame: CGRect.zero)
-    fileprivate let closeImageButton = ArtKitButton(frame: CGRect.zero)
+    public let closeImageButton = ArtKitButton(frame: CGRect.zero)
     private var shouldSetupConstraints = true
     
     
@@ -72,6 +72,13 @@ class MemeView: DynamicImageView {
     }
     
     
+    public func set(text: String?, for label: UILabel) {
+        if label === top {
+            topText = text
+        } else if label === bottom {
+            bottomText = text
+        }
+    }
 }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="a4J-X8-YgO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5Yu-dK-Lf3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
         <scene sceneID="7FI-Bd-JPW">
             <objects>
                 <navigationController id="5Yu-dK-Lf3" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="dtp-Li-Tmq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dtp-Li-Tmq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -44,19 +44,19 @@
                                 <rect key="frame" x="108" y="315.5" width="159" height="36.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAr-pc-ai1" userLabel="Camera" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="37" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="37" height="36.5"/>
                                         <connections>
                                             <action selector="showImageSource:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vpk-bJ-jw6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPe-ev-tHQ" userLabel="Album" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="61" y="0.0" width="37" height="36.5"/>
+                                        <rect key="frame" x="61" y="0.5" width="37" height="36.5"/>
                                         <connections>
                                             <action selector="showImageSource:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zn0-gW-xdY"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbA-u8-0sJ" userLabel="Popular" customClass="ArtKitButton" customModule="MemeMe" customModuleProvider="target">
-                                        <rect key="frame" x="122" y="0.0" width="37" height="36.5"/>
+                                        <rect key="frame" x="122" y="0.5" width="37" height="36.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vbA-u8-0sJ" secondAttribute="height" multiplier="1:1" id="1au-oX-3J2"/>
                                         </constraints>
@@ -71,6 +71,9 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3WO-JZ-hmf" userLabel="FocusOnTextView Stack View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.91372549020000005" green="0.10980392160000001" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -78,11 +81,15 @@
                             <constraint firstItem="oIM-dT-fSO" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.36" constant="48" id="62f-hX-u4E">
                                 <variation key="widthClass=compact" constant="24"/>
                             </constraint>
+                            <constraint firstItem="3WO-JZ-hmf" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="9Mv-aP-htg"/>
                             <constraint firstItem="X4F-nM-GMx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KMC-kG-UGB"/>
                             <constraint firstItem="oIM-dT-fSO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L0R-Rj-TtC"/>
                             <constraint firstItem="X4F-nM-GMx" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="M3t-BI-cZI"/>
+                            <constraint firstItem="3WO-JZ-hmf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="PFi-Yw-1Ha"/>
                             <constraint firstItem="X4F-nM-GMx" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="ivg-Ny-LFu"/>
+                            <constraint firstItem="3WO-JZ-hmf" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="kpE-ri-GxB"/>
                             <constraint firstItem="X4F-nM-GMx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="lHx-q6-VXW"/>
+                            <constraint firstItem="3WO-JZ-hmf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="nNK-z2-RFw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QOW-54-a5o">
@@ -108,6 +115,7 @@
                         <outlet property="album" destination="gPe-ev-tHQ" id="RgW-z6-H2t"/>
                         <outlet property="camera" destination="eAr-pc-ai1" id="CfF-qB-MNX"/>
                         <outlet property="doneButton" destination="oJ5-b1-hJu" id="5n0-t3-DNK"/>
+                        <outlet property="focusOnTextViewStackView" destination="3WO-JZ-hmf" id="rIJ-aP-xH6"/>
                         <outlet property="imageSourceSelector" destination="oIM-dT-fSO" id="rVF-hj-dZl"/>
                         <outlet property="memeView" destination="X4F-nM-GMx" id="wdc-ye-9R0"/>
                         <outlet property="popular" destination="vbA-u8-0sJ" id="xOg-ep-zbk"/>
@@ -141,29 +149,6 @@
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EY7-dG-0eA">
                                 <rect key="frame" x="0.0" y="20" width="375" height="631"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="plB-5t-mvJ" userLabel="Buttons Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="631"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uil-mq-X8s">
-                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="631"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="Start"/>
-                                                <connections>
-                                                    <action selector="start:" destination="a4J-X8-YgO" eventType="touchUpInside" id="2cF-U5-tsB"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hn-Kg-ZKl">
-                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="631"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="End"/>
-                                                <connections>
-                                                    <action selector="end:" destination="a4J-X8-YgO" eventType="touchUpInside" id="Mfg-aj-zcQ"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

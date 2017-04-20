@@ -11,25 +11,32 @@ import UIKit
 class MemeEditorViewController: UIViewController {
 
     // MARK: IBOutlets
+
+    // General
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    // Select Image
     @IBOutlet weak var camera: ArtKitButton!
     @IBOutlet weak var album: ArtKitButton!
     @IBOutlet weak var popular: ArtKitButton!
-    @IBOutlet weak var shareButton: UIBarButtonItem!
-    @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var imageSourceSelector: UIStackView!
     
+    // Select Text
     @IBOutlet weak var memeView: MemeView!
     
     
     // MARK: Public variables and types
    
+    // Input Text
+    @IBOutlet weak var focusOnTextViewStackView: UIStackView!
     
     
     // MARK: Private variables and types
     fileprivate enum State {
         case selectImage
         case selectText
-        case inputText
+        case inputText(for: UILabel, with: FocusOnTextView?)
         case memeReady
     }
     
@@ -100,26 +107,29 @@ extension MemeEditorViewController {
     }
     
     
-    func setupUI() {
+    fileprivate func setupUI() {
         setupView()
         setupTitle()
         setupNavBar()
         setupImageSourceSelector()
         setupMemeView()
+        setupFocusOnTextViewStackView()
     }
     
-    
-    func setupView() {
+    //--------------------------------------------------------------------------
+    //                                  General
+    //--------------------------------------------------------------------------
+    private func setupView() {
         view.backgroundColor = ArtKit.backgroundColor
     }
     
     
-    func setupTitle() {
+    private func setupTitle() {
         title = "Create"
     }
     
     
-    func setupNavBar() {
+    private func setupNavBar() {
         if let navbar = navigationController?.navigationBar {
             navbar.barTintColor = ArtKit.primaryColor
             navbar.tintColor = ArtKit.secondaryColor
@@ -130,7 +140,10 @@ extension MemeEditorViewController {
     }
     
     
-    func setupImageSourceSelector() {
+    //--------------------------------------------------------------------------
+    //                            State: selectImage
+    //--------------------------------------------------------------------------
+    private func setupImageSourceSelector() {
         camera.kind = .camera(blendMode: .normal)
         album.kind = .album(blendMode: .normal)
         popular.kind = .popular(blendMode: .normal)
@@ -141,32 +154,85 @@ extension MemeEditorViewController {
     }
     
     
-    func setupMemeView() {
+    //--------------------------------------------------------------------------
+    //                            State: selectText
+    //--------------------------------------------------------------------------
+    private func setupMemeView() {
         memeView.delegate = self
     }
     
     
-    func updateMemeView(with image: UIImage) {
+    fileprivate func updateMemeView(with image: UIImage) {
         memeView.image = image
     }
     
     
-    func updateUI() {
+    //--------------------------------------------------------------------------
+    //                            State: inputText
+    //--------------------------------------------------------------------------
+    fileprivate func setupFocusOnTextViewStackView() {
+        focusOnTextViewStackView.isHidden = true
+    }
+    
+    
+    fileprivate func setupFocusOnTextView() -> FocusOnTextView {
+        let focusOnTextView = FocusOnTextView()
+        focusOnTextView.textView.delegate = self
+        let properties = OverlayType.Properties(color: Default.Overlay.BackgroundColor,
+                                                blur: OverlayType.Properties.Blur(style: Default.Overlay.BlurEffectStyle, isVibrant: true))
+        focusOnTextView.overlayProperties = properties
+        focusOnTextViewStackView.addArrangedSubview(focusOnTextView)
+        focusOnTextViewStackView.isHidden = true
+        return focusOnTextView
+    }
+    
+    
+    //--------------------------------------------------------------------------
+    //                              Manage State
+    //--------------------------------------------------------------------------
+    fileprivate func updateUI() {
         switch currentState {
         case .selectImage:
             ArtKitButton.setBlendMode(of: [camera, album, popular], to: .normal)
+            shareButton.isEnabled = false
+            doneButton.isEnabled = false
             imageSourceSelector.isHidden = false
             memeView.isHidden = true
+            focusOnTextViewStackView.isHidden = true
         
         case .selectText:
+            shareButton.isEnabled = false
+            doneButton.isEnabled = false
+            imageSourceSelector.isHidden = true
+            memeView.isHidden = false
+            focusOnTextViewStackView.isHidden = true
+            
+        case let .inputText(label, focusOnTextView):
+            shareButton.isEnabled = false
+            doneButton.isEnabled = false
             imageSourceSelector.isHidden = true
             memeView.isHidden = false
             
-        case .inputText:
-            imageSourceSelector.isHidden = true
+            if let focusOnTextView = focusOnTextView {
+                if focusOnTextViewStackView.isHidden {
+                    focusOnTextViewStackView.arrangedSubviews.forEach {
+                        focusOnTextViewStackView.removeArrangedSubview($0)
+                    }
+                    focusOnTextViewStackView.addArrangedSubview(focusOnTextView)
+                    focusOnTextViewStackView.isHidden = false
+                    startFocusOnTextView()
+                }
+                
+            } else {
+                currentState = .inputText(for: label, with: setupFocusOnTextView())
+            }
             
         case .memeReady:
+            shareButton.isEnabled = true
+            doneButton.isEnabled = true
             imageSourceSelector.isHidden = true
+            memeView.isHidden = false
+            focusOnTextViewStackView.isHidden = true
         }
     }
     
@@ -175,7 +241,7 @@ extension MemeEditorViewController {
 
 
 //******************************************************************************
-//                              MARK: Pick Image
+//                              MARK: Select Image
 //******************************************************************************
 extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -190,7 +256,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             updateMemeView(with: image)
-            currentState = .selectText
+            currentState = (memeView.topText != nil) && (memeView.bottomText != nil) ? .memeReady : .selectText
         } else {
             currentState = .selectImage
         }
@@ -209,7 +275,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
 
 
 //******************************************************************************
-//                              MARK: MemeViewDelegate
+//                              MARK: Select Text
 //******************************************************************************
 extension MemeEditorViewController: MemeViewDelegate {
     
@@ -219,14 +285,68 @@ extension MemeEditorViewController: MemeViewDelegate {
     }
     
     func memeLabelTapped(sender: UITapGestureRecognizer) {
-        if memeView.top === sender.view {
-            print("Top Pressed")
-        } else if memeView.bottom === sender.view {
-            print("Bottom Pressed")
+        if let label = sender.view as? UILabel,
+            memeView.top === label || memeView.bottom === label {
+         
+            currentState = .inputText(for: label, with: nil)
+        
         }
     }
     
 }
 
+
+//******************************************************************************
+//                              MARK: Input Text
+//******************************************************************************
+extension MemeEditorViewController: UITextViewDelegate {
+    
+    fileprivate func startFocusOnTextView() {
+        
+        guard case let State.inputText(label, focusOnTextViewOptional) = currentState,
+            let focusOnTextView = focusOnTextViewOptional else {
+                print("Unexpected Current state: \(currentState)")
+                return
+        }
+        
+        let initialFrame = label.superview?.convert(label.frame, to: focusOnTextView)
+        focusOnTextView.fadeIn(duration: 0.01) { _ in
+            focusOnTextView.start(from: initialFrame, in: 0.25) {
+                focusOnTextView.textView.text = label.text
+                focusOnTextView.textView.textAlignment = label.textAlignment
+            }
+        }
+    }
+    
+    
+    fileprivate func endFocusOnTextView() {
+        
+        guard case let State.inputText(label, focusOnTextViewOptional) = currentState,
+            let focusOnTextView = focusOnTextViewOptional else {
+                print("Unexpected Current state: \(currentState)")
+                return
+        }
+        
+        let finalFrame = label.superview?.convert(label.frame, to: focusOnTextView)
+        memeView.set(text: focusOnTextView.textView.text, for: label)
+        focusOnTextView.end(on: finalFrame)
+        focusOnTextView.fadeOut(duration: Default.UIView_.Fade.Out.Duration) {_ in 
+            self.focusOnTextViewStackView.isHidden = true
+        }
+        
+    }
+    
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        endFocusOnTextView()
+        currentState = (memeView.topText != nil) && (memeView.bottomText != nil) ? .memeReady : .selectText
+    }
+    
+}
+
+
+//******************************************************************************
+//                              MARK: Meme Ready
+//******************************************************************************
 
 
