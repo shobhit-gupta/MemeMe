@@ -271,20 +271,25 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let state: State
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             updateMemeView(with: image)
-            currentState = (memeView.topText != nil) && (memeView.bottomText != nil) ? .memeReady : .selectText
+            state = (memeView.topText != nil) && (memeView.bottomText != nil) ? .memeReady : .selectText
         } else {
-            currentState = .selectImage
+            state = .selectImage
         }
-        picker.dismiss(animated: true, completion: nil)
+        
+        picker.dismiss(animated: true) {
+            self.currentState = state
+        }
         
     }
     
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-        currentState = .selectImage
+        picker.dismiss(animated: true) {
+            self.currentState = .selectImage
+        }
     }
 
 }
@@ -347,8 +352,9 @@ extension MemeEditorViewController: UITextViewDelegate {
         let finalFrame = label.superview?.convert(label.frame, to: focusOnTextView)
         memeView.set(text: focusOnTextView.textView.text, for: label)
         focusOnTextView.end(on: finalFrame)
-        focusOnTextView.fadeOut(duration: Default.UIView_.Fade.Out.Duration) {_ in 
+        focusOnTextView.fadeOut(duration: 0.25) { _ in
             self.focusOnTextViewStackView.isHidden = true
+            self.currentState = (self.memeView.topText != nil) && (self.memeView.bottomText != nil) ? .memeReady : .selectText
         }
         
     }
@@ -356,7 +362,6 @@ extension MemeEditorViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         endFocusOnTextView()
-        currentState = (memeView.topText != nil) && (memeView.bottomText != nil) ? .memeReady : .selectText
     }
     
 }
