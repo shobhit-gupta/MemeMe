@@ -63,7 +63,24 @@ class MemeEditorViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func share(_ sender: UIBarButtonItem) {
-        print("Share pressed")
+        guard case State.memeReady = currentState else {
+            print("Asked to share. Unexpected current state: \(currentState)")
+            return
+        }
+        
+        if let meme = generateMeme() {
+            let activityController = UIActivityViewController(activityItems: [meme], applicationActivities: nil)
+            
+            if let popoverPresentationController = activityController.popoverPresentationController {
+                popoverPresentationController.barButtonItem = sender
+            }
+            
+//            activityController.completionWithItemsHandler = { action in
+//                
+//            }
+            
+            present(activityController, animated: true, completion: nil)
+        }
     }
     
     
