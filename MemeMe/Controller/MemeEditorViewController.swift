@@ -263,6 +263,11 @@ extension MemeEditorViewController {
 extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func pickAnImage(from sourceType: UIImagePickerControllerSourceType) {
+        guard case .selectImage = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = sourceType
@@ -271,22 +276,32 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let state: State
+        guard case .selectImage = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
+        let nextState: State
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             updateMemeView(with: image)
-            state = (memeView.topText != nil) && (memeView.bottomText != nil) ? .memeReady : .selectText
+            nextState = (memeView.topText != nil) && (memeView.bottomText != nil) ? .memeReady : .selectText
         } else {
-            state = .selectImage
+            nextState = .selectImage
         }
         
         picker.dismiss(animated: true) {
-            self.currentState = state
+            self.currentState = nextState
         }
         
     }
     
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        guard case .selectImage = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
         picker.dismiss(animated: true) {
             self.currentState = .selectImage
         }
@@ -302,11 +317,21 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
 extension MemeEditorViewController: MemeViewDelegate {
     
     func closeImageButtonPressed() {
+        guard case .selectText = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
         memeView.image = nil
         currentState = .selectImage
     }
     
     func memeLabelTapped(sender: UITapGestureRecognizer) {
+        guard case .selectText = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
         if let label = sender.view as? UILabel,
             memeView.top === label || memeView.bottom === label {
          
@@ -324,8 +349,7 @@ extension MemeEditorViewController: MemeViewDelegate {
 extension MemeEditorViewController: UITextViewDelegate {
     
     fileprivate func startFocusOnTextView() {
-        
-        guard case let State.inputText(label, focusOnTextViewOptional) = currentState,
+        guard case let .inputText(label, focusOnTextViewOptional) = currentState,
             let focusOnTextView = focusOnTextViewOptional else {
                 print("Unexpected Current state: \(currentState)")
                 return
@@ -342,8 +366,7 @@ extension MemeEditorViewController: UITextViewDelegate {
     
     
     fileprivate func endFocusOnTextView() {
-        
-        guard case let State.inputText(label, focusOnTextViewOptional) = currentState,
+        guard case let .inputText(label, focusOnTextViewOptional) = currentState,
             let focusOnTextView = focusOnTextViewOptional else {
                 print("Unexpected Current state: \(currentState)")
                 return
@@ -373,6 +396,11 @@ extension MemeEditorViewController: UITextViewDelegate {
 extension MemeEditorViewController {
     
     fileprivate func generateMeme() -> UIImage? {
+        guard case .memeReady = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return nil
+        }
+        
         // Render MemeView to image
         memeView.closeImageButton.isHidden = true
         defer {
@@ -391,6 +419,16 @@ extension MemeEditorViewController {
         let croppedMeme = meme?.crop(to: scaledRect, orientation: .up) ?? meme
         
         return croppedMeme
+    }
+    
+    
+    fileprivate func save(meme: UIImage) {
+        guard case .memeReady = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
+        
     }
     
 }
