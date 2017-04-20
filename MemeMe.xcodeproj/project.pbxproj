@@ -11,6 +11,8 @@
 		74A6B8C00859CEC1AE95F473 /* Pods_MemeMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F1827E8842EC82D86E8300 /* Pods_MemeMeUITests.framework */; };
 		9DBECDFED26305EE09318B3A /* Pods_MemeMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFF7A5F879F0FF5DA3C47DE4 /* Pods_MemeMeTests.framework */; };
 		EE2BA6321EA5D03900FD211A /* UIView+StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2BA6311EA5D03900FD211A /* UIView+StackView.swift */; };
+		EE2BA6351EA84EE300FD211A /* UIImage+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2BA6341EA84EE300FD211A /* UIImage+Ease.swift */; };
+		EE2BA6371EA8813100FD211A /* UIView+GraphicsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2BA6361EA8813100FD211A /* UIView+GraphicsContext.swift */; };
 		EE44A7DE1E97D23200C9C49F /* ArtKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DD1E97D23200C9C49F /* ArtKit.swift */; };
 		EE44A7E01E97D39800C9C49F /* ArtKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */; };
 		EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */; };
@@ -66,6 +68,8 @@
 		CFF7A5F879F0FF5DA3C47DE4 /* Pods_MemeMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8F1827E8842EC82D86E8300 /* Pods_MemeMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2BA6311EA5D03900FD211A /* UIView+StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+StackView.swift"; sourceTree = "<group>"; };
+		EE2BA6341EA84EE300FD211A /* UIImage+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Ease.swift"; sourceTree = "<group>"; };
+		EE2BA6361EA8813100FD211A /* UIView+GraphicsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+GraphicsContext.swift"; sourceTree = "<group>"; };
 		EE44A7DD1E97D23200C9C49F /* ArtKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKit.swift; path = View/ArtKit.swift; sourceTree = "<group>"; };
 		EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKitButton.swift; path = View/ArtKitButton.swift; sourceTree = "<group>"; };
 		EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Convert.swift"; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 			children = (
 				EE6C54A81E9F54A10014A102 /* CGSize+Ease.swift */,
 				EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */,
+				EE2BA6341EA84EE300FD211A /* UIImage+Ease.swift */,
 			);
 			name = EaseExtensions;
 			path = Reusable/EaseExtensions;
@@ -227,6 +232,7 @@
 				EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */,
 				EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */,
 				EE2BA6311EA5D03900FD211A /* UIView+StackView.swift */,
+				EE2BA6361EA8813100FD211A /* UIView+GraphicsContext.swift */,
 			);
 			name = UIView;
 			path = Reusable/UIView;
@@ -600,11 +606,13 @@
 				EEB3C4C51E9C703900871423 /* ViewController.swift in Sources */,
 				EE6C54AD1EA068E90014A102 /* Keyboard.swift in Sources */,
 				EE4C810F1EA39C0A009CA8EA /* FocusOnContentView.swift in Sources */,
+				EE2BA6351EA84EE300FD211A /* UIImage+Ease.swift in Sources */,
 				EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */,
 				EE6C54AF1EA08DF50014A102 /* UIView+Animations.swift in Sources */,
 				EEDF112D1E9BAD0200BCCF05 /* DynamicImageView.swift in Sources */,
 				EE6C54A91E9F54A10014A102 /* CGSize+Ease.swift in Sources */,
 				EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */,
+				EE2BA6371EA8813100FD211A /* UIView+GraphicsContext.swift in Sources */,
 				EE758CCC1EA26E1100F2E794 /* CGRect+Ease.swift in Sources */,
 				EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */,
 				EE6C54A41E9F52F40014A102 /* TextField.swift in Sources */,
