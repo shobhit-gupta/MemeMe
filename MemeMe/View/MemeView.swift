@@ -33,6 +33,15 @@ class MemeView: DynamicImageView {
     public let closeImageButton = ArtKitButton(frame: CGRect.zero)
     private var shouldSetupConstraints = true
     
+    fileprivate var textAttributes: [String : Any] {
+        var attributes = [String : Any]()
+        attributes[NSStrokeColorAttributeName] = UIColor.black
+        attributes[NSStrokeWidthAttributeName] = -3.0
+        attributes[NSForegroundColorAttributeName] = UIColor.white
+        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
+        return attributes
+    }
+    
     
     // MARK: Initializers
     override init(frame: CGRect) {
@@ -79,6 +88,17 @@ class MemeView: DynamicImageView {
             bottomText = text
         }
     }
+    
+    
+    public func gettext(for label: UILabel) -> String? {
+        if label === top {
+            return topText
+        } else if label === bottom {
+            return bottomText
+        }
+        return nil
+    }
+    
 }
 
 
@@ -116,7 +136,7 @@ extension MemeView {
     
     
     fileprivate func resetLabel(_ label: UILabel, withText text: String) {
-        label.text = text
+        label.attributedText = NSAttributedString(string: text, attributes: textAttributes)
     }
     
     

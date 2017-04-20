@@ -329,7 +329,7 @@ extension MemeEditorViewController: UITextViewDelegate {
         let initialFrame = label.superview?.convert(label.frame, to: focusOnTextView)
         focusOnTextView.fadeIn(duration: 0.01) { _ in
             focusOnTextView.start(from: initialFrame, in: 0.25) {
-                focusOnTextView.textView.text = label.text
+                focusOnTextView.textView.text = self.memeView.gettext(for: label)
                 focusOnTextView.textView.textAlignment = label.textAlignment
             }
         }
