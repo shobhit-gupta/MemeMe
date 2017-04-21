@@ -46,6 +46,11 @@ class MemeEditorViewController: UIViewController {
         case inputText(for: UILabel, with: FocusOnTextView?)
         case memeReady
         
+        // Used when guarding for multiple enum cases at once where the enum has
+        // associated values (like this one) and hence doesn't conform to the
+        // Equatable protcol by default.
+        // See "Select Text" methods, for example: closeImageButtonPressed
+        // Modified from: http://stackoverflow.com/a/35212378/471960
         private func isEqual(to state: State) -> Bool {
             switch self {
             case .selectImage:
