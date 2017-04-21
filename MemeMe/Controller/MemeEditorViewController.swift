@@ -25,12 +25,19 @@ class MemeEditorViewController: UIViewController {
     // Select Text
     @IBOutlet weak var memeView: MemeView!
     
-    
-    // MARK: Public variables and types
-   
     // Input Text
     @IBOutlet weak var focusOnTextViewStackView: UIStackView!
     
+    
+    // MARK: Public variables and types
+    public var memeIdx: Int? {
+        get { return _memeIdx }
+        set {
+            guard _memeIdx == nil else { return }
+            _memeIdx = newValue
+        }
+    }
+   
     
     // MARK: Private variables and types
     fileprivate enum State {
@@ -45,6 +52,8 @@ class MemeEditorViewController: UIViewController {
             updateUI()
         }
     }
+    
+    fileprivate var _memeIdx: Int?
     
     
     // MARK: UIViewController Methods
@@ -69,15 +78,15 @@ class MemeEditorViewController: UIViewController {
         }
         
         if let meme = generateMeme() {
-            let activityController = UIActivityViewController(activityItems: [meme], applicationActivities: nil)
+            let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
             
             if let popoverPresentationController = activityController.popoverPresentationController {
                 popoverPresentationController.barButtonItem = sender
             }
             
-//            activityController.completionWithItemsHandler = { action in
-//                
-//            }
+            activityController.completionWithItemsHandler = { action in
+                self.save(meme: meme)
+            }
             
             present(activityController, animated: true, completion: nil)
         }
@@ -85,7 +94,10 @@ class MemeEditorViewController: UIViewController {
     
     
     @IBAction func done(_ sender: UIBarButtonItem) {
-        print("Done pressed")
+        if let meme = generateMeme() {
+            save(meme: meme)
+        }
+        
     }
     
     
@@ -395,7 +407,32 @@ extension MemeEditorViewController: UITextViewDelegate {
 //******************************************************************************
 extension MemeEditorViewController {
     
-    fileprivate func generateMeme() -> UIImage? {
+    fileprivate func save(meme: Meme) {
+        _ = meme.save(byReplacing: _memeIdx)
+    }
+    
+    
+    fileprivate func generateMeme() -> Meme? {
+        guard case .memeReady = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return nil
+        }
+        
+        var meme: Meme? = nil
+        if let topText = memeView.topText,
+            let bottomText = memeView.bottomText,
+            let originalImage = memeView.image,
+            let memedImage = generateMemedImage() {
+            
+            meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, memedImage: memedImage)
+            
+        }
+        
+        return meme
+    }
+    
+    
+    private func generateMemedImage() -> UIImage? {
         guard case .memeReady = currentState else {
             print("Unexpected Current state: \(currentState)")
             return nil
@@ -419,16 +456,6 @@ extension MemeEditorViewController {
         let croppedMeme = meme?.crop(to: scaledRect, orientation: .up) ?? meme
         
         return croppedMeme
-    }
-    
-    
-    fileprivate func save(meme: UIImage) {
-        guard case .memeReady = currentState else {
-            print("Unexpected Current state: \(currentState)")
-            return
-        }
-        
-        
     }
     
 }
