@@ -87,61 +87,6 @@ class MemeEditorViewController: UIViewController {
         popular.setNeedsDisplay()
     }
     
-    
-    // MARK: Actions
-    @IBAction func share(_ sender: UIBarButtonItem) {
-        guard case State.memeReady = currentState else {
-            print("Asked to share. Unexpected current state: \(currentState)")
-            return
-        }
-        
-        if let meme = generateMeme() {
-            let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
-            
-            if let popoverPresentationController = activityController.popoverPresentationController {
-                popoverPresentationController.barButtonItem = sender
-            }
-            
-            activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) in
-                if completed {
-                    self.save(meme: meme)
-                }
-            }
-            
-            present(activityController, animated: true, completion: nil)
-        }
-    }
-    
-    
-    @IBAction func done(_ sender: UIBarButtonItem) {
-        if let meme = generateMeme() {
-            save(meme: meme)
-        }
-        
-    }
-    
-    
-    @IBAction func close(_ sender: UIBarButtonItem) {
-        print("Close pressed")
-    }
-    
-
-    @IBAction func showImageSource(_ sender: ArtKitButton) {
-        switch sender.kind {
-        case .camera:
-            sender.kind = .camera(blendMode: .overlay)
-            pickAnImage(from: .camera)
-        case .album:
-            sender.kind = .album(blendMode: .overlay)
-            pickAnImage(from: .photoLibrary)
-        case .popular:
-            sender.kind = .popular(blendMode: .overlay)
-        default:
-            break
-        }
-        
-    }
-    
 }
 
 
@@ -290,9 +235,70 @@ extension MemeEditorViewController {
 
 
 //******************************************************************************
+//                              MARK: General
+//******************************************************************************
+extension MemeEditorViewController {
+    
+    @IBAction func share(_ sender: UIBarButtonItem) {
+        guard case State.memeReady = currentState else {
+            print("Asked to share. Unexpected current state: \(currentState)")
+            return
+        }
+        
+        if let meme = generateMeme() {
+            let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+            
+            if let popoverPresentationController = activityController.popoverPresentationController {
+                popoverPresentationController.barButtonItem = sender
+            }
+            
+            activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) in
+                if completed {
+                    self.save(meme: meme)
+                }
+            }
+            
+            present(activityController, animated: true, completion: nil)
+        }
+    }
+    
+    
+    @IBAction func done(_ sender: UIBarButtonItem) {
+        if let meme = generateMeme() {
+            save(meme: meme)
+        }
+        
+    }
+    
+    
+    @IBAction func close(_ sender: UIBarButtonItem) {
+        print("Close pressed")
+    }
+    
+}
+
+
+//******************************************************************************
 //                              MARK: Select Image
 //******************************************************************************
 extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @IBAction func showImageSource(_ sender: ArtKitButton) {
+        switch sender.kind {
+        case .camera:
+            sender.kind = .camera(blendMode: .overlay)
+            pickAnImage(from: .camera)
+        case .album:
+            sender.kind = .album(blendMode: .overlay)
+            pickAnImage(from: .photoLibrary)
+        case .popular:
+            sender.kind = .popular(blendMode: .overlay)
+        default:
+            break
+        }
+        
+    }
+    
     
     func pickAnImage(from sourceType: UIImagePickerControllerSourceType) {
         guard case .selectImage = currentState else {
