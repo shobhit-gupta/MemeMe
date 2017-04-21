@@ -40,11 +40,29 @@ class MemeEditorViewController: UIViewController {
    
     
     // MARK: Private variables and types
-    fileprivate enum State {
+    fileprivate enum State: Equatable {
         case selectImage
         case selectText
         case inputText(for: UILabel, with: FocusOnTextView?)
         case memeReady
+        
+        private func isEqual(to state: State) -> Bool {
+            switch self {
+            case .selectImage:
+                if case .selectImage = state { return true }
+            case .selectText:
+                if case .selectText = state { return true }
+            case let .inputText(label1, focusOnTextView1):
+                if case let .inputText(label2, focusOnTextView2) = state, label1 == label2, focusOnTextView1 == focusOnTextView2 { return true }
+            case .memeReady:
+                if case .memeReady = state { return true }
+            }
+            return false
+        }
+        
+        static func ==(lhs: State, rhs: State) -> Bool {
+            return lhs.isEqual(to: rhs)
+        }
     }
     
     fileprivate var currentState: State = .selectImage {
@@ -329,7 +347,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
 extension MemeEditorViewController: MemeViewDelegate {
     
     func closeImageButtonPressed() {
-        guard case .selectText = currentState else {
+        guard [.selectText, .memeReady].contains(currentState) else {
             print("Unexpected Current state: \(currentState)")
             return
         }
@@ -339,7 +357,7 @@ extension MemeEditorViewController: MemeViewDelegate {
     }
     
     func memeLabelTapped(sender: UITapGestureRecognizer) {
-        guard case .selectText = currentState else {
+        guard [.selectText, .memeReady].contains(currentState) else {
             print("Unexpected Current state: \(currentState)")
             return
         }
