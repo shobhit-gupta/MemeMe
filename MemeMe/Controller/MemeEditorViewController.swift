@@ -321,9 +321,8 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
             nextState = .selectImage
         }
         
-        picker.dismiss(animated: true) {
-            self.currentState = nextState
-        }
+        picker.dismiss(animated: true)
+        self.currentState = nextState
         
     }
     
@@ -334,13 +333,12 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
             return
         }
         
-        picker.dismiss(animated: true) {
-            self.currentState = .selectImage
-        }
+        picker.dismiss(animated: true)
+        self.currentState = .selectImage
+        
     }
 
 }
-
 
 
 //******************************************************************************
