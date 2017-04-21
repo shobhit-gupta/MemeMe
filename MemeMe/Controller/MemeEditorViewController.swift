@@ -102,8 +102,10 @@ class MemeEditorViewController: UIViewController {
                 popoverPresentationController.barButtonItem = sender
             }
             
-            activityController.completionWithItemsHandler = { action in
-                self.save(meme: meme)
+            activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) in
+                if completed {
+                    self.save(meme: meme)
+                }
             }
             
             present(activityController, animated: true, completion: nil)
