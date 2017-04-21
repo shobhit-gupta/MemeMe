@@ -316,7 +316,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
         let nextState: State
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             updateMemeView(with: image)
-            nextState = (memeView.topText != nil) && (memeView.bottomText != nil) ? .memeReady : .selectText
+            nextState = memeView.isReady ? .memeReady : .selectText
         } else {
             nextState = .selectImage
         }
@@ -409,7 +409,7 @@ extension MemeEditorViewController: UITextViewDelegate {
         focusOnTextView.end(on: finalFrame)
         focusOnTextView.fadeOut(duration: 0.25) { _ in
             self.focusOnTextViewStackView.isHidden = true
-            self.currentState = (self.memeView.topText != nil) && (self.memeView.bottomText != nil) ? .memeReady : .selectText
+            self.currentState = self.memeView.isReady ? .memeReady : .selectText
         }
         
     }

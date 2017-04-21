@@ -25,6 +25,9 @@ class MemeView: DynamicImageView {
     @IBInspectable public var topText: String? { didSet { resetLabelsText() } }
     @IBInspectable public var bottomText: String? { didSet { resetLabelsText() } }
     
+    public var isReady: Bool {
+        return (topText != nil) && (bottomText != nil) && (image != nil)
+    }
     
     // MARK: Private variables and types
     fileprivate let augmentedStackView = UIStackView(frame: CGRect.zero)
