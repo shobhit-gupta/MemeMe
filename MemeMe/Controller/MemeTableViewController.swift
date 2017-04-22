@@ -31,6 +31,7 @@ class MemeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createTableViewDataSource()
+        setupNavBar()
         navigationItem.title = "Memes"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -45,18 +46,6 @@ class MemeTableViewController: UITableViewController {
 
     
     // MARK: - Table view data source
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-   
 
     /*
     // Override to support editing the table view.
@@ -78,10 +67,41 @@ class MemeTableViewController: UITableViewController {
     */
     
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "MemeEditor", sender: indexPath.row)
+    }
+    
+    
     func addMeme(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "MemeEditor", sender: sender)
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? MemeEditorViewController {
+            
+            if let memeIdx = sender as? Int {
+                destination.memeIdx = memeIdx
+                destination.title = "Edit Meme"
+            
+            } else if let _ = sender as? UIBarButtonItem {
+                destination.title = "Create Meme"
+                
+            }
+        }
+    }
 
+    
+    private func setupNavBar() {
+        if let navbar = navigationController?.navigationBar {
+            navbar.barTintColor = ArtKit.primaryColor
+            navbar.tintColor = ArtKit.secondaryColor
+            // To set the status bar style to lightcontent when the navigation
+            // controller displays a navigation bar.
+            navbar.barStyle = .black
+        }
+    }
+    
 }
 
 
