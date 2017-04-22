@@ -260,6 +260,7 @@ extension MemeEditorViewController {
             activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) in
                 if completed {
                     self.save(meme: meme)
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
             
@@ -272,12 +273,12 @@ extension MemeEditorViewController {
         if let meme = generateMeme() {
             save(meme: meme)
         }
-        
+        navigationController?.popViewController(animated: true)
     }
     
     
     @IBAction func close(_ sender: UIBarButtonItem) {
-        print("Close pressed")
+        navigationController?.popViewController(animated: true)
     }
     
 }
