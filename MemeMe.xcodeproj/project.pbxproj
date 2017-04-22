@@ -36,6 +36,7 @@
 		EE894AD11E5C99AC0066A4FE /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894AD01E5C99AC0066A4FE /* MemeMeTests.swift */; };
 		EE894ADC1E5C99AC0066A4FE /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */; };
 		EE8B01961EAA806700E67F18 /* MemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B01951EAA806700E67F18 /* MemeTableViewController.swift */; };
+		EE8B01981EAB4F6500E67F18 /* ArrayTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B01971EAB4F6500E67F18 /* ArrayTableViewDataSource.swift */; };
 		EEB3C4C51E9C703900871423 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB3C4C41E9C703900871423 /* ViewController.swift */; };
 		EEDA3F7A1E9D1D83006ABCCC /* FocusOnTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */; };
 		EEDF111D1E99117700BCCF05 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EEDF111C1E99117700BCCF05 /* ionicons.ttf */; };
@@ -101,6 +102,7 @@
 		EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		EE894ADD1E5C99AC0066A4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE8B01951EAA806700E67F18 /* MemeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemeTableViewController.swift; path = Controller/MemeTableViewController.swift; sourceTree = "<group>"; };
+		EE8B01971EAB4F6500E67F18 /* ArrayTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayTableViewDataSource.swift; sourceTree = "<group>"; };
 		EEB3C4C41E9C703900871423 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
 		EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusOnTextView.swift; sourceTree = "<group>"; };
 		EEDF111C1E99117700BCCF05 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = Fonts/ionicons.ttf; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				EE6C549C1E9F52F40014A102 /* CustomViews */,
 				EE6C549E1E9F52F40014A102 /* EaseExtensions */,
 				EE6C54A21E9F52F40014A102 /* UIView */,
+				EE8B01971EAB4F6500E67F18 /* ArrayTableViewDataSource.swift */,
 				EE6C54AC1EA068E90014A102 /* Keyboard.swift */,
 			);
 			name = Reusable;
@@ -620,6 +623,7 @@
 				EEDF112D1E9BAD0200BCCF05 /* DynamicImageView.swift in Sources */,
 				EE6C54A91E9F54A10014A102 /* CGSize+Ease.swift in Sources */,
 				EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */,
+				EE8B01981EAB4F6500E67F18 /* ArrayTableViewDataSource.swift in Sources */,
 				EE2BA6371EA8813100FD211A /* UIView+GraphicsContext.swift in Sources */,
 				EE758CCC1EA26E1100F2E794 /* CGRect+Ease.swift in Sources */,
 				EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */,

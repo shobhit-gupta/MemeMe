@@ -10,32 +10,41 @@ import UIKit
 
 class MemeTableViewController: UITableViewController {
 
+    // MARK: Public variables and types
+    public var memes: [Meme]?
+    
+    
+    // MARK: Private variables and types
+    fileprivate var _memes: [Meme] {
+        if let memes = memes {
+            return memes
+        } else {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            return appDelegate.memes
+        }
+    }
+    
+    fileprivate var tableViewDataSource: ArrayTableViewDataSource<MemeTableViewController>? = nil
+    
+    
+    // MARK: UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        createTableViewDataSource()
+        navigationItem.title = "Memes"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
+    
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,13 +56,7 @@ class MemeTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
+   
 
     /*
     // Override to support editing the table view.
@@ -73,23 +76,38 @@ class MemeTableViewController: UITableViewController {
 
     }
     */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    
+    func addMeme(sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "MemeEditor", sender: sender)
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+
+extension MemeTableViewController: ArrayTableViewDataSourceController {
+    typealias ElementType = Meme
+    typealias CellType = UITableViewCell
+    
+    var source: [Meme] {
+        return _memes
+    }
+    
+    var reusableCellIdentifier: String {
+        return "MemeTableViewCell"
+    }
+    
+    
+    func configureCell(_ cell: UITableViewCell, with dataItem: Meme) {
+        cell.imageView?.image = dataItem.memedImage
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.text = "\(dataItem.topText)...\(dataItem.bottomText)"
+    }
+    
+    
+    func createTableViewDataSource() {
+        tableViewDataSource = ArrayTableViewDataSource(withController: self, for: tableView)
+    }
+    
+}
+
