@@ -108,11 +108,12 @@ extension MemeEditorViewController {
     
     fileprivate func setupUI() {
         setupView()
-        setupTitle()
+        setupTitleIfNeeded()
         setupNavBar()
         setupImageSourceSelector()
         setupMemeView()
         setupFocusOnTextViewStackView()
+        setupOldMemeIfNeeded()
     }
     
     //--------------------------------------------------------------------------
@@ -123,8 +124,10 @@ extension MemeEditorViewController {
     }
     
     
-    private func setupTitle() {
-        title = "Create"
+    private func setupTitleIfNeeded() {
+        if title == nil {
+            title = "Create Meme"
+        }
     }
     
     
@@ -165,6 +168,19 @@ extension MemeEditorViewController {
         memeView.image = image
     }
     
+    
+    private func setupOldMemeIfNeeded() {
+        if let memeIdx = memeIdx,
+            let memes = (UIApplication.shared.delegate as? AppDelegate)?.memes,
+            memes.indices.contains(memeIdx) {
+            
+            let memeToLoad = memes[memeIdx]
+            updateMemeView(with: memeToLoad.originalImage)
+            memeView.set(text: memeToLoad.topText, for: memeView.top)
+            memeView.set(text: memeToLoad.bottomText, for: memeView.bottom)
+            currentState = .memeReady
+        }
+    }
     
     //--------------------------------------------------------------------------
     //                            State: inputText
@@ -260,6 +276,7 @@ extension MemeEditorViewController {
             activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) in
                 if completed {
                     self.save(meme: meme)
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
             
@@ -272,12 +289,23 @@ extension MemeEditorViewController {
         if let meme = generateMeme() {
             save(meme: meme)
         }
-        
+        dismiss()
     }
     
     
     @IBAction func close(_ sender: UIBarButtonItem) {
-        print("Close pressed")
+        dismiss()
+    }
+    
+    
+    private func dismiss() {
+        // https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/ImplementEditAndDeleteBehavior.html
+        let isPresentingInCreateMemeMode = presentingViewController is UINavigationController
+        if isPresentingInCreateMemeMode {
+            dismiss(animated: true, completion: nil)
+        } else if let owningNavigationController = navigationController {
+            owningNavigationController.popViewController(animated: true)
+        }
     }
     
 }
@@ -343,10 +371,8 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
             print("Unexpected Current state: \(currentState)")
             return
         }
-        
         picker.dismiss(animated: true)
         self.currentState = .selectImage
-        
     }
 
 }
