@@ -109,7 +109,7 @@ extension MemeEditorViewController {
     fileprivate func setupUI() {
         setupView()
         setupTitleIfNeeded()
-        //setupNavBar()
+        setupNavBar()
         setupImageSourceSelector()
         setupMemeView()
         setupFocusOnTextViewStackView()
@@ -289,12 +289,23 @@ extension MemeEditorViewController {
         if let meme = generateMeme() {
             save(meme: meme)
         }
-        navigationController?.popViewController(animated: true)
+        dismiss()
     }
     
     
     @IBAction func close(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
+        dismiss()
+    }
+    
+    
+    private func dismiss() {
+        // https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/ImplementEditAndDeleteBehavior.html
+        let isPresentingInCreateMemeMode = presentingViewController is UINavigationController
+        if isPresentingInCreateMemeMode {
+            dismiss(animated: true, completion: nil)
+        } else if let owningNavigationController = navigationController {
+            owningNavigationController.popViewController(animated: true)
+        }
     }
     
 }
@@ -360,10 +371,8 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
             print("Unexpected Current state: \(currentState)")
             return
         }
-        
         picker.dismiss(animated: true)
         self.currentState = .selectImage
-        
     }
 
 }

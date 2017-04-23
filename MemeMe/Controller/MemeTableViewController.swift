@@ -52,23 +52,37 @@ class MemeTableViewController: UITableViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? MemeEditorViewController {
-            
-            if let memeIdx = sender as? Int {
-                destination.memeIdx = memeIdx
-                destination.title = "Edit Meme"
-            
-            } else if let _ = sender as? UIBarButtonItem {
-                destination.title = "Create Meme"
-                
+        super.prepare(for: segue, sender: sender)
+        
+        switch segue.identifier ?? "" {
+        case "MemeEditorShow":
+            guard let memeIdx = sender as? Int else {
+                fatalError("Unexpected sender: \(String(describing: sender)) for segue identifier:\(String(describing: segue.identifier))")
             }
+            
+            guard let destination = segue.destination as? MemeEditorViewController else {
+                fatalError("Unexpected destination for segue identifier:\(String(describing: segue.identifier))")
+            }
+            
+            destination.memeIdx = memeIdx
+            destination.title = "Edit Meme"
+            
+        case "MemeEditorModal":
+            guard let _ = segue.destination as? UINavigationController else {
+                fatalError("Unexpected destination for segue identifier:\(String(describing: segue.identifier))")
+            }
+        
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+        
         }
+        
     }
 
     
     // MARK: Actions
     func addMeme(sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "MemeEditor", sender: sender)
+        performSegue(withIdentifier: "MemeEditorModal", sender: sender)
     }
     
 }
@@ -116,7 +130,7 @@ extension MemeTableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "MemeEditor", sender: indexPath.row)
+        performSegue(withIdentifier: "MemeEditorShow", sender: indexPath.row)
     }
     
 }
