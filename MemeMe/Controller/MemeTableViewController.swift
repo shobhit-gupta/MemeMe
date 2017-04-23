@@ -16,64 +16,38 @@ class MemeTableViewController: UITableViewController {
     
     // MARK: Private variables and types
     fileprivate var _memes: [Meme] {
-        if let memes = memes {
-            return memes
-        } else {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            return appDelegate.memes
+        get {
+            if let memes = memes {
+                return memes
+            } else {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                return appDelegate.memes
+            }
+        }
+        set {
+            if let _ = memes {
+                self.memes = newValue
+            } else {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.memes = newValue
+            }
         }
     }
     
-    fileprivate var tableViewDataSource: ArrayTableViewDataSource<MemeTableViewController>? = nil
+    fileprivate var tableViewDataSource: MutableArrayTableViewDataSource<MemeTableViewController>? = nil
     
     
     // MARK: UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         createTableViewDataSource()
-        setupNavBar()
-        navigationItem.title = "Memes"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        setupUI()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-    }
-
-    
-    // MARK: - Table view data source
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-    
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "MemeEditor", sender: indexPath.row)
-    }
-    
-    
-    func addMeme(sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "MemeEditor", sender: sender)
     }
     
     
@@ -92,6 +66,32 @@ class MemeTableViewController: UITableViewController {
     }
 
     
+    // MARK: Actions
+    func addMeme(sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "MemeEditor", sender: sender)
+    }
+    
+}
+
+
+//******************************************************************************
+//                              MARK: User Interface
+//******************************************************************************
+extension MemeTableViewController {
+
+    fileprivate func setupUI() {
+        setupNavBar()
+        setupNavItem()
+    }
+    
+    
+    private func setupNavItem() {
+        navigationItem.title = "Memes"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
+        navigationItem.rightBarButtonItem = editButtonItem
+    }
+    
+    
     private func setupNavBar() {
         if let navbar = navigationController?.navigationBar {
             navbar.barTintColor = ArtKit.primaryColor
@@ -101,16 +101,37 @@ class MemeTableViewController: UITableViewController {
             navbar.barStyle = .black
         }
     }
+
+}
+
+
+//******************************************************************************
+//                          MARK: Table View Delegate
+//******************************************************************************
+extension MemeTableViewController {
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "MemeEditor", sender: indexPath.row)
+    }
     
 }
 
 
-extension MemeTableViewController: ArrayTableViewDataSourceController {
+//******************************************************************************
+//                         MARK: Table View Data Source
+//******************************************************************************
+extension MemeTableViewController: MutableArrayTableViewDataSourceController {
     typealias ElementType = Meme
     typealias CellType = UITableViewCell
     
     var source: [Meme] {
-        return _memes
+        get { return _memes }
+        set { _memes = newValue }
     }
     
     var reusableCellIdentifier: String {
@@ -122,12 +143,16 @@ extension MemeTableViewController: ArrayTableViewDataSourceController {
         cell.imageView?.image = dataItem.memedImage
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = "\(dataItem.topText)...\(dataItem.bottomText)"
+        cell.setEditing(true, animated: true)
     }
     
     
     func createTableViewDataSource() {
-        tableViewDataSource = ArrayTableViewDataSource(withController: self, for: tableView)
+        tableViewDataSource = MutableArrayTableViewDataSource(withController: self, for: tableView)
     }
     
 }
+
+
+
 

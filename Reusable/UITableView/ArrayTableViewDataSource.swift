@@ -23,7 +23,7 @@ protocol ArrayTableViewDataSourceController {
 
 class ArrayTableViewDataSource<T: ArrayTableViewDataSourceController>: NSObject, UITableViewDataSource {
     
-    let controller: T
+    var controller: T
     
     init(withController controller: T, for tableView: UITableView) {
         self.controller = controller
@@ -53,4 +53,6 @@ class ArrayTableViewDataSource<T: ArrayTableViewDataSourceController>: NSObject,
     }
     
 }
+
+
 
