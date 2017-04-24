@@ -55,7 +55,7 @@ class MemeTableViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         switch segue.identifier ?? "" {
-        case "MemeEditorShow":
+        case "fromMemesListToEditorShow":
             guard let memeIdx = sender as? Int else {
                 fatalError("Unexpected sender: \(String(describing: sender)) for segue identifier:\(String(describing: segue.identifier))")
             }
@@ -67,7 +67,7 @@ class MemeTableViewController: UITableViewController {
             destination.memeIdx = memeIdx
             destination.title = "Edit Meme"
             
-        case "MemeEditorModal":
+        case "fromMemesListToEditorModal":
             guard let _ = segue.destination as? UINavigationController else {
                 fatalError("Unexpected destination for segue identifier:\(String(describing: segue.identifier))")
             }
@@ -82,7 +82,7 @@ class MemeTableViewController: UITableViewController {
     
     // MARK: Actions
     func addMeme(sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "MemeEditorModal", sender: sender)
+        performSegue(withIdentifier: "fromMemesListToEditorModal", sender: sender)
     }
     
 }
@@ -130,7 +130,7 @@ extension MemeTableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "MemeEditorShow", sender: indexPath.row)
+        performSegue(withIdentifier: "fromMemesListToEditorShow", sender: indexPath.row)
     }
     
 }
