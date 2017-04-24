@@ -10,18 +10,7 @@ import Foundation
 import UIKit
 
 
-protocol ArrayTableViewDataSourceController {
-    associatedtype ElementType
-    associatedtype CellType: UITableViewCell
-    
-    var source: [ElementType] { get }
-    var reusableCellIdentifier: String { get }
-    func configureCell(_ cell: CellType, with dataItem: ElementType)
-    
-}
-
-
-class ArrayTableViewDataSource<T: ArrayTableViewDataSourceController>: NSObject, UITableViewDataSource {
+class ArrayTableViewDataSource<T: ArrayDataSourceController>: NSObject, UITableViewDataSource where T.CellType: UITableViewCell {
     
     var controller: T
     
@@ -45,7 +34,7 @@ class ArrayTableViewDataSource<T: ArrayTableViewDataSourceController>: NSObject,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: controller.reusableCellIdentifier) as? T.CellType else {
             print("1. Couldn't find UITableViewCell with reusable cell identifier: \(controller.reusableCellIdentifier) or, \n2. Couldn't downcast to \(T.CellType.self)")
-            return UITableViewCell()
+            return T.CellType()
         }
         
         controller.configureCell(cell, with: dataItem(at: indexPath))

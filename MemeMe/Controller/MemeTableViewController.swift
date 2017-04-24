@@ -127,7 +127,7 @@ extension MemeTableViewController {
 //******************************************************************************
 //                         MARK: Table View Data Source
 //******************************************************************************
-extension MemeTableViewController: MutableArrayTableViewDataSourceController {
+extension MemeTableViewController: MutableArrayDataSourceController {
     typealias ElementType = Meme
     typealias CellType = UITableViewCell
     

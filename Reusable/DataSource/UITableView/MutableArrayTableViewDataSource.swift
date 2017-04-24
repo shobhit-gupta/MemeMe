@@ -10,12 +10,7 @@ import Foundation
 import UIKit
 
 
-protocol MutableArrayTableViewDataSourceController: ArrayTableViewDataSourceController  {
-    var source: [ElementType] { get set }
-}
-
-
-class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceController>: NSObject, UITableViewDataSource {
+class MutableArrayTableViewDataSource<T: MutableArrayDataSourceController>: NSObject, UITableViewDataSource  where T.CellType: UITableViewCell {
     
     var controller: T
     
@@ -39,7 +34,7 @@ class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceControll
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: controller.reusableCellIdentifier) as? T.CellType else {
             print("1. Couldn't find UITableViewCell with reusable cell identifier: \(controller.reusableCellIdentifier) or, \n2. Couldn't downcast to \(T.CellType.self)")
-            return UITableViewCell()
+            return T.CellType()
         }
         
         controller.configureCell(cell, with: dataItem(at: indexPath))
