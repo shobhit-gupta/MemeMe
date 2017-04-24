@@ -40,7 +40,7 @@ class MemeTableViewController: UITableViewController {
     // MARK: UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        createTableViewDataSource()
+        createDataSource()
         setupUI()
     }
     
@@ -127,7 +127,7 @@ extension MemeTableViewController {
 //******************************************************************************
 //                         MARK: Table View Data Source
 //******************************************************************************
-extension MemeTableViewController: MutableArrayDataSourceController {
+extension MemeTableViewController: MutableArrayTableViewDataSourceController {
     typealias ElementType = Meme
     typealias CellType = UITableViewCell
     
@@ -149,7 +149,7 @@ extension MemeTableViewController: MutableArrayDataSourceController {
     }
     
     
-    func createTableViewDataSource() {
+    func createDataSource() {
         tableViewDataSource = MutableArrayTableViewDataSource(withController: self, for: tableView)
     }
     

@@ -10,19 +10,16 @@ import Foundation
 import UIKit
 
 
-class ArrayTableViewDataSource<T: ArrayDataSourceController>: NSObject, UITableViewDataSource where T.CellType: UITableViewCell {
-    
-    var controller: T
+protocol ArrayTableViewDataSourceController: ArrayDataSourceController {
+    associatedtype CellType: UITableViewCell
+}
+
+
+class ArrayTableViewDataSource<T: ArrayTableViewDataSourceController>: ArrayDataSource<T>, UITableViewDataSource {
     
     init(withController controller: T, for tableView: UITableView) {
-        self.controller = controller
-        super.init()
+        super.init(withController: controller)
         tableView.dataSource = self
-    }
-    
-    
-    func dataItem(at indexPath: IndexPath) -> T.ElementType {
-        return controller.source[indexPath.row]
     }
     
     
@@ -42,6 +39,7 @@ class ArrayTableViewDataSource<T: ArrayDataSourceController>: NSObject, UITableV
     }
     
 }
+
 
 
 

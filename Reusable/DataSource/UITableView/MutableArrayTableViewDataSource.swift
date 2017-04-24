@@ -10,19 +10,16 @@ import Foundation
 import UIKit
 
 
-class MutableArrayTableViewDataSource<T: MutableArrayDataSourceController>: NSObject, UITableViewDataSource  where T.CellType: UITableViewCell {
-    
-    var controller: T
+protocol MutableArrayTableViewDataSourceController: MutableArrayDataSourceController {
+    associatedtype CellType: UITableViewCell
+}
+
+
+class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceController>: ArrayDataSource<T>, UITableViewDataSource {
     
     init(withController controller: T, for tableView: UITableView) {
-        self.controller = controller
-        super.init()
+        super.init(withController: controller)
         tableView.dataSource = self
-    }
-    
-    
-    func dataItem(at indexPath: IndexPath) -> T.ElementType {
-        return controller.source[indexPath.row]
     }
     
     

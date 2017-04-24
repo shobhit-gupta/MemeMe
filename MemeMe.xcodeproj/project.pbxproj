@@ -19,6 +19,7 @@
 		EE39BF461EAD847700C9D657 /* MemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE39BF451EAD847700C9D657 /* MemeCollectionViewCell.swift */; };
 		EE39BF481EAD8E7C00C9D657 /* ArtKit+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE39BF471EAD8E7C00C9D657 /* ArtKit+NavBar.swift */; };
 		EE39BF4A1EAE084000C9D657 /* ArrayDataSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE39BF491EAE084000C9D657 /* ArrayDataSourceController.swift */; };
+		EE39BF4D1EAE195E00C9D657 /* ArrayCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE39BF4C1EAE195E00C9D657 /* ArrayCollectionViewDataSource.swift */; };
 		EE44A7DE1E97D23200C9C49F /* ArtKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DD1E97D23200C9C49F /* ArtKit.swift */; };
 		EE44A7E01E97D39800C9C49F /* ArtKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */; };
 		EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */; };
@@ -84,6 +85,7 @@
 		EE39BF451EAD847700C9D657 /* MemeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemeCollectionViewCell.swift; path = View/MemeCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE39BF471EAD8E7C00C9D657 /* ArtKit+NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ArtKit+NavBar.swift"; path = "View/ArtKit+NavBar.swift"; sourceTree = "<group>"; };
 		EE39BF491EAE084000C9D657 /* ArrayDataSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayDataSourceController.swift; path = Reusable/DataSource/ArrayDataSourceController.swift; sourceTree = "<group>"; };
+		EE39BF4C1EAE195E00C9D657 /* ArrayCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayCollectionViewDataSource.swift; path = Reusable/DataSource/UICollectionView/ArrayCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		EE44A7DD1E97D23200C9C49F /* ArtKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKit.swift; path = View/ArtKit.swift; sourceTree = "<group>"; };
 		EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtKitButton.swift; path = View/ArtKitButton.swift; sourceTree = "<group>"; };
 		EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Convert.swift"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				EE39BF491EAE084000C9D657 /* ArrayDataSourceController.swift */,
 				EE39BF4B1EAE0BE900C9D657 /* UITableView */,
+				EE39BF4E1EAE196500C9D657 /* UICollectionView */,
 			);
 			name = DataSource;
 			sourceTree = "<group>";
@@ -186,6 +189,14 @@
 				EE39BF411EAC717800C9D657 /* MutableArrayTableViewDataSource.swift */,
 			);
 			name = UITableView;
+			sourceTree = "<group>";
+		};
+		EE39BF4E1EAE196500C9D657 /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				EE39BF4C1EAE195E00C9D657 /* ArrayCollectionViewDataSource.swift */,
+			);
+			name = UICollectionView;
 			sourceTree = "<group>";
 		};
 		EE44A7D91E97D16200C9C49F /* Controller */ = {
@@ -659,6 +670,7 @@
 				EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */,
 				EE39BF481EAD8E7C00C9D657 /* ArtKit+NavBar.swift in Sources */,
 				EE8B01981EAB4F6500E67F18 /* ArrayTableViewDataSource.swift in Sources */,
+				EE39BF4D1EAE195E00C9D657 /* ArrayCollectionViewDataSource.swift in Sources */,
 				EE2BA6371EA8813100FD211A /* UIView+GraphicsContext.swift in Sources */,
 				EE758CCC1EA26E1100F2E794 /* CGRect+Ease.swift in Sources */,
 				EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */,

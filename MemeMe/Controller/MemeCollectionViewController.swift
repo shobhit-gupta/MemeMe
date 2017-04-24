@@ -38,9 +38,13 @@ class MemeCollectionViewController: UICollectionViewController {
         }
     }
     
+    fileprivate var collectionViewDataSource: ArrayCollectionViewDataSource<MemeCollectionViewController>? = nil
     
+    
+    // MARK: UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        createDataSource()
         setupUI()
     }
     
@@ -50,11 +54,11 @@ class MemeCollectionViewController: UICollectionViewController {
         collectionView?.reloadData()
     }
     
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionView?.collectionViewLayout.invalidateLayout()
     }
-    override func viewWillLayoutSubviews() {
-    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -130,12 +134,6 @@ extension MemeCollectionViewController: UICollectionViewDelegateFlowLayout {
         return (width - emptySpace) / numCells
     }
     
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let dimension = cellDimension(for: collectionView)
@@ -164,23 +162,17 @@ extension MemeCollectionViewController: UICollectionViewDelegateFlowLayout {
 //******************************************************************************
 //                         MARK: Collection View Data Source
 //******************************************************************************
-extension MemeCollectionViewController {
-    
+extension MemeCollectionViewController: ArrayCollectionViewDataSourceController {
     typealias ElementType = Meme
     typealias CellType = MemeCollectionViewCell
-    
-    var reusableCellIdentifier: String {
-        return"MemeCollectionViewCell"
-    }
     
     var source: [Meme] {
         get { return _memes }
         set { _memes = newValue }
     }
-    
-    
-    func dataItem(at indexPath: IndexPath) -> ElementType {
-        return source[indexPath.item]
+
+    var reusableCellIdentifier: String {
+        return"MemeCollectionViewCell"
     }
     
     
@@ -189,20 +181,10 @@ extension MemeCollectionViewController {
     }
     
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? source.count : 0
-    }
-    
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellIdentifier, for: indexPath) as? CellType else {
-            print("1. Couldn't find UICollectionViewCell with reusable cell identifier: \(reusableCellIdentifier) or, \n2. Couldn't downcast to \(CellType.self)")
-            return UICollectionViewCell()
+    func createDataSource() {
+        if let collectionView = collectionView {
+            collectionViewDataSource = ArrayCollectionViewDataSource(withController: self, for: collectionView)
         }
-        
-        // Configure the cell
-        configureCell(cell, with: dataItem(at: indexPath))
-        return cell
     }
     
 }
