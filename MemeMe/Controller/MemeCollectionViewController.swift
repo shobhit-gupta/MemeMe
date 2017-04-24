@@ -14,6 +14,9 @@ class MemeCollectionViewController: UICollectionViewController {
     // MARK: Public variables and types
     public var memes: [Meme]?
     
+    public let space: CGFloat = 0.0
+    public let numCellsOnSmallerSide = 4
+    
     
     // MARK: Private variables and types
     fileprivate var _memes: [Meme] {
@@ -47,6 +50,40 @@ class MemeCollectionViewController: UICollectionViewController {
         collectionView?.reloadData()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    override func viewWillLayoutSubviews() {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        switch segue.identifier ?? "" {
+        case "fromMemesGridToEditorShow":
+            guard let memeIdx = sender as? Int else {
+                fatalError("Unexpected sender: \(String(describing: sender)) for segue identifier:\(String(describing: segue.identifier))")
+            }
+            
+            guard let destination = segue.destination as? MemeEditorViewController else {
+                fatalError("Unexpected destination for segue identifier:\(String(describing: segue.identifier))")
+            }
+            
+            destination.memeIdx = memeIdx
+            destination.title = "Edit Meme"
+            
+        case "fromMemesGridToEditorModal":
+            guard let _ = segue.destination as? UINavigationController else {
+                fatalError("Unexpected destination for segue identifier:\(String(describing: segue.identifier))")
+            }
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+            
+        }
+        
+    }
+    
     
     // MARK: Actions
     func addMeme(sender: UIBarButtonItem) {
@@ -77,14 +114,21 @@ extension MemeCollectionViewController {
 //******************************************************************************
 //                          MARK: Collection View Delegate
 //******************************************************************************
-extension MemeCollectionViewController {
+extension MemeCollectionViewController: UICollectionViewDelegateFlowLayout {
     
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
+    private func numberOfCellsInRow(for collectionView: UICollectionView) -> Int {
+        let width = collectionView.frame.width
+        let height = collectionView.frame.height
+        return width < height ? numCellsOnSmallerSide : Int(CGFloat(numCellsOnSmallerSide) * width / height)
+    }
+    
+    
+    private func cellDimension(for collectionView: UICollectionView) -> CGFloat {
+        let width = collectionView.frame.width
+        let numCells = CGFloat(numberOfCellsInRow(for: collectionView))
+        let emptySpace = (numCells - 1) * space
+        return (width - emptySpace) / numCells
+    }
     
     /*
      // Uncomment this method to specify if the specified item should be selected
@@ -93,20 +137,25 @@ extension MemeCollectionViewController {
      }
      */
     
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let dimension = cellDimension(for: collectionView)
+        return CGSize(width: dimension, height: dimension)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return space
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return space
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "fromMemesGridToEditorShow", sender: indexPath.item)
+    }
     
 }
 
@@ -116,6 +165,9 @@ extension MemeCollectionViewController {
 //                         MARK: Collection View Data Source
 //******************************************************************************
 extension MemeCollectionViewController {
+    
+    typealias ElementType = Meme
+    typealias CellType = MemeCollectionViewCell
     
     var reusableCellIdentifier: String {
         return"MemeCollectionViewCell"
@@ -127,23 +179,29 @@ extension MemeCollectionViewController {
     }
     
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    func dataItem(at indexPath: IndexPath) -> ElementType {
+        return source[indexPath.item]
+    }
+    
+    
+    func configureCell(_ cell: CellType, with dataItem: ElementType) {
+        cell.imageView.image = dataItem.memedImage
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return section == 0 ? source.count : 0
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellIdentifier, for: indexPath) as? CellType else {
+            print("1. Couldn't find UICollectionViewCell with reusable cell identifier: \(reusableCellIdentifier) or, \n2. Couldn't downcast to \(CellType.self)")
+            return UICollectionViewCell()
+        }
         
         // Configure the cell
-        
+        configureCell(cell, with: dataItem(at: indexPath))
         return cell
     }
     

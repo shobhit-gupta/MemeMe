@@ -201,9 +201,9 @@
 			children = (
 				EE44A7DD1E97D23200C9C49F /* ArtKit.swift */,
 				EE44A7DF1E97D39800C9C49F /* ArtKitButton.swift */,
+				EE39BF471EAD8E7C00C9D657 /* ArtKit+NavBar.swift */,
 				EE6885A01E9CE9160021F696 /* MemeView.swift */,
 				EE39BF451EAD847700C9D657 /* MemeCollectionViewCell.swift */,
-				EE39BF471EAD8E7C00C9D657 /* ArtKit+NavBar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
