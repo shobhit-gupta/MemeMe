@@ -109,7 +109,6 @@ extension MemeEditorViewController {
     fileprivate func setupUI() {
         setupView()
         setupTitleIfNeeded()
-        setupNavBar()
         setupImageSourceSelector()
         setupMemeView()
         setupFocusOnTextViewStackView()
@@ -127,17 +126,6 @@ extension MemeEditorViewController {
     private func setupTitleIfNeeded() {
         if title == nil {
             title = "Create Meme"
-        }
-    }
-    
-    
-    private func setupNavBar() {
-        if let navbar = navigationController?.navigationBar {
-            navbar.barTintColor = ArtKit.primaryColor
-            navbar.tintColor = ArtKit.secondaryColor
-            // To set the status bar style to lightcontent when the navigation
-            // controller displays a navigation bar.
-            navbar.barStyle = .black
         }
     }
     

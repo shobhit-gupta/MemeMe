@@ -94,7 +94,6 @@ class MemeTableViewController: UITableViewController {
 extension MemeTableViewController {
 
     fileprivate func setupUI() {
-        setupNavBar()
         setupNavItem()
     }
     
@@ -103,17 +102,6 @@ extension MemeTableViewController {
         navigationItem.title = "Memes"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
         navigationItem.rightBarButtonItem = editButtonItem
-    }
-    
-    
-    private func setupNavBar() {
-        if let navbar = navigationController?.navigationBar {
-            navbar.barTintColor = ArtKit.primaryColor
-            navbar.tintColor = ArtKit.secondaryColor
-            // To set the status bar style to lightcontent when the navigation
-            // controller displays a navigation bar.
-            navbar.barStyle = .black
-        }
     }
 
 }
