@@ -20,6 +20,10 @@ public extension Error_ {
         
     }
     
+    enum Network {
+        
+    }
+    
 }
 
 
