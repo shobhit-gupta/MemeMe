@@ -15,6 +15,7 @@ public extension String {
         case word
         case sentence
         case paragraph
+        case essay
     }
     
     
@@ -104,6 +105,12 @@ public extension String {
                 random(.sentence, minLength: 3, maxLength: 10)
             }
             randomString = randomSentences.joined(separator: " ")
+            
+        case .essay:
+            let randomParagraphs = (1...length).map { _ in
+                random(.paragraph, minLength: 4, maxLength: 10)
+            }
+            randomString = randomParagraphs.joined(separator: "\n\n")
         }
         
         return randomString

@@ -59,7 +59,7 @@ extension Meme {
             
             let image = image ?? #imageLiteral(resourceName: "640x480")
             let topText = "\(image.size.width) x \(image.size.height)"
-            let bottomText = String.random(.paragraph, minLength: 1, maxLength: 3)
+            let bottomText = String.random(.sentence, minLength: 4, maxLength: 15)
             let meme = Meme(topText: topText, bottomText: bottomText, originalImage: image, memedImage: image)
             completion(meme)
             
