@@ -18,6 +18,7 @@ public extension String {
     }
     
     
+    // Modified from: http://planetozh.com/blog/2012/10/generate-random-pronouceable-words/
     public static func random(ofLength length: Int) -> String {
         
         enum State {
@@ -96,7 +97,7 @@ public extension String {
             let randomWords = (1...length).map { _ in
                 random(.word, minLength: 2, maxLength: 10)
             }
-            randomString = randomWords.joined(separator: " ") + "."
+            randomString = randomWords.joined(separator: " ").capitalizingFirstLetter() + "."
             
         case .paragraph:
             let randomSentences = (1...length).map { _ in
@@ -115,7 +116,7 @@ public extension String {
             return ""
         }
         
-        let length = Int.random(lower: minLength, upper: maxLength)
+        let length = Int.random(lower: minLength, upper: maxLength + 1)
         return random(type, ofLength: length)
         
     }

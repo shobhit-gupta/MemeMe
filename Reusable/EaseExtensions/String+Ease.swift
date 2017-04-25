@@ -14,4 +14,17 @@ extension String {
         return self.characters.count
     }
     
+    
+    // http://stackoverflow.com/a/26306372/471960
+    func capitalizingFirstLetter() -> String {
+        let first = String(characters.prefix(1)).capitalized
+        let other = String(characters.dropFirst())
+        return first + other
+    }
+    
+    
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
+    
 }
