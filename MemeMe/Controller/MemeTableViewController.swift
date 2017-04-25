@@ -47,7 +47,14 @@ class MemeTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        sunscribeToNotifications()
         tableView.reloadData()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unsubscribeFromNotification()
     }
     
     
@@ -151,6 +158,26 @@ extension MemeTableViewController: MutableArrayTableViewDataSourceController {
     
     func createDataSource() {
         tableViewDataSource = MutableArrayTableViewDataSource(withController: self, for: tableView)
+    }
+    
+}
+
+
+
+extension MemeTableViewController {
+    
+    func sunscribeToNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(memesAdded(_:)), name: Notification.Name(rawValue: "GotNewMemes"), object: nil)
+    }
+    
+    
+    func unsubscribeFromNotification() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    func memesAdded(_ notification: Notification) {
+        tableView.reloadData()
     }
     
 }

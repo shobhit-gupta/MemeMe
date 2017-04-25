@@ -51,7 +51,15 @@ class MemeCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        subscribeToNotifications()
         collectionView?.reloadData()
+    }
+    
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        unsubscribeFromNotification()
     }
     
     
@@ -185,6 +193,25 @@ extension MemeCollectionViewController: ArrayCollectionViewDataSourceController 
         if let collectionView = collectionView {
             collectionViewDataSource = ArrayCollectionViewDataSource(withController: self, for: collectionView)
         }
+    }
+    
+}
+
+
+extension MemeCollectionViewController {
+    
+    func subscribeToNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(memesAdded(_:)), name: Notification.Name(rawValue: "GotNewMemes"), object: nil)
+    }
+    
+    
+    func unsubscribeFromNotification() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    func memesAdded(_ notification: Notification) {
+        collectionView?.reloadData()
     }
     
 }
