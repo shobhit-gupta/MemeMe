@@ -40,5 +40,32 @@ struct Meme {
         
     }
     
+}
+
+
+
+
+
+
+extension Meme {
+    
+    public static func randomMeme(completion: @escaping (Meme?) -> Void) {
+        UIImage.random { (image, error) in
+            if let error = error as? Error_.Network.Get.Image {
+                print(error.localizedDescription)
+            } else if let error = error {
+                print(error.info())
+            }
+            
+            let image = image ?? #imageLiteral(resourceName: "640x480")
+            let topText = "\(image.size.width) x \(image.size.height)"
+            let bottomText = "\(image.size.width) x \(image.size.height)"
+            let meme = Meme(topText: topText, bottomText: bottomText, originalImage: image, memedImage: image)
+            completion(meme)
+            
+        }
+    }
     
 }
+
+

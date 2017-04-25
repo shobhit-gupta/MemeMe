@@ -12,15 +12,37 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var memes = [Meme]()
+    var memes = [Meme]() {
+        didSet {
+            let notification = Notification(name: Notification.Name(rawValue: "GotNewMemes"), object: nil, userInfo: nil)
+            NotificationCenter.default.post(notification)
+        }
+    }
 
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
         ArtKit.setupNavBar()
-        
+        let numMemes = Int.random(lower: 0, upper: 100)
+        generateRandomMemes(stop: numMemes)
         return true
     }
+    
+    
+    func generateRandomMemes(stop: Int) {
+        if stop <= 0 {
+            return
+        }
+        print("Stop: \(stop)")
+        Meme.randomMeme() { (meme) in
+            if let meme = meme {
+                self.memes.append(meme)
+                self.generateRandomMemes(stop: stop - 1)
+            }
+        }
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
