@@ -7,7 +7,6 @@ target 'MemeMe' do
 
   # Pods for MemeMe
   pod 'PureLayout'
-  pod 'LoremIpsum', '~> 1.0'
 
   target 'MemeMeTests' do
     inherit! :search_paths
