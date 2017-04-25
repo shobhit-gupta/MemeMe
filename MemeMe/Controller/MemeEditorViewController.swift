@@ -167,6 +167,7 @@ extension MemeEditorViewController {
             memeView.set(text: memeToLoad.topText, for: memeView.top)
             memeView.set(text: memeToLoad.bottomText, for: memeView.bottom)
             currentState = .memeReady
+            memeView.layoutIfNeeded()
         }
     }
     
