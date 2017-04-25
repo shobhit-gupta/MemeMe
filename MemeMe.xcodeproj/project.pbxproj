@@ -44,6 +44,9 @@
 		EE894ADC1E5C99AC0066A4FE /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ADB1E5C99AC0066A4FE /* MemeMeUITests.swift */; };
 		EE8971EA1EAEDB5500F04DA6 /* Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8971E91EAEDB5500F04DA6 /* Get.swift */; };
 		EE8971EC1EAEDE9300F04DA6 /* UIImage+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8971EB1EAEDE9300F04DA6 /* UIImage+Random.swift */; };
+		EE8971EE1EAF363300F04DA6 /* Text+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8971ED1EAF363300F04DA6 /* Text+Random.swift */; };
+		EE8971F01EAF3F9F00F04DA6 /* String+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8971EF1EAF3F9F00F04DA6 /* String+Ease.swift */; };
+		EE8971F21EAF4DE900F04DA6 /* Array+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8971F11EAF4DE900F04DA6 /* Array+Random.swift */; };
 		EE8B01961EAA806700E67F18 /* MemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B01951EAA806700E67F18 /* MemeTableViewController.swift */; };
 		EE8B01981EAB4F6500E67F18 /* ArrayTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B01971EAB4F6500E67F18 /* ArrayTableViewDataSource.swift */; };
 		EEB3C4C51E9C703900871423 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB3C4C41E9C703900871423 /* ViewController.swift */; };
@@ -119,6 +122,9 @@
 		EE894ADD1E5C99AC0066A4FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE8971E91EAEDB5500F04DA6 /* Get.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Get.swift; path = Reusable/Networking/Get.swift; sourceTree = "<group>"; };
 		EE8971EB1EAEDE9300F04DA6 /* UIImage+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Random.swift"; sourceTree = "<group>"; };
+		EE8971ED1EAF363300F04DA6 /* Text+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Text+Random.swift"; sourceTree = "<group>"; };
+		EE8971EF1EAF3F9F00F04DA6 /* String+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Ease.swift"; sourceTree = "<group>"; };
+		EE8971F11EAF4DE900F04DA6 /* Array+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Random.swift"; sourceTree = "<group>"; };
 		EE8B01951EAA806700E67F18 /* MemeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemeTableViewController.swift; path = Controller/MemeTableViewController.swift; sourceTree = "<group>"; };
 		EE8B01971EAB4F6500E67F18 /* ArrayTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayTableViewDataSource.swift; path = Reusable/DataSource/UITableView/ArrayTableViewDataSource.swift; sourceTree = "<group>"; };
 		EEB3C4C41E9C703900871423 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +271,7 @@
 			children = (
 				EE6C54A81E9F54A10014A102 /* CGSize+Ease.swift */,
 				EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */,
+				EE8971EF1EAF3F9F00F04DA6 /* String+Ease.swift */,
 				EE2BA6341EA84EE300FD211A /* UIImage+Ease.swift */,
 			);
 			name = EaseExtensions;
@@ -299,6 +306,8 @@
 			children = (
 				EE749CCF1EAE3EAF00B55809 /* Basic+Random.swift */,
 				EE8971EB1EAEDE9300F04DA6 /* UIImage+Random.swift */,
+				EE8971ED1EAF363300F04DA6 /* Text+Random.swift */,
+				EE8971F11EAF4DE900F04DA6 /* Array+Random.swift */,
 			);
 			name = Random;
 			path = Reusable/Random;
@@ -675,13 +684,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE8971EE1EAF363300F04DA6 /* Text+Random.swift in Sources */,
 				EE6C54A51E9F52F40014A102 /* Default.swift in Sources */,
 				EE6C54A61E9F52F40014A102 /* Error_.swift in Sources */,
 				EE8971EC1EAEDE9300F04DA6 /* UIImage+Random.swift in Sources */,
 				EE6C54A71E9F52F40014A102 /* UIView+Fadeable.swift in Sources */,
+				EE8971F21EAF4DE900F04DA6 /* Array+Random.swift in Sources */,
 				EE8B01961EAA806700E67F18 /* MemeTableViewController.swift in Sources */,
 				EE39BF441EAD844E00C9D657 /* MemeCollectionViewController.swift in Sources */,
 				EE44A7E01E97D39800C9C49F /* ArtKitButton.swift in Sources */,
+				EE8971F01EAF3F9F00F04DA6 /* String+Ease.swift in Sources */,
 				EE6C54AB1E9FA0760014A102 /* Overlay.swift in Sources */,
 				EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */,
 				EE39BF421EAC717800C9D657 /* MutableArrayTableViewDataSource.swift in Sources */,
