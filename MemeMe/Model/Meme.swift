@@ -43,10 +43,6 @@ struct Meme {
 }
 
 
-
-
-
-
 extension Meme {
     
     public static func randomMeme(completion: @escaping (Meme?) -> Void) {
@@ -58,7 +54,7 @@ extension Meme {
             }
             
             let image = image ?? #imageLiteral(resourceName: "640x480")
-            let topText = "\(image.size.width) x \(image.size.height)"
+            let topText = String.random(.sentence, minLength: 4, maxLength: 15)
             let bottomText = String.random(.sentence, minLength: 4, maxLength: 15)
             let meme = Meme(topText: topText, bottomText: bottomText, originalImage: image, memedImage: image)
             completion(meme)
