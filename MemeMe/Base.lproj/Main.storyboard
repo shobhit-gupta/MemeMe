@@ -96,16 +96,25 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KDO-Zz-h1Z">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgS-ce-XxJ" userLabel="Overlay" customClass="OverlayView" customModule="MemeMe" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="KDO-Zz-h1Z" secondAttribute="bottom" id="3WM-cW-798"/>
+                                    <constraint firstItem="KDO-Zz-h1Z" firstAttribute="bottom" secondItem="6pA-zj-p9J" secondAttribute="bottom" id="3WM-cW-798"/>
                                     <constraint firstItem="KDO-Zz-h1Z" firstAttribute="leading" secondItem="6pA-zj-p9J" secondAttribute="leading" id="GZQ-p2-zaq"/>
+                                    <constraint firstItem="PgS-ce-XxJ" firstAttribute="top" secondItem="6pA-zj-p9J" secondAttribute="top" id="ZWH-i9-xPq"/>
+                                    <constraint firstItem="PgS-ce-XxJ" firstAttribute="bottom" secondItem="6pA-zj-p9J" secondAttribute="bottom" id="bhR-H7-aqX"/>
+                                    <constraint firstItem="PgS-ce-XxJ" firstAttribute="trailing" secondItem="6pA-zj-p9J" secondAttribute="trailing" id="f4D-FQ-5qX"/>
                                     <constraint firstItem="KDO-Zz-h1Z" firstAttribute="top" secondItem="6pA-zj-p9J" secondAttribute="top" id="gXr-iJ-K8w"/>
-                                    <constraint firstAttribute="trailing" secondItem="KDO-Zz-h1Z" secondAttribute="trailing" id="ly1-8E-2yA"/>
+                                    <constraint firstItem="KDO-Zz-h1Z" firstAttribute="trailing" secondItem="6pA-zj-p9J" secondAttribute="trailing" id="ly1-8E-2yA"/>
+                                    <constraint firstItem="PgS-ce-XxJ" firstAttribute="leading" secondItem="6pA-zj-p9J" secondAttribute="leading" id="ws6-W2-vUL"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="KDO-Zz-h1Z" id="Gmq-mw-yce"/>
+                                    <outlet property="overlay" destination="PgS-ce-XxJ" id="Ab3-ay-W5t"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -223,52 +232,6 @@
             </objects>
             <point key="canvasLocation" x="244" y="1551"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="ECn-JB-EU1">
-            <objects>
-                <viewController id="a4J-X8-YgO" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OmK-5f-Jcp"/>
-                        <viewControllerLayoutGuide type="bottom" id="BkS-yC-0v1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="oJs-C5-TOz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaN-H3-JAB" customClass="MemeView" customModule="MemeMe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="320" height="406"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="200x600"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="topText" value="One Does Not Simply"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="bottomText" value="Get rich by creating a website"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EY7-dG-0eA">
-                                <rect key="frame" x="0.0" y="20" width="320" height="444"/>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="EY7-dG-0eA" firstAttribute="top" secondItem="OmK-5f-Jcp" secondAttribute="bottom" id="7on-Pk-NdR"/>
-                            <constraint firstItem="SaN-H3-JAB" firstAttribute="height" secondItem="EY7-dG-0eA" secondAttribute="height" constant="-38" id="8ms-qP-FlM"/>
-                            <constraint firstItem="EY7-dG-0eA" firstAttribute="bottom" secondItem="BkS-yC-0v1" secondAttribute="top" constant="-16" id="HWG-pG-GWs"/>
-                            <constraint firstItem="SaN-H3-JAB" firstAttribute="top" secondItem="OmK-5f-Jcp" secondAttribute="bottom" id="LHn-RJ-erZ"/>
-                            <constraint firstItem="SaN-H3-JAB" firstAttribute="trailing" secondItem="oJs-C5-TOz" secondAttribute="trailing" id="OdZ-p4-oLy"/>
-                            <constraint firstItem="SaN-H3-JAB" firstAttribute="leading" secondItem="oJs-C5-TOz" secondAttribute="leading" id="am9-Pu-KwF"/>
-                            <constraint firstItem="EY7-dG-0eA" firstAttribute="trailing" secondItem="oJs-C5-TOz" secondAttribute="trailing" id="dgI-AO-STI"/>
-                            <constraint firstItem="EY7-dG-0eA" firstAttribute="leading" secondItem="oJs-C5-TOz" secondAttribute="leading" id="jtC-Td-6EG"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="focussedStackView" destination="EY7-dG-0eA" id="kVh-W4-l80"/>
-                        <outlet property="memeView" destination="SaN-H3-JAB" id="9c8-ik-RoM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d3i-lc-rjV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3852" y="821"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="svQ-5n-mQU">
             <objects>
@@ -307,7 +270,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="200x600" width="200" height="600"/>
         <image name="CloseBarButton" width="22" height="22"/>
         <image name="DoneBarButton" width="22" height="22"/>
         <image name="ShareBarButton" width="22" height="22"/>
