@@ -19,6 +19,17 @@ class MemeCollectionViewController: UICollectionViewController {
     
     
     // MARK: Private variables and types
+    fileprivate enum State {
+        case normal
+        case select
+    }
+    
+    fileprivate var currentState: State = .normal {
+        didSet {
+            updateUI()
+        }
+    }
+    
     fileprivate var _memes: [Meme] {
         get {
             if let memes = memes {
@@ -101,6 +112,41 @@ class MemeCollectionViewController: UICollectionViewController {
     func addMeme(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "fromMemesGridToEditorModal", sender: sender)
     }
+    
+    
+    func selectMemes(sender: UIBarButtonItem) {
+        currentState = .select
+    }
+    
+    
+    func delete(sender: UIBarButtonItem) {
+        guard case .select = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
+        currentState = .normal
+    }
+    
+    
+    func selectAll(sender: UIBarButtonItem) {
+        guard case .select = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
+        currentState = .normal
+    }
+    
+    
+    func cancel(sender: UIBarButtonItem) {
+        guard case .select = currentState else {
+            print("Unexpected Current state: \(currentState)")
+            return
+        }
+        
+        currentState = .normal
+    }
 
 }
 
@@ -115,9 +161,39 @@ extension MemeCollectionViewController {
     }
     
     
+    private func setupTitle() {
+        if title == nil {
+            title = "Memes"
+        }
+    }
+    
+    
     private func setupNavItem() {
-        navigationItem.title = "Memes"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
+        switch currentState {
+        case .normal:
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectMemes(sender:)))
+            
+        case .select:
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(delete(sender:)))
+            navigationItem.rightBarButtonItem = nil
+            navigationItem.rightBarButtonItems = UIBarButtonItem.getBarButtonItems(withDictionaries: [
+                [.image : #imageLiteral(resourceName: "CloseBarButton"),
+                 .target : self,
+                 .action : #selector(cancel(sender:))],
+                
+                [.title : "Select All",
+                 .target : self,
+                 .action : #selector(selectAll(sender:))]
+                
+                ])
+        }
+    }
+    
+    
+    fileprivate func updateUI() {
+        setupNavItem()
     }
     
 }
@@ -186,6 +262,7 @@ extension MemeCollectionViewController: ArrayCollectionViewDataSourceController 
     
     func configureCell(_ cell: CellType, with dataItem: ElementType) {
         cell.imageView.image = dataItem.memedImage
+        //cell.layer.borderWidth = 2.0
     }
     
     

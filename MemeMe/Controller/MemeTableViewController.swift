@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class MemeTableViewController: UITableViewController {
 
     // MARK: Public variables and types
@@ -101,12 +102,18 @@ class MemeTableViewController: UITableViewController {
 extension MemeTableViewController {
 
     fileprivate func setupUI() {
+        setupTitle()
         setupNavItem()
     }
     
     
+    private func setupTitle() {
+        if title == nil {
+            title = "Memes"
+        }
+    }
+    
     private func setupNavItem() {
-        navigationItem.title = "Memes"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
         navigationItem.rightBarButtonItem = editButtonItem
     }
