@@ -267,10 +267,10 @@
             </objects>
             <point key="canvasLocation" x="-1567.5" y="1986.25"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Meme Tab Bar Controller-->
         <scene sceneID="Ne3-Jf-tkF">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ORq-Jd-VHo" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ORq-Jd-VHo" customClass="MemeTabBarController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JkD-DJ-zhj">
                         <autoresizingMask key="autoresizingMask"/>
