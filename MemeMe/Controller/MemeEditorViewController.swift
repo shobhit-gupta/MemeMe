@@ -163,9 +163,7 @@ extension MemeEditorViewController {
             memeItems.indices.contains(memeIdx) {
             
             let memeToLoad = memeItems[memeIdx].meme
-            updateMemeView(with: memeToLoad.originalImage)
-            memeView.set(text: memeToLoad.topText, for: memeView.top)
-            memeView.set(text: memeToLoad.bottomText, for: memeView.bottom)
+            memeView.setProperties(topText: memeToLoad.topText, bottomText: memeToLoad.bottomText, image: memeToLoad.originalImage)
             currentState = .memeReady
             memeView.layoutIfNeeded()
         }
@@ -467,41 +465,13 @@ extension MemeEditorViewController {
         var meme: Meme? = nil
         if let topText = memeView.topText,
             let bottomText = memeView.bottomText,
-            let originalImage = memeView.image,
-            let memedImage = generateMemedImage() {
+            let originalImage = memeView.image {
             
-            meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, memedImage: memedImage)
+            meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, size: memeView.bounds.size)
             
         }
         
         return meme
-    }
-    
-    
-    private func generateMemedImage() -> UIImage? {
-        guard case .memeReady = currentState else {
-            print("Unexpected Current state: \(currentState)")
-            return nil
-        }
-        
-        // Render MemeView to image
-        memeView.closeImageButton.isHidden = true
-        defer {
-            memeView.closeImageButton.isHidden = false
-        }
-        
-        let scale = memeView.image!.size.width / memeView.imageView.frame.width
-        let meme = memeView.renderToImage(atScale: scale)
-        
-        // Crop MemeView to appropriate size (remember MemeView is a DynamicImageView)
-        let imageContentRect = memeView.imageView.frame
-        let scaledRect = CGRect(x: ceil(imageContentRect.origin.x * scale),
-                                y: ceil(imageContentRect.origin.y * scale),
-                                width: floor(imageContentRect.width * scale),
-                                height: floor(imageContentRect.height * scale))
-        let croppedMeme = meme?.crop(to: scaledRect, orientation: .up) ?? meme
-        
-        return croppedMeme
     }
     
 }

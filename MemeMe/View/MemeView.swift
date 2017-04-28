@@ -176,3 +176,14 @@ extension MemeView {
     }
     
 }
+
+
+extension MemeView {
+    
+    public func setProperties(topText: String, bottomText: String, image: UIImage) {
+        self.image = image
+        set(text: topText, for: top)
+        set(text: bottomText, for: bottom)
+    }
+    
+}
