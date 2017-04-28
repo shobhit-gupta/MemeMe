@@ -38,6 +38,11 @@ class MutableArrayCollectionViewDataSource<T: MutableArrayCollectionViewDataSour
         return cell
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        controller.source.move(from: sourceIndexPath.item, to: destinationIndexPath.item)
+    }
+    
 }
 
 
