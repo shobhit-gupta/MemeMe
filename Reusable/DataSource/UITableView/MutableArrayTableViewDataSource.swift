@@ -51,7 +51,7 @@ class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceControll
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            controller.source.remove(at: indexPath.row)
+            self.controller.source.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

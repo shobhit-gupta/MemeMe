@@ -288,8 +288,9 @@ extension MemeEditorViewController {
     
     
     private func dismiss() {
+        // Modified from: 
         // https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/ImplementEditAndDeleteBehavior.html
-        let isPresentingInCreateMemeMode = presentingViewController is UINavigationController
+        let isPresentingInCreateMemeMode = presentingViewController is UINavigationController || presentingViewController is UITabBarController
         if isPresentingInCreateMemeMode {
             dismiss(animated: true, completion: nil)
         } else if let owningNavigationController = navigationController {
