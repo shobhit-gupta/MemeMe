@@ -159,10 +159,10 @@ extension MemeEditorViewController {
     
     private func setupOldMemeIfNeeded() {
         if let memeIdx = memeIdx,
-            let memes = (UIApplication.shared.delegate as? AppDelegate)?.memes,
-            memes.indices.contains(memeIdx) {
+            let memeItems = (UIApplication.shared.delegate as? AppDelegate)?.memeItems,
+            memeItems.indices.contains(memeIdx) {
             
-            let memeToLoad = memes[memeIdx]
+            let memeToLoad = memeItems[memeIdx].meme
             updateMemeView(with: memeToLoad.originalImage)
             memeView.set(text: memeToLoad.topText, for: memeView.top)
             memeView.set(text: memeToLoad.bottomText, for: memeView.bottom)
@@ -452,7 +452,8 @@ extension MemeEditorViewController: UITextViewDelegate {
 extension MemeEditorViewController {
     
     fileprivate func save(meme: Meme) {
-        _ = meme.save(byReplacing: _memeIdx)
+        let memeItem = MemeItem(with: meme)
+        _ = memeItem.save(byReplacing: _memeIdx)
     }
     
     

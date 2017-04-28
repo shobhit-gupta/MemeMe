@@ -12,25 +12,25 @@ import UIKit
 class MemeTableViewController: UITableViewController {
 
     // MARK: Public variables and types
-    public var memes: [Meme]?
+    public var memeItems: [MemeItem]?
     
     
     // MARK: Private variables and types
-    fileprivate var _memes: [Meme] {
+    fileprivate var _memeItems: [MemeItem] {
         get {
-            if let memes = memes {
-                return memes
+            if let memeItems = memeItems {
+                return memeItems
             } else {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                return appDelegate.memes
+                return appDelegate.memeItems
             }
         }
         set {
-            if let _ = memes {
-                self.memes = newValue
+            if let _ = memeItems {
+                self.memeItems = newValue
             } else {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.memes = newValue
+                appDelegate.memeItems = newValue
             }
         }
     }
@@ -142,12 +142,12 @@ extension MemeTableViewController {
 //                         MARK: Table View Data Source
 //******************************************************************************
 extension MemeTableViewController: MutableArrayTableViewDataSourceController {
-    typealias ElementType = Meme
+    typealias ElementType = MemeItem
     typealias CellType = UITableViewCell
     
-    var source: [Meme] {
-        get { return _memes }
-        set { _memes = newValue }
+    var source: [MemeItem] {
+        get { return _memeItems }
+        set { _memeItems = newValue }
     }
     
     var reusableCellIdentifier: String {
@@ -155,10 +155,11 @@ extension MemeTableViewController: MutableArrayTableViewDataSourceController {
     }
     
     
-    func configureCell(_ cell: UITableViewCell, with dataItem: Meme) {
-        cell.imageView?.image = dataItem.memedImage
+    func configureCell(_ cell: UITableViewCell, with dataItem: MemeItem) {
+        let meme = dataItem.meme
+        cell.imageView?.image = meme.memedImage
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = "\(dataItem.topText)...\(dataItem.bottomText)"
+        cell.textLabel?.text = "\(meme.topText)...\(meme.bottomText)"
         cell.setEditing(true, animated: true)
     }
     
@@ -174,7 +175,7 @@ extension MemeTableViewController: MutableArrayTableViewDataSourceController {
 extension MemeTableViewController {
     
     func sunscribeToNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(memesAdded(_:)), name: Notification.Name(rawValue: "GotNewMemes"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(memesAdded(_:)), name: Notification.Name(rawValue: "MemesModified"), object: nil)
     }
     
     

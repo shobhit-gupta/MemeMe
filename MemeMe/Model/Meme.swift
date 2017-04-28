@@ -16,36 +16,12 @@ struct Meme {
     let originalImage: UIImage
     let memedImage: UIImage
     
-    
-    public func save(byReplacing idx: Int? = nil) -> Bool {
-        var isSaved = false
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return isSaved
-        }
-        
-        if let idx = idx,
-            appDelegate.memes.indices.contains(idx) {
-            
-            appDelegate.memes[idx] = self
-            isSaved = true
-            
-        } else {
-            appDelegate.memes.append(self)
-            isSaved = true
-        }
-        
-        print(appDelegate.memes)
-        print("============================================")
-        return isSaved
-        
-    }
-    
 }
 
 
 extension Meme {
     
-    public static func randomMeme(completion: @escaping (Meme?) -> Void) {
+    public static func random(completion: @escaping (Meme?) -> Void) {
         UIImage.random { (image, error) in
             if let error = error as? Error_.Network.Get.Image {
                 print(error.localizedDescription)

@@ -12,9 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var memes = [Meme]() {
+    var memeItems = [MemeItem]() {
         didSet {
-            let notification = Notification(name: Notification.Name(rawValue: "GotNewMemes"), object: nil, userInfo: nil)
+            let notification = Notification(name: Notification.Name(rawValue: "MemesModified"), object: nil, userInfo: nil)
             NotificationCenter.default.post(notification)
         }
     }
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Override point for customization after application launch.
         ArtKit.setupNavBar()
-        let numMemes = Int.random(lower: 0, upper: 100)
+        let numMemes = Int.random(lower: 50, upper: 100)
         generateRandomMemes(stop: numMemes)
         return true
     }
@@ -35,9 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         print("Stop: \(stop)")
-        Meme.randomMeme() { (meme) in
+        Meme.random() { (meme) in
             if let meme = meme {
-                self.memes.append(meme)
+                self.memeItems.append(MemeItem(with: meme))
                 self.generateRandomMemes(stop: stop - 1)
             }
         }
