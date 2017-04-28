@@ -209,10 +209,11 @@ extension MemeCollectionViewController {
         switch currentState {
         case .normal:
             dataSource?.deSelectAllItems(in: collectionView, doesCollectionViewKnow: false)
-            //collectionView?.deselectAll(animated: true)
             collectionView?.allowsMultipleSelection = false
+            installsStandardGestureForInteractiveMovement = true
         case .select:
             collectionView?.allowsMultipleSelection = true
+            installsStandardGestureForInteractiveMovement = false
         }
     }
     

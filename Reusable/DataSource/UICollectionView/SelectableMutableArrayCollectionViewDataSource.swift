@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+// Note: Ensure that cells are not moved when in selected state.
+// In selected state set UICollectionViewController's
+// installsStandardGestureForInteractiveMovement property to false.
 
 protocol SelectableItem: class {
     var isSelected: Bool { get set }
@@ -82,6 +85,7 @@ class SelectableMutableArrayCollectionViewDataSource<T: SelectableMutableArrayCo
         }, completion: completion)
         
     }
+    
     
 }
 
