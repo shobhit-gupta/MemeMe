@@ -35,7 +35,7 @@ class MemeTableViewController: UITableViewController {
         }
     }
     
-    fileprivate var tableViewDataSource: MutableArrayTableViewDataSource<MemeTableViewController>? = nil
+    fileprivate var dataSource: MutableArrayTableViewDataSource<MemeTableViewController>? = nil
     
     
     // MARK: UIViewController Methods
@@ -165,7 +165,7 @@ extension MemeTableViewController: MutableArrayTableViewDataSourceController {
     
     
     func createDataSource() {
-        tableViewDataSource = MutableArrayTableViewDataSource(withController: self, for: tableView)
+        dataSource = MutableArrayTableViewDataSource(withController: self, for: tableView)
     }
     
 }

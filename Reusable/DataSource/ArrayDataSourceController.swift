@@ -37,7 +37,11 @@ public class ArrayDataSource<T: ArrayDataSourceController>: NSObject {
     
     
     public func dataItem(at indexPath: IndexPath) -> T.ElementType {
-        return controller.source[indexPath.row]
+        if T.CellType.self is UITableViewCell.Type {
+            return controller.source[indexPath.row]
+        } else {
+            return controller.source[indexPath.item]
+        }
     }
     
 }

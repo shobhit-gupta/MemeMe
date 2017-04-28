@@ -13,6 +13,7 @@
 		EE291CB61EB1D4740034EDEB /* MemeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE291CB51EB1D4740034EDEB /* MemeItem.swift */; };
 		EE291CB81EB2478B0034EDEB /* Array+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE291CB71EB2478B0034EDEB /* Array+Ease.swift */; };
 		EE291CBA1EB24EA30034EDEB /* MutableArrayCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE291CB91EB24EA30034EDEB /* MutableArrayCollectionViewDataSource.swift */; };
+		EE291CBC1EB309E90034EDEB /* SelectableMutableArrayCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE291CBB1EB309E90034EDEB /* SelectableMutableArrayCollectionViewDataSource.swift */; };
 		EE2BA6321EA5D03900FD211A /* UIView+StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2BA6311EA5D03900FD211A /* UIView+StackView.swift */; };
 		EE2BA6351EA84EE300FD211A /* UIImage+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2BA6341EA84EE300FD211A /* UIImage+Ease.swift */; };
 		EE2BA6371EA8813100FD211A /* UIView+GraphicsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2BA6361EA8813100FD211A /* UIView+GraphicsContext.swift */; };
@@ -90,6 +91,7 @@
 		EE291CB51EB1D4740034EDEB /* MemeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemeItem.swift; path = Model/MemeItem.swift; sourceTree = "<group>"; };
 		EE291CB71EB2478B0034EDEB /* Array+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Ease.swift"; sourceTree = "<group>"; };
 		EE291CB91EB24EA30034EDEB /* MutableArrayCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableArrayCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		EE291CBB1EB309E90034EDEB /* SelectableMutableArrayCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableMutableArrayCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		EE2BA6311EA5D03900FD211A /* UIView+StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+StackView.swift"; sourceTree = "<group>"; };
 		EE2BA6341EA84EE300FD211A /* UIImage+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Ease.swift"; sourceTree = "<group>"; };
 		EE2BA6361EA8813100FD211A /* UIView+GraphicsContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+GraphicsContext.swift"; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			children = (
 				EE39BF4C1EAE195E00C9D657 /* ArrayCollectionViewDataSource.swift */,
 				EE291CB91EB24EA30034EDEB /* MutableArrayCollectionViewDataSource.swift */,
+				EE291CBB1EB309E90034EDEB /* SelectableMutableArrayCollectionViewDataSource.swift */,
 			);
 			path = UICollectionView;
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				EE6C54AF1EA08DF50014A102 /* UIView+Animations.swift in Sources */,
 				EEDF112D1E9BAD0200BCCF05 /* DynamicImageView.swift in Sources */,
 				EE6C54A91E9F54A10014A102 /* CGSize+Ease.swift in Sources */,
+				EE291CBC1EB309E90034EDEB /* SelectableMutableArrayCollectionViewDataSource.swift in Sources */,
 				EE39BF461EAD847700C9D657 /* MemeCollectionViewCell.swift in Sources */,
 				EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */,
 				EE8971EA1EAEDB5500F04DA6 /* Get.swift in Sources */,

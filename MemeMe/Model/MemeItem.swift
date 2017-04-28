@@ -11,7 +11,7 @@ import UIKit
 
 // MemeItem is passed by reference so that view controllers may easily (un)set
 // isSelected property.
-class MemeItem {
+class MemeItem: SelectableItem {
     let meme: Meme
     var isSelected: Bool
     
