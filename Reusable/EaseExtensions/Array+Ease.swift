@@ -21,5 +21,17 @@ public extension Array {
         return enumerated().filter { !indices.contains($0.offset) }.map { $0.element }
     }
     
+    
+    public mutating func move(from fromIdx: Array.Index, to toIdx: Array.Index) {
+        insert(remove(at: fromIdx), at: toIdx)
+    }
+    
+    
+    public func rearrange(from fromIdx: Array.Index, to toIdx: Array.Index) -> [Element] {
+        var array = self
+        array.move(from: fromIdx, to: toIdx)
+        return array
+    }
+    
 }
 

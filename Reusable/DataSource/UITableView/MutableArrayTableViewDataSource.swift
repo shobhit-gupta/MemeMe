@@ -58,7 +58,7 @@ class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceControll
     
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        (controller.source[sourceIndexPath.row], controller.source[destinationIndexPath.row]) = (controller.source[destinationIndexPath.row], controller.source[sourceIndexPath.row])
+        controller.source.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
 }
