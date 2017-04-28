@@ -12,7 +12,7 @@ import UIKit
 class MemeCollectionViewController: UICollectionViewController {
 
     // MARK: Public variables and types
-    public var memes: [Meme]?
+    public var memeItems: [MemeItem]?
     
     public let space: CGFloat = 0.0
     public let numCellsOnSmallerSide = 4
@@ -30,27 +30,28 @@ class MemeCollectionViewController: UICollectionViewController {
         }
     }
     
-    fileprivate var _memes: [Meme] {
+    fileprivate var _memeItems: [MemeItem] {
         get {
-            if let memes = memes {
-                return memes
+            if let memeItems = memeItems {
+                return memeItems
             } else {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                return appDelegate.memes
+                return appDelegate.memeItems
             }
         }
         set {
-            if let _ = memes {
-                self.memes = newValue
+            if let _ = memeItems {
+                self.memeItems = newValue
             } else {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.memes = newValue
+                appDelegate.memeItems = newValue
             }
         }
     }
     
-    fileprivate var collectionViewDataSource: ArrayCollectionViewDataSource<MemeCollectionViewController>? = nil
+    fileprivate var collectionViewDataSource: MutableArrayCollectionViewDataSource<MemeCollectionViewController>? = nil
     
+    fileprivate var indexPathForSelectedMemeItems = [IndexPath]()
     
     // MARK: UIViewController Methods
     override func viewDidLoad() {
@@ -124,7 +125,7 @@ class MemeCollectionViewController: UICollectionViewController {
             print("Unexpected Current state: \(currentState)")
             return
         }
-        
+        deleteSelectedItems(doesCollectionViewKnow: false)
         currentState = .normal
     }
     
@@ -135,7 +136,15 @@ class MemeCollectionViewController: UICollectionViewController {
             return
         }
         
-        currentState = .normal
+        if let title = sender.title {
+            if title == "Select All" {
+                selectAllItems(doesCollectionViewKnow: false)
+                sender.title = "Deselect All"
+            } else if title == "Deselect All" {
+                deSelectAllItems(doesCollectionViewKnow: false)
+                sender.title = "Select All"
+            }
+        }
     }
     
     
@@ -157,6 +166,7 @@ class MemeCollectionViewController: UICollectionViewController {
 extension MemeCollectionViewController {
     
     fileprivate func setupUI() {
+        setupTitle()
         setupNavItem()
     }
     
@@ -188,12 +198,22 @@ extension MemeCollectionViewController {
                  .action : #selector(selectAll(sender:))]
                 
                 ])
+            
+            navigationItem.rightBarButtonItems?[1].possibleTitles = ["Select All", "Deselect All"]
         }
     }
     
     
     fileprivate func updateUI() {
         setupNavItem()
+        switch currentState {
+        case .normal:
+            deSelectAllItems()
+            collectionView?.deselectAll(animated: true)
+            collectionView?.allowsMultipleSelection = false
+        case .select:
+            collectionView?.allowsMultipleSelection = true
+        }
     }
     
 }
@@ -203,6 +223,74 @@ extension MemeCollectionViewController {
 //                          MARK: Collection View Delegate
 //******************************************************************************
 extension MemeCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
+    fileprivate func selectItem(at indexPath: IndexPath, doesCollectionViewKnow: Bool = false) {
+        if let dataItem = collectionViewDataSource?.dataItem(at: indexPath) {
+            dataItem.isSelected = true
+            indexPathForSelectedMemeItems.append(indexPath)
+            if !doesCollectionViewKnow {
+                collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: .init(rawValue: 0))
+            }
+        }
+    }
+    
+    
+    fileprivate func deselectItem(at indexPath: IndexPath, doesCollectionViewKnow: Bool = false) {
+        if let dataItem = collectionViewDataSource?.dataItem(at: indexPath) {
+            dataItem.isSelected = false
+            indexPathForSelectedMemeItems = indexPathForSelectedMemeItems.filter { $0 != indexPath }
+            if !doesCollectionViewKnow {
+                collectionView?.deselectItem(at: indexPath, animated: true)
+            }
+        }
+    }
+    
+    
+    fileprivate func selectAllItems(inSection section: Int = 0, doesCollectionViewKnow: Bool = false) {
+        if let dataItems = collectionViewDataSource?.controller.source {
+            stride(from: 0, to: dataItems.count, by: 1).forEach {
+                dataItems[$0].isSelected = true
+                let indexPath = IndexPath(row: $0, section: 0)
+                indexPathForSelectedMemeItems.append(indexPath)
+                if !doesCollectionViewKnow {
+                    collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: .init(rawValue: 0))
+                }
+            }
+        }
+    }
+    
+    
+    fileprivate func deSelectAllItems(doesCollectionViewKnow: Bool = false) {
+        indexPathForSelectedMemeItems.forEach {
+            if let dataItem = collectionViewDataSource?.dataItem(at: $0) {
+                dataItem.isSelected = false
+            }
+        }
+        indexPathForSelectedMemeItems.removeAll()
+        if !doesCollectionViewKnow {
+            collectionView?.deselectAll(animated: true)
+        }
+    }
+    
+    
+    fileprivate func deleteSelectedItems(doesCollectionViewKnow: Bool = false) {
+
+        collectionView?.performBatchUpdates({
+            // Remove selected memes from data source
+            if let dataSource = self.collectionViewDataSource {
+                dataSource.controller.source = dataSource.controller.source.remove(indices: self.indexPathForSelectedMemeItems.map{ $0.item })
+            }
+            
+            if !doesCollectionViewKnow {
+                self.collectionView?.deleteItems(at: self.indexPathForSelectedMemeItems)
+            }
+            
+            self.indexPathForSelectedMemeItems.removeAll()
+        
+        }, completion: nil)
+        
+    }
+    
     
     private func numberOfCellsInRow(for collectionView: UICollectionView) -> Int {
         let width = collectionView.frame.width
@@ -235,8 +323,20 @@ extension MemeCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     
+    override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        if case .select = currentState {
+            deselectItem(at: indexPath, doesCollectionViewKnow: true)
+        }
+        return true
+    }
+    
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "fromMemesGridToEditorShow", sender: indexPath.item)
+        if case .normal = currentState {
+            performSegue(withIdentifier: "fromMemesGridToEditorShow", sender: indexPath.item)
+        } else if case .select = currentState {
+            selectItem(at: indexPath, doesCollectionViewKnow: true)
+        }
     }
     
 }
@@ -246,13 +346,13 @@ extension MemeCollectionViewController: UICollectionViewDelegateFlowLayout {
 //******************************************************************************
 //                         MARK: Collection View Data Source
 //******************************************************************************
-extension MemeCollectionViewController: ArrayCollectionViewDataSourceController {
-    typealias ElementType = Meme
+extension MemeCollectionViewController: MutableArrayCollectionViewDataSourceController {
+    typealias ElementType = MemeItem
     typealias CellType = MemeCollectionViewCell
     
-    var source: [Meme] {
-        get { return _memes }
-        set { _memes = newValue }
+    var source: [MemeItem] {
+        get { return _memeItems }
+        set { _memeItems = newValue }
     }
 
     var reusableCellIdentifier: String {
@@ -261,14 +361,16 @@ extension MemeCollectionViewController: ArrayCollectionViewDataSourceController 
     
     
     func configureCell(_ cell: CellType, with dataItem: ElementType) {
-        cell.imageView.image = dataItem.memedImage
+        let meme = dataItem.meme
+        cell.imageView.image = meme.memedImage
+        cell.isSelected = dataItem.isSelected
         //cell.layer.borderWidth = 2.0
     }
     
     
     func createDataSource() {
         if let collectionView = collectionView {
-            collectionViewDataSource = ArrayCollectionViewDataSource(withController: self, for: collectionView)
+            collectionViewDataSource = MutableArrayCollectionViewDataSource(withController: self, for: collectionView)
         }
     }
     
@@ -278,7 +380,7 @@ extension MemeCollectionViewController: ArrayCollectionViewDataSourceController 
 extension MemeCollectionViewController {
     
     func subscribeToNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(memesAdded(_:)), name: Notification.Name(rawValue: "GotNewMemes"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(memesModified(_:)), name: Notification.Name(rawValue: "MemesModified"), object: nil)
     }
     
     
@@ -287,8 +389,11 @@ extension MemeCollectionViewController {
     }
     
     
-    func memesAdded(_ notification: Notification) {
+    func memesModified(_ notification: Notification) {
         collectionView?.reloadData()
+        indexPathForSelectedMemeItems.forEach {
+            collectionView?.selectItem(at: $0, animated: false, scrollPosition: .init(rawValue: 0))
+        }
     }
     
 }

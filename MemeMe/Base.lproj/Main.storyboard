@@ -96,8 +96,9 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KDO-Zz-h1Z">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgS-ce-XxJ" userLabel="Overlay" customClass="OverlayView" customModule="MemeMe" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgS-ce-XxJ" userLabel="Overlay" customClass="OverlayView" customModule="MemeMe" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
@@ -105,12 +106,8 @@
                                 <constraints>
                                     <constraint firstItem="KDO-Zz-h1Z" firstAttribute="bottom" secondItem="6pA-zj-p9J" secondAttribute="bottom" id="3WM-cW-798"/>
                                     <constraint firstItem="KDO-Zz-h1Z" firstAttribute="leading" secondItem="6pA-zj-p9J" secondAttribute="leading" id="GZQ-p2-zaq"/>
-                                    <constraint firstItem="PgS-ce-XxJ" firstAttribute="top" secondItem="6pA-zj-p9J" secondAttribute="top" id="ZWH-i9-xPq"/>
-                                    <constraint firstItem="PgS-ce-XxJ" firstAttribute="bottom" secondItem="6pA-zj-p9J" secondAttribute="bottom" id="bhR-H7-aqX"/>
-                                    <constraint firstItem="PgS-ce-XxJ" firstAttribute="trailing" secondItem="6pA-zj-p9J" secondAttribute="trailing" id="f4D-FQ-5qX"/>
                                     <constraint firstItem="KDO-Zz-h1Z" firstAttribute="top" secondItem="6pA-zj-p9J" secondAttribute="top" id="gXr-iJ-K8w"/>
                                     <constraint firstItem="KDO-Zz-h1Z" firstAttribute="trailing" secondItem="6pA-zj-p9J" secondAttribute="trailing" id="ly1-8E-2yA"/>
-                                    <constraint firstItem="PgS-ce-XxJ" firstAttribute="leading" secondItem="6pA-zj-p9J" secondAttribute="leading" id="ws6-W2-vUL"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="KDO-Zz-h1Z" id="Gmq-mw-yce"/>
