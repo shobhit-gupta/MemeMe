@@ -105,6 +105,9 @@ public extension Overlay where Self: UIView {
 }
 
 
+class OverlayView: UIView, Overlay {}
+
+
 public extension Default {
     enum Overlay {
         static let BlurEffectStyle: UIBlurEffectStyle = .dark

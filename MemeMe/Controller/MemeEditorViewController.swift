@@ -109,7 +109,6 @@ extension MemeEditorViewController {
     fileprivate func setupUI() {
         setupView()
         setupTitleIfNeeded()
-        setupNavBar()
         setupImageSourceSelector()
         setupMemeView()
         setupFocusOnTextViewStackView()
@@ -127,17 +126,6 @@ extension MemeEditorViewController {
     private func setupTitleIfNeeded() {
         if title == nil {
             title = "Create Meme"
-        }
-    }
-    
-    
-    private func setupNavBar() {
-        if let navbar = navigationController?.navigationBar {
-            navbar.barTintColor = ArtKit.primaryColor
-            navbar.tintColor = ArtKit.secondaryColor
-            // To set the status bar style to lightcontent when the navigation
-            // controller displays a navigation bar.
-            navbar.barStyle = .black
         }
     }
     
@@ -171,14 +159,15 @@ extension MemeEditorViewController {
     
     private func setupOldMemeIfNeeded() {
         if let memeIdx = memeIdx,
-            let memes = (UIApplication.shared.delegate as? AppDelegate)?.memes,
-            memes.indices.contains(memeIdx) {
+            let memeItems = (UIApplication.shared.delegate as? AppDelegate)?.memeItems,
+            memeItems.indices.contains(memeIdx) {
             
-            let memeToLoad = memes[memeIdx]
+            let memeToLoad = memeItems[memeIdx].meme
             updateMemeView(with: memeToLoad.originalImage)
             memeView.set(text: memeToLoad.topText, for: memeView.top)
             memeView.set(text: memeToLoad.bottomText, for: memeView.bottom)
             currentState = .memeReady
+            memeView.layoutIfNeeded()
         }
     }
     
@@ -463,7 +452,8 @@ extension MemeEditorViewController: UITextViewDelegate {
 extension MemeEditorViewController {
     
     fileprivate func save(meme: Meme) {
-        _ = meme.save(byReplacing: _memeIdx)
+        let memeItem = MemeItem(with: meme)
+        _ = memeItem.save(byReplacing: _memeIdx)
     }
     
     

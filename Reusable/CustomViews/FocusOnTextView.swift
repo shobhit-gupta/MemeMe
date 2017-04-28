@@ -9,21 +9,16 @@
 import UIKit
 
 
-extension UITextView: ContentView {
-    public typealias ViewType = UITextView
-}
-
-
-class FocusOnTextView: FocusOnContentView<UITextView> {
+class FocusOnTextView: FocusOnContentView {
     
     // MARK: Public variables and types
     public var textView: UITextView {
-        return contentView
+        return contentView as! UITextView
     }
     
     public override var displayRect: CGRect {
         let container = _availableSpace
-        let midPoint = CGPoint(x: container.midX, y: container.midY)
+        let midPoint = container.midPoint
         let width = container.width - 16.0
         let height = min(100.0 + 0.1 * container.height, container.height)
         return CGRect(midPoint: midPoint, size: CGSize(width: width, height: height))
@@ -46,12 +41,18 @@ class FocusOnTextView: FocusOnContentView<UITextView> {
     // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        commonInit()
     }
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    
+    private func commonInit() {
+        contentView = UITextView(frame: CGRect.zero)
         setupView()
     }
     

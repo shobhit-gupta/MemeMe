@@ -16,29 +16,28 @@ struct Meme {
     let originalImage: UIImage
     let memedImage: UIImage
     
+}
+
+
+extension Meme {
     
-    public func save(byReplacing idx: Int? = nil) -> Bool {
-        var isSaved = false
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return isSaved
-        }
-        
-        if let idx = idx,
-            appDelegate.memes.indices.contains(idx) {
+    public static func random(completion: @escaping (Meme?) -> Void) {
+        UIImage.random { (image, error) in
+            if let error = error as? Error_.Network.Get.Image {
+                print(error.localizedDescription)
+            } else if let error = error {
+                print(error.info())
+            }
             
-            appDelegate.memes[idx] = self
-            isSaved = true
+            let image = image ?? #imageLiteral(resourceName: "640x480")
+            let topText = String.random(.sentence, minLength: 4, maxLength: 15)
+            let bottomText = String.random(.sentence, minLength: 4, maxLength: 15)
+            let meme = Meme(topText: topText, bottomText: bottomText, originalImage: image, memedImage: image)
+            completion(meme)
             
-        } else {
-            appDelegate.memes.append(self)
-            isSaved = true
         }
-        
-        print(appDelegate.memes)
-        print("============================================")
-        return isSaved
-        
     }
     
-    
 }
+
+

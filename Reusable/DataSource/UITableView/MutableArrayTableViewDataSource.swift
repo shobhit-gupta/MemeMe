@@ -10,24 +10,16 @@ import Foundation
 import UIKit
 
 
-protocol MutableArrayTableViewDataSourceController: ArrayTableViewDataSourceController  {
-    var source: [ElementType] { get set }
+protocol MutableArrayTableViewDataSourceController: MutableArrayDataSourceController {
+    associatedtype CellType: UITableViewCell
 }
 
 
-class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceController>: NSObject, UITableViewDataSource {
-    
-    var controller: T
+class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceController>: ArrayDataSource<T>, UITableViewDataSource {
     
     init(withController controller: T, for tableView: UITableView) {
-        self.controller = controller
-        super.init()
+        super.init(withController: controller)
         tableView.dataSource = self
-    }
-    
-    
-    func dataItem(at indexPath: IndexPath) -> T.ElementType {
-        return controller.source[indexPath.row]
     }
     
     
@@ -39,7 +31,7 @@ class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceControll
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: controller.reusableCellIdentifier) as? T.CellType else {
             print("1. Couldn't find UITableViewCell with reusable cell identifier: \(controller.reusableCellIdentifier) or, \n2. Couldn't downcast to \(T.CellType.self)")
-            return UITableViewCell()
+            return T.CellType()
         }
         
         controller.configureCell(cell, with: dataItem(at: indexPath))
@@ -66,7 +58,7 @@ class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceControll
     
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        (controller.source[sourceIndexPath.row], controller.source[destinationIndexPath.row]) = (controller.source[destinationIndexPath.row], controller.source[sourceIndexPath.row])
+        controller.source.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
 }

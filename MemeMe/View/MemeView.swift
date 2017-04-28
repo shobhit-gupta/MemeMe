@@ -80,7 +80,7 @@ class MemeView: DynamicImageView {
     
     private func addConstraintsForLabels() {
         top.autoMatch(.width, to: .width, of: augmentedStackView)
-        //bottom.autoMatch(.width, to: .width, of: augmentedStackView)
+        bottom.autoMatch(.width, to: .width, of: augmentedStackView)
     }
     
     
@@ -148,12 +148,13 @@ extension MemeView {
         augmentedStackView.alignment = .center
         augmentedStackView.distribution = .fillEqually
         
-        let topStackView = top.encompassInStackView(axis: .horizontal, alignment: .top)
+        let topStackView = top.encompassInStackView(axis: .horizontal, alignment: .fill)
         let closeImageButtonStackView = closeImageButton.encompassInStackView(axis: .horizontal, alignment: .center)
-        let bottomStackView = bottom.encompassInStackView(axis: .horizontal, alignment: .bottom)
+        let bottomStackView = bottom.encompassInStackView(axis: .horizontal, alignment: .fill)
         
         [topStackView, closeImageButtonStackView, bottomStackView].forEach() { augmentedStackView.addArrangedSubview($0) }
         addSubview(augmentedStackView)
+        
     }
     
     

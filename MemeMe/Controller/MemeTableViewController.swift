@@ -8,46 +8,54 @@
 
 import UIKit
 
+
 class MemeTableViewController: UITableViewController {
 
     // MARK: Public variables and types
-    public var memes: [Meme]?
+    public var memeItems: [MemeItem]?
     
     
     // MARK: Private variables and types
-    fileprivate var _memes: [Meme] {
+    fileprivate var _memeItems: [MemeItem] {
         get {
-            if let memes = memes {
-                return memes
+            if let memeItems = memeItems {
+                return memeItems
             } else {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                return appDelegate.memes
+                return appDelegate.memeItems
             }
         }
         set {
-            if let _ = memes {
-                self.memes = newValue
+            if let _ = memeItems {
+                self.memeItems = newValue
             } else {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.memes = newValue
+                appDelegate.memeItems = newValue
             }
         }
     }
     
-    fileprivate var tableViewDataSource: MutableArrayTableViewDataSource<MemeTableViewController>? = nil
+    fileprivate var dataSource: MutableArrayTableViewDataSource<MemeTableViewController>? = nil
     
     
     // MARK: UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        createTableViewDataSource()
+        createDataSource()
         setupUI()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        sunscribeToNotifications()
         tableView.reloadData()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unsubscribeFromNotification()
     }
     
     
@@ -55,7 +63,7 @@ class MemeTableViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         switch segue.identifier ?? "" {
-        case "MemeEditorShow":
+        case "fromMemesListToEditorShow":
             guard let memeIdx = sender as? Int else {
                 fatalError("Unexpected sender: \(String(describing: sender)) for segue identifier:\(String(describing: segue.identifier))")
             }
@@ -67,7 +75,7 @@ class MemeTableViewController: UITableViewController {
             destination.memeIdx = memeIdx
             destination.title = "Edit Meme"
             
-        case "MemeEditorModal":
+        case "fromMemesListToEditorModal":
             guard let _ = segue.destination as? UINavigationController else {
                 fatalError("Unexpected destination for segue identifier:\(String(describing: segue.identifier))")
             }
@@ -82,7 +90,7 @@ class MemeTableViewController: UITableViewController {
     
     // MARK: Actions
     func addMeme(sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "MemeEditorModal", sender: sender)
+        performSegue(withIdentifier: "fromMemesListToEditorModal", sender: sender)
     }
     
 }
@@ -94,26 +102,20 @@ class MemeTableViewController: UITableViewController {
 extension MemeTableViewController {
 
     fileprivate func setupUI() {
-        setupNavBar()
+        setupTitle()
         setupNavItem()
     }
     
     
-    private func setupNavItem() {
-        navigationItem.title = "Memes"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
-        navigationItem.rightBarButtonItem = editButtonItem
+    private func setupTitle() {
+        if title == nil {
+            title = "Memes"
+        }
     }
     
-    
-    private func setupNavBar() {
-        if let navbar = navigationController?.navigationBar {
-            navbar.barTintColor = ArtKit.primaryColor
-            navbar.tintColor = ArtKit.secondaryColor
-            // To set the status bar style to lightcontent when the navigation
-            // controller displays a navigation bar.
-            navbar.barStyle = .black
-        }
+    private func setupNavItem() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
+        navigationItem.rightBarButtonItem = editButtonItem
     }
 
 }
@@ -130,7 +132,7 @@ extension MemeTableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "MemeEditorShow", sender: indexPath.row)
+        performSegue(withIdentifier: "fromMemesListToEditorShow", sender: indexPath.row)
     }
     
 }
@@ -140,12 +142,12 @@ extension MemeTableViewController {
 //                         MARK: Table View Data Source
 //******************************************************************************
 extension MemeTableViewController: MutableArrayTableViewDataSourceController {
-    typealias ElementType = Meme
+    typealias ElementType = MemeItem
     typealias CellType = UITableViewCell
     
-    var source: [Meme] {
-        get { return _memes }
-        set { _memes = newValue }
+    var source: [MemeItem] {
+        get { return _memeItems }
+        set { _memeItems = newValue }
     }
     
     var reusableCellIdentifier: String {
@@ -153,16 +155,37 @@ extension MemeTableViewController: MutableArrayTableViewDataSourceController {
     }
     
     
-    func configureCell(_ cell: UITableViewCell, with dataItem: Meme) {
-        cell.imageView?.image = dataItem.memedImage
+    func configureCell(_ cell: UITableViewCell, with dataItem: MemeItem) {
+        let meme = dataItem.meme
+        cell.imageView?.image = meme.memedImage
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = "\(dataItem.topText)...\(dataItem.bottomText)"
+        cell.textLabel?.text = "\(meme.topText)...\(meme.bottomText)"
         cell.setEditing(true, animated: true)
     }
     
     
-    func createTableViewDataSource() {
-        tableViewDataSource = MutableArrayTableViewDataSource(withController: self, for: tableView)
+    func createDataSource() {
+        dataSource = MutableArrayTableViewDataSource(withController: self, for: tableView)
+    }
+    
+}
+
+
+
+extension MemeTableViewController {
+    
+    func sunscribeToNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(memesAdded(_:)), name: Notification.Name(rawValue: "MemesModified"), object: nil)
+    }
+    
+    
+    func unsubscribeFromNotification() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    func memesAdded(_ notification: Notification) {
+        tableView.reloadData()
     }
     
 }

@@ -15,7 +15,7 @@ public extension CGRect {
     public var midPoint: CGPoint {
         return CGPoint(x: midX, y: midY)
     }
-
+    
     
     public init(midPoint: CGPoint, size: CGSize) {
         let origin = CGPoint(x: midPoint.x - size.width / 2, y: midPoint.y - size.height / 2)

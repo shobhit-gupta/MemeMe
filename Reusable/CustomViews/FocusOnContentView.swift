@@ -9,15 +9,10 @@
 import UIKit
 
 
-public protocol ContentView {
-    associatedtype ViewType: UIView
-}
-
-
-open class FocusOnContentView<T: ContentView>: UIView {
+open class FocusOnContentView: UIView {
     
     // MARK: Public variables and types
-    public var contentView = T.ViewType(frame: CGRect.zero) { didSet { setNeedsLayout() } }
+    public var contentView = UIView(frame: CGRect.zero) { didSet { setNeedsLayout() } }
     public var availableSpace: CGRect? { didSet { setNeedsLayout() } }
     
     // Display frame for contentView inside availableSpace.
