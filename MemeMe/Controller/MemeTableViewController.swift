@@ -175,7 +175,7 @@ extension MemeTableViewController: MutableArrayTableViewDataSourceController {
 extension MemeTableViewController {
     
     func sunscribeToNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(memesAdded(_:)), name: Notification.Name(rawValue: "MemesModified"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(memesModified(_:)), name: Notification.Name(rawValue: "MemesModified"), object: nil)
     }
     
     
@@ -184,7 +184,7 @@ extension MemeTableViewController {
     }
     
     
-    func memesAdded(_ notification: Notification) {
+    func memesModified(_ notification: Notification) {
         tableView.reloadData()
     }
     

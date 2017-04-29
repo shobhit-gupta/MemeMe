@@ -134,12 +134,9 @@ extension MemeEditorViewController {
     //                            State: selectImage
     //--------------------------------------------------------------------------
     private func setupImageSourceSelector() {
-        camera.kind = .camera(blendMode: .normal)
-        album.kind = .album(blendMode: .normal)
-        popular.kind = .popular(blendMode: .normal)
-        camera.backgroundColor = ArtKit.backgroundColor
-        album.backgroundColor = ArtKit.backgroundColor
-        popular.backgroundColor = ArtKit.backgroundColor
+        camera.kind = .camera
+        album.kind = .album
+        popular.kind = .popular
         camera.isHidden = !UIImagePickerController.isSourceTypeAvailable(.camera)
     }
     
@@ -195,7 +192,10 @@ extension MemeEditorViewController {
     fileprivate func updateUI() {
         switch currentState {
         case .selectImage:
-            ArtKitButton.setBlendMode(of: [camera, album, popular], to: .normal)
+            [camera, album, popular].forEach {
+                $0?.isSelected = false
+                $0?.isEnabled = true
+            }
             shareButton.isEnabled = false
             doneButton.isEnabled = false
             imageSourceSelector.isHidden = false
@@ -305,15 +305,17 @@ extension MemeEditorViewController {
 extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBAction func showImageSource(_ sender: ArtKitButton) {
+        [camera, album, popular].forEach { $0?.isEnabled = false }
         switch sender.kind {
         case .camera:
-            sender.kind = .camera(blendMode: .overlay)
+            //sender.kind = .camera(blendMode: .overlay)
             pickAnImage(from: .camera)
         case .album:
-            sender.kind = .album(blendMode: .overlay)
+            //sender.kind = .album(blendMode: .overlay)
             pickAnImage(from: .photoLibrary)
         case .popular:
-            sender.kind = .popular(blendMode: .overlay)
+            //sender.kind = .popular(blendMode: .overlay)
+            break
         default:
             break
         }

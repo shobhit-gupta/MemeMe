@@ -160,6 +160,7 @@ extension MemeView {
     
     fileprivate func setupcloseImageButton() {
         closeImageButton.kind = .closeImage
+        closeImageButton.backgroundColor = UIColor.clear
     }
     
     
