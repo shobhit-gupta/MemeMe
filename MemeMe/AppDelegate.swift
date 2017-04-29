@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
-        ArtKit.setupNavBar()
+        ArtKit.setupAppearance()
         let numMemes = Int.random(lower: 50, upper: 100)
         generateRandomMemes(stop: numMemes)
         return true

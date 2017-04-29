@@ -1,5 +1,5 @@
 //
-//  ArtKit+NavBar.swift
+//  ArtKit+Appearance.swift
 //  MemeMe
 //
 //  Created by Shobhit Gupta on 24/04/17.
@@ -12,7 +12,21 @@ import UIKit
 
 public extension ArtKit {
     
-    public class func setupNavBar() {
+    public class func setupAppearance() {
+        setupNavBarAppearance()
+        setupTabBarAppearance()
+    }
+    
+    
+    public class func setupTabBarAppearance() {
+        let appearance = UITabBar.appearance()
+        appearance.barTintColor = ArtKit.primaryColor
+        appearance.tintColor = ArtKit.secondaryColor
+        appearance.barStyle = .black
+    }
+    
+    
+    public class func setupNavBarAppearance() {
         let appearance = UINavigationBar.appearance()
         appearance.barTintColor = ArtKit.primaryColor
         appearance.tintColor = ArtKit.secondaryColor
