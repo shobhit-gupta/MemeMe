@@ -180,11 +180,19 @@ extension MemeEditorViewController {
         let properties = OverlayType.Properties(color: Default.Overlay.BackgroundColor,
                                                 blur: OverlayType.Properties.Blur(style: Default.Overlay.BlurEffectStyle, isVibrant: true))
         focusOnTextView.overlayProperties = properties
+        style(focusOnTextView)
         focusOnTextViewStackView.addArrangedSubview(focusOnTextView)
         focusOnTextViewStackView.isHidden = true
         return focusOnTextView
     }
     
+    
+    private func style(_ focusOnTextView: FocusOnTextView) {
+        var textAttributes = memeView.textAttributes
+        textAttributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 24)!
+        focusOnTextView.textView.typingAttributes = textAttributes
+        
+    }
     
     //--------------------------------------------------------------------------
     //                              Manage State
