@@ -383,17 +383,15 @@ extension MemeEditorViewController: MemeViewDelegate {
         currentState = .selectImage
     }
     
-    func memeLabelTapped(sender: UITapGestureRecognizer) {
+    
+    func memeLabelTapped(sender: UILabel) {
         guard [.selectText, .memeReady].contains(currentState) else {
             print("Unexpected Current state: \(currentState)")
             return
         }
         
-        if let label = sender.view as? UILabel,
-            memeView.top === label || memeView.bottom === label {
-         
-            currentState = .inputText(for: label, with: nil)
-        
+        if memeView.top === sender || memeView.bottom === sender {
+            currentState = .inputText(for: sender, with: nil)
         }
     }
     
