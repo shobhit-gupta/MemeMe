@@ -55,11 +55,11 @@
             </objects>
             <point key="canvasLocation" x="-693.75" y="1125"/>
         </scene>
-        <!--List-->
+        <!--Memes-->
         <scene sceneID="7FI-Bd-JPW">
             <objects>
                 <navigationController id="5Yu-dK-Lf3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" image="List" id="MA3-6P-etR"/>
+                    <tabBarItem key="tabBarItem" title="Memes" image="List" id="MA3-6P-etR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dtp-Li-Tmq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -248,11 +248,11 @@
             </objects>
             <point key="canvasLocation" x="120" y="1550"/>
         </scene>
-        <!--Grid-->
+        <!--Memes-->
         <scene sceneID="ybm-cZ-YCf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0VA-nU-gJg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Grid" image="Grid" id="of5-c0-zKE"/>
+                    <tabBarItem key="tabBarItem" title="Memes" image="Grid" id="of5-c0-zKE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fZD-RR-8Oh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -273,6 +273,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ORq-Jd-VHo" customClass="MemeTabBarController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JkD-DJ-zhj">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
