@@ -41,7 +41,7 @@ class MemeView: DynamicImageView {
         attributes[NSStrokeColorAttributeName] = UIColor.black
         attributes[NSStrokeWidthAttributeName] = -3.0
         attributes[NSForegroundColorAttributeName] = UIColor.white
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
+        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 72)!
         return attributes
     }
     
@@ -129,6 +129,9 @@ extension MemeView {
         label.textColor = UIColor.white
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 1/3
     }
     
     
