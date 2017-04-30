@@ -39,12 +39,12 @@ class MemeView: DynamicImageView {
     fileprivate var topStackView: UIStackView?
     fileprivate var bottomStackView: UIStackView?
     
-    fileprivate var textAttributes: [String : Any] {
+    public var textAttributes: [String : Any] {
         var attributes = [String : Any]()
         attributes[NSStrokeColorAttributeName] = UIColor.black
         attributes[NSStrokeWidthAttributeName] = -3.0
         attributes[NSForegroundColorAttributeName] = UIColor.white
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 72)!
+        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 64)!
         return attributes
     }
     
