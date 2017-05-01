@@ -29,8 +29,6 @@ class MemeCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
-        imageView.layer.borderColor = ArtKit.secondaryColor.cgColor
-        isSelected = false
     }
     
     override func prepareForReuse() {
@@ -46,14 +44,20 @@ class MemeCollectionViewCell: UICollectionViewCell {
 extension MemeCollectionViewCell {
     
     fileprivate func setupView() {
+        setupProperties()
         setupOverlay()
         setupOverlayConstraints()
     }
     
+    private func setupProperties() {
+        isSelected = false
+        backgroundColor = UIColor.clear
+        imageView.layer.borderColor = ArtKit.primaryColor.cgColor
+    }
     
     private func setupOverlay() {
-//        let properties = OverlayType.Properties(color: UIColor.white.withAlphaComponent(0.2), blur: nil)
-        let properties = OverlayType.Properties(color: UIColor.white.withAlphaComponent(0.2), blur: OverlayType.Properties.Blur(style: .light, isVibrant: false))
+        let properties = OverlayType.Properties(color: UIColor.white.withAlphaComponent(1.0), blur: nil)
+//        let properties = OverlayType.Properties(color: UIColor.white.withAlphaComponent(0.2), blur: OverlayType.Properties.Blur(style: .light, isVibrant: false))
         _ = overlay.setupOverlay(withDesired: properties)
         overlay.alpha = 0.5
     }
