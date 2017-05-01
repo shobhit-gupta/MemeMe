@@ -14,11 +14,19 @@ class MemeCollectionViewController: UICollectionViewController {
     // MARK: Public variables and types
     public var memeItems: [MemeItem]?
     
-    public let space: CGFloat = 0.0
-    public let numCellsOnSmallerSide = 4
-    
     
     // MARK: Private variables and types
+    fileprivate var space: CGFloat {
+        return round((collectionView?.bounds.width ?? 0.0) / 320.0)
+    }
+    
+    fileprivate var numCellsOnSmallerSide: Int {
+        if let collectionView = collectionView {
+            return Int(round(min(collectionView.bounds.width, collectionView.bounds.height) / 160.0))
+        }
+        return 4
+    }
+    
     fileprivate enum State {
         case normal
         case select
@@ -235,24 +243,49 @@ extension MemeCollectionViewController: UICollectionViewDelegateFlowLayout {
     private func cellDimension(for collectionView: UICollectionView) -> CGFloat {
         let width = collectionView.frame.width
         let numCells = CGFloat(numberOfCellsInRow(for: collectionView))
-        let emptySpace = (numCells - 1) * space
+        let emptySpace = (numCells + 1) * space
         return (width - emptySpace) / numCells
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let dimension = cellDimension(for: collectionView)
-        return CGSize(width: dimension, height: dimension)
+        var width = dimension
+        var height = dimension
+        
+        if numCellsOnSmallerSide > 2,
+            let image = dataSource?.dataItem(at: indexPath).meme.memedImage {
+            
+            let aspectRatio = (image.size.width) / (image.size.height)
+            if aspectRatio > 2 {
+                height /= 2
+            } else if aspectRatio > 1 {
+                height /= aspectRatio
+            } else if aspectRatio < 0.5 {
+                width *= 0.5
+            } else {
+                width *= aspectRatio
+            }
+            
+        }
+        
+        return CGSize(width: width, height: height)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return space
+        return 2 * space
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return space
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let space = self.space
+        return UIEdgeInsets(top: space, left: space, bottom: space, right: space)
     }
     
     
@@ -298,6 +331,7 @@ extension MemeCollectionViewController: SelectableMutableArrayCollectionViewData
         cell.imageView.image = meme.memedImage
         cell.isSelected = dataItem.isSelected
         //cell.layer.borderWidth = 2.0
+        cell.layer.cornerRadius = 4.0
     }
     
     
