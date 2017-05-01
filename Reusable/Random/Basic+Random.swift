@@ -82,6 +82,9 @@ public extension Int32 {
 
 public extension UInt64 {
     public static func random(lower: UInt64 = min, upper: UInt64 = max) -> UInt64 {
+        guard lower < upper else {
+            return lower
+        }
         var m: UInt64
         let u = upper - lower
         var r = arc4random(UInt64.self)
