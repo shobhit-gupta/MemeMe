@@ -23,6 +23,7 @@ public extension ArtKit {
         appearance.barTintColor = ArtKit.primaryColor
         appearance.tintColor = ArtKit.secondaryColor
         appearance.barStyle = .black
+        appearance.isShadowPresent = true
     }
     
     
@@ -33,6 +34,59 @@ public extension ArtKit {
         // To set the status bar style to lightcontent when the navigation
         // controller displays a navigation bar.
         appearance.barStyle = .black
+        appearance.isShadowPresent = true
+       
+    }
+    
+}
+
+
+
+extension UINavigationBar {
+    
+    var isShadowPresent: Bool {
+        get {
+            return layer.shadowOpacity > 0.0
+        }
+        set {
+            if newValue {
+                layer.shadowColor = ArtKit.shadowOfPrimaryColor.cgColor
+                layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+                layer.shadowRadius = 4.0
+                layer.shadowOpacity = 1.0
+                layer.masksToBounds = false
+            } else {
+                layer.shadowColor = nil
+                layer.shadowOpacity = 0.0
+                layer.masksToBounds = true
+            }
+            
+        }
+    }
+    
+}
+
+
+extension UITabBar {
+    
+    var isShadowPresent: Bool {
+        get {
+            return layer.shadowOpacity > 0.0
+        }
+        set {
+            if newValue {
+                layer.shadowColor = ArtKit.shadowOfPrimaryColor.cgColor
+                layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+                layer.shadowRadius = 4.0
+                layer.shadowOpacity = 1.0
+                layer.masksToBounds = false
+            } else {
+                layer.shadowColor = nil
+                layer.shadowOpacity = 0.0
+                layer.masksToBounds = true
+            }
+            
+        }
     }
     
 }
