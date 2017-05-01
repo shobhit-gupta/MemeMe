@@ -40,6 +40,7 @@
 		EE6C54AF1EA08DF50014A102 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */; };
 		EE749CD31EAE3EAF00B55809 /* Basic+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE749CCF1EAE3EAF00B55809 /* Basic+Random.swift */; };
 		EE758CCC1EA26E1100F2E794 /* CGRect+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */; };
+		EE82985E1EB711C10056D4D4 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82985D1EB711C10056D4D4 /* Enum.swift */; };
 		EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ABB1E5C99AC0066A4FE /* AppDelegate.swift */; };
 		EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ABD1E5C99AC0066A4FE /* MemeEditorViewController.swift */; };
 		EE894AC11E5C99AC0066A4FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE894ABF1E5C99AC0066A4FE /* Main.storyboard */; };
@@ -119,6 +120,7 @@
 		EE6C54AE1EA08DF50014A102 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		EE749CCF1EAE3EAF00B55809 /* Basic+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Basic+Random.swift"; sourceTree = "<group>"; };
 		EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Ease.swift"; sourceTree = "<group>"; };
+		EE82985D1EB711C10056D4D4 /* Enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enum.swift; path = Reusable/Enum.swift; sourceTree = "<group>"; };
 		EE894AB81E5C99AC0066A4FE /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE894ABB1E5C99AC0066A4FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE894ABD1E5C99AC0066A4FE /* MemeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemeEditorViewController.swift; path = Controller/MemeEditorViewController.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				EE8971E81EAEDA4100F04DA6 /* Networking */,
 				EE749CCE1EAE3EAF00B55809 /* Random */,
 				EE6C54A21E9F52F40014A102 /* UIView */,
+				EE82985D1EB711C10056D4D4 /* Enum.swift */,
 				EE6C54AC1EA068E90014A102 /* Keyboard.swift */,
 			);
 			name = Reusable;
@@ -730,6 +733,7 @@
 				EE2BA6391EA8E61400FD211A /* Meme.swift in Sources */,
 				EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */,
 				EE6C54AF1EA08DF50014A102 /* UIView+Animations.swift in Sources */,
+				EE82985E1EB711C10056D4D4 /* Enum.swift in Sources */,
 				EEDF112D1E9BAD0200BCCF05 /* DynamicImageView.swift in Sources */,
 				EE6C54A91E9F54A10014A102 /* CGSize+Ease.swift in Sources */,
 				EE291CBC1EB309E90034EDEB /* SelectableMutableArrayCollectionViewDataSource.swift in Sources */,
