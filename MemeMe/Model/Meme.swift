@@ -53,7 +53,10 @@ struct Meme {
 
 extension Meme {
     
+    
+    
     public static func random(completion: @escaping (Meme?) -> Void) {
+        
         UIImage.random { (image, error) in
             if let error = error as? Error_.Network.Get.Image {
                 print(error.localizedDescription)

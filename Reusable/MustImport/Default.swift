@@ -31,6 +31,10 @@ public extension Default {
 //        
 //    }
     
+    enum UIImage_ {
+        
+    }
+    
 }
 
 
