@@ -13,13 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var memeItems = [MemeItem]()
-
+    let numMemes = Int.random(lower: 80, upper: 100)
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
         ArtKit.setupAppearance()
-        let numMemes = Int.random(lower: 50, upper: 100)
         generateRandomMemes(stop: numMemes)
         return true
     }
@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if stop <= 0 {
             return
         }
-        print("Stop: \(stop)")
         Meme.random() { (meme) in
             if let meme = meme {
                 self.memeItems.append(MemeItem(with: meme))

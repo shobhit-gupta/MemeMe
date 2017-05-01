@@ -59,6 +59,8 @@ class MemeCollectionViewController: UICollectionViewController {
     
     fileprivate var dataSource: SelectableMutableArrayCollectionViewDataSource<MemeCollectionViewController>? = nil
     
+    fileprivate var navigationPromptUpdate: DispatchWorkItem?
+    
     internal var indexPathForSelectedItems = [IndexPath]()
     
     // MARK: UIViewController Methods
@@ -360,6 +362,17 @@ extension MemeCollectionViewController {
         collectionView?.reloadData()
         indexPathForSelectedItems.forEach {
             collectionView?.selectItem(at: $0, animated: false, scrollPosition: .init(rawValue: 0))
+        }
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            navigationItem.prompt = "Downloaded memes: \(appDelegate.memeItems.count) of \(appDelegate.numMemes)"
+            navigationPromptUpdate?.cancel()
+            let deadline = DispatchTime.now() + .seconds(2)
+            navigationPromptUpdate = DispatchWorkItem {
+                self.navigationItem.prompt = nil
+            }
+            if let navigationPromptUpdate = navigationPromptUpdate {
+                DispatchQueue.main.asyncAfter(deadline: deadline, execute: navigationPromptUpdate)
+            }
         }
     }
     
