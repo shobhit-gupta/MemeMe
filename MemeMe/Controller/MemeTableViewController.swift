@@ -62,27 +62,38 @@ class MemeTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        switch segue.identifier ?? "" {
-        case "fromMemesListToEditorShow":
-            guard let memeIdx = sender as? Int else {
-                fatalError("Unexpected sender: \(String(describing: sender)) for segue identifier:\(String(describing: segue.identifier))")
-            }
-            
-            guard let destination = segue.destination as? MemeEditorViewController else {
-                fatalError("Unexpected destination for segue identifier:\(String(describing: segue.identifier))")
-            }
-            
-            destination.memeIdx = memeIdx
-            destination.title = "Edit Meme"
-            
-        case "fromMemesListToEditorModal":
-            guard let _ = segue.destination as? UINavigationController else {
-                fatalError("Unexpected destination for segue identifier:\(String(describing: segue.identifier))")
+        if let identifier = Default.Segues.FromList(rawValue: segue.identifier ?? "") {
+            switch identifier {
+            case .ToEditorShow:
+                guard let memeIdx = sender as? Int else {
+                    let error = Error_.General.UnexpectedSegueSender(identifier: identifier.rawValue,
+                                                                     sender: type(of: sender),
+                                                                     expected: Int.self)
+                    fatalError(error.localizedDescription)
+                }
+                
+                guard let destination = segue.destination as? MemeEditorViewController else {
+                    let error = Error_.General.UnexpectedSegueDestination(identifier: identifier.rawValue,
+                                                                          destination: type(of: segue.destination),
+                                                                          expected: MemeEditorViewController.self)
+                    fatalError(error.localizedDescription)
+                }
+                
+                destination.memeIdx = memeIdx
+                destination.title = identifier.destinationTitle
+                
+            case .ToEditorModal:
+                guard let _ = segue.destination as? UINavigationController else {
+                    let error = Error_.General.UnexpectedSegueDestination(identifier: identifier.rawValue,
+                                                                          destination: type(of: segue.destination),
+                                                                          expected: UINavigationController.self)
+                    fatalError(error.localizedDescription)
+                }
             }
         
-        default:
-            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
-        
+        } else {
+            let error = Error_.General.UnexpectedSegue(identifier: segue.identifier)
+            fatalError(error.localizedDescription)
         }
         
     }
@@ -90,7 +101,7 @@ class MemeTableViewController: UITableViewController {
     
     // MARK: Actions
     func addMeme(sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "fromMemesListToEditorModal", sender: sender)
+        performSegue(withIdentifier: Default.Segues.FromList.ToEditorModal.rawValue, sender: sender)
     }
     
 }
@@ -109,12 +120,14 @@ extension MemeTableViewController {
     
     private func setupTitle() {
         if title == nil {
-            title = "Memes"
+            title = Default.ListView.Title
         }
     }
     
     private func setupNavItem() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMeme(sender:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                           target: self,
+                                                           action: #selector(addMeme(sender:)))
         navigationItem.rightBarButtonItem = editButtonItem
     }
 
@@ -132,7 +145,7 @@ extension MemeTableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "fromMemesListToEditorShow", sender: indexPath.row)
+        performSegue(withIdentifier: Default.Segues.FromList.ToEditorShow.rawValue, sender: indexPath.row)
     }
     
 }
@@ -151,7 +164,7 @@ extension MemeTableViewController: MutableArrayTableViewDataSourceController {
     }
     
     var reusableCellIdentifier: String {
-        return "MemeTableViewCell"
+        return Default.ListViewCell.ReusableCellId
     }
     
     
@@ -175,7 +188,10 @@ extension MemeTableViewController: MutableArrayTableViewDataSourceController {
 extension MemeTableViewController {
     
     func sunscribeToNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(memesModified(_:)), name: Notification.Name(rawValue: "MemesModified"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(memesModified(_:)),
+                                               name: Notification.Name(rawValue: Default.Notification.MemesModified.rawValue),
+                                               object: nil)
     }
     
     

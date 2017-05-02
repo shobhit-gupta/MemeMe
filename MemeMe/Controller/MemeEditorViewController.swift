@@ -102,7 +102,7 @@ extension MemeEditorViewController {
     
     // Not called when navigation controller displays a navigation bar.
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return Default.General.StatusBarStyle
     }
     
     
@@ -125,7 +125,7 @@ extension MemeEditorViewController {
     
     private func setupTitleIfNeeded() {
         if title == nil {
-            title = "Create Meme"
+            title = Default.Meme.Editor.Title
         }
     }
     
@@ -189,7 +189,7 @@ extension MemeEditorViewController {
     
     private func style(_ focusOnTextView: FocusOnTextView) {
         var textAttributes = memeView.textAttributes
-        textAttributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 24)!
+        textAttributes[NSFontAttributeName] = Default.Meme.Text.InputFont
         focusOnTextView.textView.typingAttributes = textAttributes
         
     }
@@ -257,7 +257,7 @@ extension MemeEditorViewController {
     
     @IBAction func share(_ sender: UIBarButtonItem) {
         guard case State.memeReady = currentState else {
-            print("Asked to share. Unexpected current state: \(currentState)")
+            print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
             return
         }
         
@@ -316,13 +316,11 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
         [camera, album, popular].forEach { $0?.isEnabled = false }
         switch sender.kind {
         case .camera:
-            //sender.kind = .camera(blendMode: .overlay)
             pickAnImage(from: .camera)
         case .album:
-            //sender.kind = .album(blendMode: .overlay)
             pickAnImage(from: .photoLibrary)
         case .popular:
-            //sender.kind = .popular(blendMode: .overlay)
+            // TODO: Add popular memes
             break
         default:
             break
@@ -333,7 +331,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func pickAnImage(from sourceType: UIImagePickerControllerSourceType) {
         guard case .selectImage = currentState else {
-            print("Unexpected Current state: \(currentState)")
+            print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
             return
         }
         
@@ -346,7 +344,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard case .selectImage = currentState else {
-            print("Unexpected Current state: \(currentState)")
+            print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
             return
         }
         
@@ -366,7 +364,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         guard case .selectImage = currentState else {
-            print("Unexpected Current state: \(currentState)")
+            print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
             return
         }
         picker.dismiss(animated: true)
@@ -383,7 +381,7 @@ extension MemeEditorViewController: MemeViewDelegate {
     
     func closeImageButtonPressed() {
         guard [.selectText, .memeReady].contains(currentState) else {
-            print("Unexpected Current state: \(currentState)")
+            print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
             return
         }
         
@@ -394,7 +392,7 @@ extension MemeEditorViewController: MemeViewDelegate {
     
     func memeLabelTapped(sender: UILabel) {
         guard [.selectText, .memeReady].contains(currentState) else {
-            print("Unexpected Current state: \(currentState)")
+            print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
             return
         }
         
@@ -414,13 +412,13 @@ extension MemeEditorViewController: UITextViewDelegate {
     fileprivate func startFocusOnTextView() {
         guard case let .inputText(label, focusOnTextViewOptional) = currentState,
             let focusOnTextView = focusOnTextViewOptional else {
-                print("Unexpected Current state: \(currentState)")
+                print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
                 return
         }
         
         let initialFrame = label.superview?.convert(label.frame, to: focusOnTextView)
-        focusOnTextView.fadeIn(duration: 0.01) { _ in
-            focusOnTextView.start(from: initialFrame, in: 0.25) {
+        focusOnTextView.fadeIn(duration: Default.Meme.Editor.TextView.FadeInDuration) { _ in
+            focusOnTextView.start(from: initialFrame, in: Default.Meme.Editor.TextView.MoveFrameDuration) {
                 focusOnTextView.textView.text = self.memeView.gettext(for: label)
                 focusOnTextView.textView.textAlignment = label.textAlignment
             }
@@ -431,14 +429,14 @@ extension MemeEditorViewController: UITextViewDelegate {
     fileprivate func endFocusOnTextView() {
         guard case let .inputText(label, focusOnTextViewOptional) = currentState,
             let focusOnTextView = focusOnTextViewOptional else {
-                print("Unexpected Current state: \(currentState)")
+                print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
                 return
         }
         
         let finalFrame = label.superview?.convert(label.frame, to: focusOnTextView)
         memeView.set(text: focusOnTextView.textView.text, for: label)
         focusOnTextView.end(on: finalFrame)
-        focusOnTextView.fadeOut(duration: 0.25) { _ in
+        focusOnTextView.fadeOut(duration: Default.Meme.Editor.TextView.FadeOutDuration) { _ in
             self.focusOnTextViewStackView.isHidden = true
             self.currentState = self.memeView.isReady ? .memeReady : .selectText
         }
@@ -466,7 +464,7 @@ extension MemeEditorViewController {
     
     fileprivate func generateMeme() -> Meme? {
         guard case .memeReady = currentState else {
-            print("Unexpected Current state: \(currentState)")
+            print(Error_.General.UnexpectedCurrentState(state: "\(currentState)").localizedDescription)
             return nil
         }
         

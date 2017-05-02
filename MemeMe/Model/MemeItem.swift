@@ -15,7 +15,7 @@ class MemeItem: SelectableItem {
     let meme: Meme
     var isSelected: Bool
     
-    init(with meme: Meme, isSelected: Bool = false) {
+    init(with meme: Meme, isSelected: Bool = Default.Meme.IsSelected) {
         self.meme = meme
         self.isSelected = isSelected
     }
@@ -24,6 +24,7 @@ class MemeItem: SelectableItem {
     public func save(byReplacing idx: Int? = nil) -> Bool {
         var isSaved = false
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            print(Error_.General.DowncastMismatch(for: UIApplication.shared.delegate!, as: AppDelegate.self))
             return isSaved
         }
         

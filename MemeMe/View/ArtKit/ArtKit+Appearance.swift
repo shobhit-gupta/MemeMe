@@ -41,7 +41,6 @@ public extension ArtKit {
 }
 
 
-
 extension UINavigationBar {
     
     var isShadowPresent: Bool {
@@ -50,17 +49,16 @@ extension UINavigationBar {
         }
         set {
             if newValue {
-                layer.shadowColor = ArtKit.shadowOfPrimaryColor.cgColor
-                layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-                layer.shadowRadius = 4.0
-                layer.shadowOpacity = 1.0
-                layer.masksToBounds = false
+                layer.shadowColor = Default.Artkit_.Bar.Shadow.Color
+                layer.shadowOffset = Default.Artkit_.Bar.Shadow.OffsetNavBar
+                layer.shadowRadius = Default.Artkit_.Bar.Shadow.Radius
+                layer.shadowOpacity = Default.Artkit_.Bar.Shadow.Opacity
+                layer.masksToBounds = Default.Artkit_.Bar.Shadow.MasksToBounds
             } else {
                 layer.shadowColor = nil
                 layer.shadowOpacity = 0.0
                 layer.masksToBounds = true
             }
-            
         }
     }
     
@@ -75,17 +73,16 @@ extension UITabBar {
         }
         set {
             if newValue {
-                layer.shadowColor = ArtKit.shadowOfPrimaryColor.cgColor
-                layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-                layer.shadowRadius = 4.0
-                layer.shadowOpacity = 1.0
-                layer.masksToBounds = false
+                layer.shadowColor = Default.Artkit_.Bar.Shadow.Color
+                layer.shadowOffset = Default.Artkit_.Bar.Shadow.OffsetTabBar
+                layer.shadowRadius = Default.Artkit_.Bar.Shadow.Radius
+                layer.shadowOpacity = Default.Artkit_.Bar.Shadow.Opacity
+                layer.masksToBounds = Default.Artkit_.Bar.Shadow.MasksToBounds
             } else {
                 layer.shadowColor = nil
                 layer.shadowOpacity = 0.0
                 layer.masksToBounds = true
             }
-            
         }
     }
     

@@ -13,12 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var memeItems = [MemeItem]()
-    let numMemes = Int.random(lower: 80, upper: 100)
+    let numMemes = Int.random(lower: Default.Random.Meme.Download.Min,
+                              upper: Default.Random.Meme.Download.Max)
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        // Override point for customization after application launch.
         ArtKit.setupAppearance()
         generateRandomMemes(stop: numMemes)
         return true
@@ -34,7 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.memeItems.append(MemeItem(with: meme))
                 // fix: Send this notification from here instead of the didSet observer in memeItems property.
                 // Doing otherwise crashes table view when deleting a row.
-                let notification = Notification(name: Notification.Name(rawValue: "MemesModified"), object: nil, userInfo: nil)
+                let notification = Notification(name: Notification.Name(rawValue: Default.Notification.MemesModified.rawValue),
+                                                object: nil,
+                                                userInfo: nil)
                 NotificationCenter.default.post(notification)
                 self.generateRandomMemes(stop: stop - 1)
             }

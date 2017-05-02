@@ -33,7 +33,7 @@ struct Meme {
         
         // Render MemeView to image
         let scale = memeView.image!.size.width / memeView.imageView.frame.width
-        let meme = memeView.renderToImage(atScale: scale, afterScreenUpdates: false)
+        let meme = memeView.renderToImage(atScale: scale, afterScreenUpdates: true)
         
         // Crop MemeView to appropriate size (remember MemeView is a DynamicImageView)
         let imageContentRect = memeView.imageView.frame
@@ -62,10 +62,21 @@ extension Meme {
                 print(error.info())
             }
             
-            let image = image ?? #imageLiteral(resourceName: "640x480")
-            let topText = String.random(.sentence, minLength: 4, maxLength: 15)
-            let bottomText = String.random(.sentence, minLength: 4, maxLength: 15)
-            let meme = Meme(topText: topText, bottomText: bottomText, originalImage: image, size: UIScreen.main.bounds.size)
+            let image = image ?? Default.Random.Meme.Image
+            
+            let topText = String.random(.sentence,
+                                        minLength: Default.Random.Meme.TopText.Length.Min,
+                                        maxLength: Default.Random.Meme.TopText.Length.Max)
+            
+            let bottomText = String.random(.sentence,
+                                           minLength: Default.Random.Meme.BottomText.Length.Min,
+                                           maxLength: Default.Random.Meme.BottomText.Length.Min)
+            
+            let meme = Meme(topText: topText,
+                            bottomText: bottomText,
+                            originalImage: image,
+                            size: Default.Random.Meme.Size)
+            
             completion(meme)
             
         }

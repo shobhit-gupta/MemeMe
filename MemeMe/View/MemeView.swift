@@ -41,10 +41,10 @@ class MemeView: DynamicImageView {
     
     public var textAttributes: [String : Any] {
         var attributes = [String : Any]()
-        attributes[NSStrokeColorAttributeName] = UIColor.black
-        attributes[NSStrokeWidthAttributeName] = -3.0
-        attributes[NSForegroundColorAttributeName] = UIColor.white
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 64)!
+        attributes[NSStrokeColorAttributeName] = Default.Meme.Text.StrokeColor
+        attributes[NSStrokeWidthAttributeName] = Default.Meme.Text.StrokeWidth
+        attributes[NSForegroundColorAttributeName] = Default.Meme.Text.ForegroundColor
+        attributes[NSFontAttributeName] = Default.Meme.Text.Font
         return attributes
     }
     
@@ -131,17 +131,17 @@ extension MemeView {
     
     
     fileprivate func setupLabel(_ label: UILabel) {
-        label.textColor = UIColor.white
-        label.textAlignment = .center
+        //label.textColor = UIColor.white
+        label.textAlignment = Default.Meme.Text.Alignment
         label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.1
+        label.adjustsFontSizeToFitWidth = Default.Meme.Text.AdjustFontSizeToFitWidth
+        label.minimumScaleFactor = Default.Meme.Text.MinimumFontScaleFactor
     }
     
     
     fileprivate func resetLabelsText() {
-        resetLabel(top, withText: topText ?? "TOP")
-        resetLabel(bottom, withText: bottomText ?? "BOTTOM")
+        resetLabel(top, withText: topText ?? Default.Meme.Text.Top)
+        resetLabel(bottom, withText: bottomText ?? Default.Meme.Text.Bottom)
     }
     
     
@@ -167,7 +167,7 @@ extension MemeView {
     
     fileprivate func setupcloseImageButton() {
         closeImageButton.kind = .closeImage
-        closeImageButton.backgroundColor = UIColor.clear
+        closeImageButton.backgroundColor = Default.Meme.CloseImageButtonBackgroundColor
     }
     
     
