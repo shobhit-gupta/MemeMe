@@ -74,15 +74,13 @@ open class FocusOnContentView: UIView {
     }
     
     
-    
-    
     // MARK: UIView Methods
     override open func layoutSubviews() {
         switch currentState {
         case let .start(initialRect, duration, options, completion):
             if let initialRect = initialRect {
-                let duration = duration ?? 0.5
-                let options = options ?? .curveEaseInOut
+                let duration = duration ?? Default.UIView_.Fade.In.Duration
+                let options = options ?? Default.UIView_.Fade.In.AnimationOptions
                 contentView.fadeIn(from: initialRect, to: displayRect, in: duration, options: options) { (finished) in
                     if finished {
                         completion?()
@@ -94,8 +92,8 @@ open class FocusOnContentView: UIView {
             }
             
         case let .display(duration, options):
-            let duration = duration ?? 0.3
-            let options = options ?? .curveEaseInOut
+            let duration = duration ?? Default.UIView_.Move.Duration
+            let options = options ?? Default.UIView_.Move.AnimationOptions
             if contentView.frame != displayRect {
                 contentView.move(to: displayRect, in: duration, options: options)
             }
@@ -110,8 +108,8 @@ open class FocusOnContentView: UIView {
                 currentState = .start(from: nil, duration: nil, options: nil, completion: nil)
             }
             
-            let duration = duration ?? 1.0
-            let options = options ?? .curveEaseInOut
+            let duration = duration ?? Default.UIView_.Fade.Out.Duration
+            let options = options ?? Default.UIView_.Fade.Out.AnimationOptions
             
             if let finalRect = finalRect {
                 contentView.fadeOut(to: finalRect, in: duration, options: options) { _ in
@@ -146,6 +144,9 @@ open class FocusOnContentView: UIView {
 }
 
 
+//******************************************************************************
+//                              MARK: Overlay
+//******************************************************************************
 extension FocusOnContentView: Overlay {
     
     public var overlayType: OverlayType? {
@@ -174,7 +175,6 @@ extension FocusOnContentView: Overlay {
     // Override this method to change set the type of overlay.
     private func setupOverlay() {
         if let overlayType = overlayType {
-            //contentView.removeFromSuperview()
             switch overlayType {
             case .plain:
                 addSubview(contentView)
@@ -190,5 +190,7 @@ extension FocusOnContentView: Overlay {
         }
     }
     
-    
+
 }
+
+

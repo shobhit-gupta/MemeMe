@@ -24,13 +24,14 @@ class MutableArrayCollectionViewDataSource<T: MutableArrayCollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? controller.source.count : 0
+        return section == 0 ? controller.source.count : Default.ArrayDataSource.ItemsCount
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: controller.reusableCellIdentifier, for: indexPath) as? T.CellType else {
-            print("1. Couldn't find UICollectionViewCell with reusable cell identifier: \(controller.reusableCellIdentifier) or, \n2. Couldn't downcast to \(T.CellType.self)")
+            let error = Error_.ArrayDataSource.DequeCellFailed(identifier: controller.reusableCellIdentifier, cellType: T.CellType.self)
+            print(error.localizedDescription)
             return T.CellType()
         }
         
@@ -42,6 +43,7 @@ class MutableArrayCollectionViewDataSource<T: MutableArrayCollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         controller.source.move(from: sourceIndexPath.item, to: destinationIndexPath.item)
     }
+    
     
 }
 

@@ -33,7 +33,7 @@ struct Meme {
         
         // Render MemeView to image
         let scale = memeView.image!.size.width / memeView.imageView.frame.width
-        let meme = memeView.renderToImage(atScale: scale)
+        let meme = memeView.renderToImage(atScale: scale, afterScreenUpdates: false)
         
         // Crop MemeView to appropriate size (remember MemeView is a DynamicImageView)
         let imageContentRect = memeView.imageView.frame
@@ -52,8 +52,6 @@ struct Meme {
 
 
 extension Meme {
-    
-    
     
     public static func random(completion: @escaping (Meme?) -> Void) {
         

@@ -97,10 +97,10 @@ class DynamicImageView: UIView {
 }
 
 
-extension Default {
+public extension Default {
     enum DynamicImageView {
         static let ContentMode: UIViewContentMode = .scaleAspectFit
-        static let BackgroundColor: UIColor = ArtKit.primaryColor
+        static let BackgroundColor: UIColor = ArtKit.primaryColor // UIColor.clear
     }
 }
 

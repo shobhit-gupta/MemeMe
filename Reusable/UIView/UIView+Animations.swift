@@ -70,7 +70,7 @@ public extension UIView {
 public extension Default.UIView_ {
     
     enum Move {
-        static let Duration: TimeInterval = 1.0
+        static let Duration: TimeInterval = 0.3
         static let Delay: TimeInterval = 0.0
         static let DampingRatio: CGFloat = 1.0
         static let Velocity: CGFloat = 0.0

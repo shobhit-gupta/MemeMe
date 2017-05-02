@@ -26,17 +26,23 @@ protocol SelectableMutableArrayCollectionViewDataSourceController: MutableArrayC
 
 class SelectableMutableArrayCollectionViewDataSource<T: SelectableMutableArrayCollectionViewDataSourceController>: MutableArrayCollectionViewDataSource<T> {
     
-    func selectItem(in collectionView: UICollectionView?, at indexPath: IndexPath, doesCollectionViewKnow: Bool = false) {
+    func selectItem(in collectionView: UICollectionView?,
+                    at indexPath: IndexPath,
+                    doesCollectionViewKnow: Bool = Default.CollectionView.DoesKnow) {
+        
         let item = dataItem(at: indexPath)
         item.isSelected = true
         controller.indexPathForSelectedItems.append(indexPath)
         if !doesCollectionViewKnow {
-            collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: .init(rawValue: 0))
+            collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: Default.CollectionView.ScrollPosition)
         }
     }
     
     
-    func deselectItem(in collectionView: UICollectionView?, at indexPath: IndexPath, doesCollectionViewKnow: Bool = false) {
+    func deselectItem(in collectionView: UICollectionView?,
+                      at indexPath: IndexPath,
+                      doesCollectionViewKnow: Bool = Default.CollectionView.DoesKnow) {
+        
         let item = dataItem(at: indexPath)
         item.isSelected = false
         controller.indexPathForSelectedItems = controller.indexPathForSelectedItems.filter { $0 != indexPath }
@@ -46,19 +52,24 @@ class SelectableMutableArrayCollectionViewDataSource<T: SelectableMutableArrayCo
     }
     
     
-    func selectAllItems(in collectionView: UICollectionView?, section: Int = 0, doesCollectionViewKnow: Bool = false) {
+    func selectAllItems(in collectionView: UICollectionView?,
+                        section: Int = Default.CollectionView.Section,
+                        doesCollectionViewKnow: Bool = Default.CollectionView.DoesKnow) {
+        
         stride(from: 0, to: controller.source.count, by: 1).forEach {
             controller.source[$0].isSelected = true
-            let indexPath = IndexPath(row: $0, section: 0)
+            let indexPath = IndexPath(row: $0, section: section)
             controller.indexPathForSelectedItems.append(indexPath)
             if !doesCollectionViewKnow {
-                collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: .init(rawValue: 0))
+                collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: Default.CollectionView.ScrollPosition)
             }
         }
     }
     
     
-    func deSelectAllItems(in collectionView: UICollectionView?, doesCollectionViewKnow: Bool = false) {
+    func deSelectAllItems(in collectionView: UICollectionView?,
+                          doesCollectionViewKnow: Bool = Default.CollectionView.DoesKnow) {
+        
         controller.indexPathForSelectedItems.forEach {
             let item = dataItem(at: $0)
             item.isSelected = false
@@ -70,7 +81,9 @@ class SelectableMutableArrayCollectionViewDataSource<T: SelectableMutableArrayCo
     }
     
     
-    func deleteSelectedItems(in collectionView: UICollectionView?, doesCollectionViewKnow: Bool = false, completion: ((Bool) -> Void)? = nil) {
+    func deleteSelectedItems(in collectionView: UICollectionView?,
+                             doesCollectionViewKnow: Bool = Default.CollectionView.DoesKnow,
+                             completion: ((Bool) -> Void)? = nil) {
         
         collectionView?.performBatchUpdates({
             // Remove selected items from data source
@@ -89,5 +102,13 @@ class SelectableMutableArrayCollectionViewDataSource<T: SelectableMutableArrayCo
     
 }
 
+
+public extension Default {
+    enum CollectionView {
+        static let DoesKnow = false
+        static let ScrollPosition: UICollectionViewScrollPosition = .init(rawValue: 0)
+        static let Section = 0
+    }
+}
 
 

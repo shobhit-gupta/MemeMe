@@ -30,7 +30,6 @@
 		EE4C810D1EA34E6C009CA8EA /* UIView+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */; };
 		EE4C810F1EA39C0A009CA8EA /* FocusOnContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4C810E1EA39C0A009CA8EA /* FocusOnContentView.swift */; };
 		EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6885A01E9CE9160021F696 /* MemeView.swift */; };
-		EE6C54A41E9F52F40014A102 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C549D1E9F52F40014A102 /* TextField.swift */; };
 		EE6C54A51E9F52F40014A102 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A01E9F52F40014A102 /* Default.swift */; };
 		EE6C54A61E9F52F40014A102 /* Error_.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A11E9F52F40014A102 /* Error_.swift */; };
 		EE6C54A71E9F52F40014A102 /* UIView+Fadeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */; };
@@ -41,6 +40,7 @@
 		EE749CD31EAE3EAF00B55809 /* Basic+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE749CCF1EAE3EAF00B55809 /* Basic+Random.swift */; };
 		EE758CCC1EA26E1100F2E794 /* CGRect+Ease.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */; };
 		EE82985E1EB711C10056D4D4 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82985D1EB711C10056D4D4 /* Enum.swift */; };
+		EE8298601EB8333B0056D4D4 /* Error_+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82985F1EB8333B0056D4D4 /* Error_+Random.swift */; };
 		EE894ABC1E5C99AC0066A4FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ABB1E5C99AC0066A4FE /* AppDelegate.swift */; };
 		EE894ABE1E5C99AC0066A4FE /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE894ABD1E5C99AC0066A4FE /* MemeEditorViewController.swift */; };
 		EE894AC11E5C99AC0066A4FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE894ABF1E5C99AC0066A4FE /* Main.storyboard */; };
@@ -109,7 +109,6 @@
 		EE4C810C1EA34E6C009CA8EA /* UIView+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Convert.swift"; sourceTree = "<group>"; };
 		EE4C810E1EA39C0A009CA8EA /* FocusOnContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusOnContentView.swift; sourceTree = "<group>"; };
 		EE6885A01E9CE9160021F696 /* MemeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemeView.swift; path = View/MemeView.swift; sourceTree = "<group>"; };
-		EE6C549D1E9F52F40014A102 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		EE6C54A01E9F52F40014A102 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		EE6C54A11E9F52F40014A102 /* Error_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error_.swift; sourceTree = "<group>"; };
 		EE6C54A31E9F52F40014A102 /* UIView+Fadeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Fadeable.swift"; sourceTree = "<group>"; };
@@ -120,6 +119,7 @@
 		EE749CCF1EAE3EAF00B55809 /* Basic+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Basic+Random.swift"; sourceTree = "<group>"; };
 		EE758CCB1EA26E1100F2E794 /* CGRect+Ease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Ease.swift"; sourceTree = "<group>"; };
 		EE82985D1EB711C10056D4D4 /* Enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enum.swift; path = Reusable/Enum.swift; sourceTree = "<group>"; };
+		EE82985F1EB8333B0056D4D4 /* Error_+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error_+Random.swift"; sourceTree = "<group>"; };
 		EE894AB81E5C99AC0066A4FE /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE894ABB1E5C99AC0066A4FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE894ABD1E5C99AC0066A4FE /* MemeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemeEditorViewController.swift; path = Controller/MemeEditorViewController.swift; sourceTree = "<group>"; };
@@ -278,7 +278,6 @@
 				EE4C810E1EA39C0A009CA8EA /* FocusOnContentView.swift */,
 				EEDA3F791E9D1D83006ABCCC /* FocusOnTextView.swift */,
 				EE6C54AA1E9FA0760014A102 /* Overlay.swift */,
-				EE6C549D1E9F52F40014A102 /* TextField.swift */,
 			);
 			name = CustomViews;
 			path = Reusable/CustomViews;
@@ -325,6 +324,7 @@
 		EE749CCE1EAE3EAF00B55809 /* Random */ = {
 			isa = PBXGroup;
 			children = (
+				EE82985F1EB8333B0056D4D4 /* Error_+Random.swift */,
 				EE8971F11EAF4DE900F04DA6 /* Array+Random.swift */,
 				EE749CCF1EAE3EAF00B55809 /* Basic+Random.swift */,
 				EE8971ED1EAF363300F04DA6 /* Text+Random.swift */,
@@ -707,14 +707,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE8971EE1EAF363300F04DA6 /* Text+Random.swift in Sources */,
 				EE6C54A51E9F52F40014A102 /* Default.swift in Sources */,
 				EE6C54A61E9F52F40014A102 /* Error_.swift in Sources */,
+				EE8298601EB8333B0056D4D4 /* Error_+Random.swift in Sources */,
 				EE8971EC1EAEDE9300F04DA6 /* UIImage+Random.swift in Sources */,
+				EE8971F21EAF4DE900F04DA6 /* Array+Random.swift in Sources */,
+				EE8971EE1EAF363300F04DA6 /* Text+Random.swift in Sources */,
 				EE291CB61EB1D4740034EDEB /* MemeItem.swift in Sources */,
 				EE8971F61EB0BE8500F04DA6 /* UIBarButtonItem+Ease.swift in Sources */,
 				EE6C54A71E9F52F40014A102 /* UIView+Fadeable.swift in Sources */,
-				EE8971F21EAF4DE900F04DA6 /* Array+Random.swift in Sources */,
 				EE8B01961EAA806700E67F18 /* MemeTableViewController.swift in Sources */,
 				EE39BF441EAD844E00C9D657 /* MemeCollectionViewController.swift in Sources */,
 				EE291CBA1EB24EA30034EDEB /* MutableArrayCollectionViewDataSource.swift in Sources */,
@@ -742,7 +743,6 @@
 				EE2BA6371EA8813100FD211A /* UIView+GraphicsContext.swift in Sources */,
 				EE758CCC1EA26E1100F2E794 /* CGRect+Ease.swift in Sources */,
 				EE6885A11E9CE9160021F696 /* MemeView.swift in Sources */,
-				EE6C54A41E9F52F40014A102 /* TextField.swift in Sources */,
 				EE749CD31EAE3EAF00B55809 /* Basic+Random.swift in Sources */,
 				EE39BF4A1EAE084000C9D657 /* ArrayDataSourceController.swift in Sources */,
 				EE291CB81EB2478B0034EDEB /* Array+Ease.swift in Sources */,

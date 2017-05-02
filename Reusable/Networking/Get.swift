@@ -10,12 +10,14 @@ import Foundation
 import UIKit
 
 
-public func asyncGetData(from url: URL, completion: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
+public func asyncGetData(from url: URL,
+                         completion: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
     URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
 }
 
 
-public func asyncGetImage(from url: URL, completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
+public func asyncGetImage(from url: URL,
+                          completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
     
     asyncGetData(from: url) { (data, response, error) in
         guard let data = data, error == nil else {

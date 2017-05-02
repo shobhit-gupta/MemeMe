@@ -45,3 +45,29 @@ public class ArrayDataSource<T: ArrayDataSourceController>: NSObject {
     }
     
 }
+
+
+public extension Default {
+    enum ArrayDataSource {
+        static let ItemsCount = 0
+    }
+}
+
+public extension Error_ {
+    
+    enum ArrayDataSource:Error {
+        case DequeCellFailed(identifier: String, cellType: UIView.Type)
+        
+        var localizedDescription: String {
+            var description = String(describing: self)
+            switch self {
+            case let .DequeCellFailed(identifier, cellType):
+                description += "Failed to deque cell with reuse id: \(identifier) as \(cellType))"
+            }
+            
+            return description
+        }
+    }
+    
+}
+
