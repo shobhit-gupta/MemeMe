@@ -42,6 +42,8 @@ class MutableArrayCollectionViewDataSource<T: MutableArrayCollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         controller.source.move(from: sourceIndexPath.item, to: destinationIndexPath.item)
+        // Fix: Resolves the issue with moving cells of varying sizes.
+        collectionView.reloadItems(at: [sourceIndexPath])
     }
     
     
