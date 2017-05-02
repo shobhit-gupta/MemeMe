@@ -113,8 +113,15 @@ class MemeTableViewController: UITableViewController {
 extension MemeTableViewController {
 
     fileprivate func setupUI() {
+        setupTableView()
         setupTitle()
         setupNavItem()
+    }
+    
+    
+    private func setupTableView() {
+        tableView.rowHeight = Default.ListView.RowHeight
+        tableView.contentInset = Default.ListView.ContentInset
     }
     
     
@@ -123,6 +130,7 @@ extension MemeTableViewController {
             title = Default.ListView.Title
         }
     }
+    
     
     private func setupNavItem() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
@@ -147,6 +155,7 @@ extension MemeTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: Default.Segues.FromList.ToEditorShow.rawValue, sender: indexPath.row)
     }
+    
     
 }
 

@@ -97,6 +97,8 @@ public extension Default {
     
     enum ListView {
         static let Title = "Memes"
+        static let RowHeight: CGFloat = 72.0
+        static let ContentInset = UIEdgeInsets(top: 8.0, left: 0.0, bottom: 8.0, right: 0.0)
     }
     
     
