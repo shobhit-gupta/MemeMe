@@ -15,9 +15,11 @@ public extension UIView {
     public func move(to newFrame: CGRect,
                      in duration: TimeInterval = Default.UIView_.Move.Duration,
                      delay: TimeInterval = Default.UIView_.Move.Delay,
+                     damping: CGFloat = Default.UIView_.Move.DampingRatio,
+                     velocity: CGFloat = Default.UIView_.Move.Velocity,
                      options: UIViewAnimationOptions = Default.UIView_.Move.AnimationOptions,
                      completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
-        UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: options, animations: {
             self.frame = newFrame
         }, completion: completion)
         
@@ -28,6 +30,8 @@ public extension UIView {
                        to finalFrame: CGRect? = nil,
                        in duration: TimeInterval,
                        delay: TimeInterval = Default.UIView_.Fade.In.Delay,
+                       damping: CGFloat = Default.UIView_.Move.DampingRatio,
+                       velocity: CGFloat = Default.UIView_.Move.Velocity,
                        options: UIViewAnimationOptions = Default.UIView_.Fade.In.AnimationOptions,
                        completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
         alpha = 0.0
@@ -35,7 +39,8 @@ public extension UIView {
         frame = initialFrame
         
         if let finalFrame = finalFrame {
-            UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
+            
+            UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: options, animations: {
                 self.alpha = 1.0
                 self.frame = finalFrame
             }, completion: completion)
@@ -65,9 +70,12 @@ public extension UIView {
 public extension Default.UIView_ {
     
     enum Move {
-        static let Duration: TimeInterval = 1.0
+        static let Duration: TimeInterval = 0.3
         static let Delay: TimeInterval = 0.0
+        static let DampingRatio: CGFloat = 1.0
+        static let Velocity: CGFloat = 0.0
         static let AnimationOptions: UIViewAnimationOptions = .curveEaseInOut
+
     }
     
 }

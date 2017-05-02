@@ -12,10 +12,10 @@ import UIKit
 
 public extension UIView {
     
-    public func renderToImage(atScale scale: CGFloat) -> UIImage? {
+    public func renderToImage(atScale scale: CGFloat, afterScreenUpdates afterUpdates: Bool) -> UIImage? {
         let rectToDraw = bounds
         UIGraphicsBeginImageContextWithOptions(rectToDraw.size, false, scale)
-        drawHierarchy(in: rectToDraw, afterScreenUpdates: true)
+        drawHierarchy(in: rectToDraw, afterScreenUpdates: afterUpdates)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image

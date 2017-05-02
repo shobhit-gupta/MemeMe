@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0VA-nU-gJg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ORq-Jd-VHo">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -53,12 +53,13 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lC2-QO-7pu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationItem title="Memes" id="u8B-n4-Dwb"/>
             </objects>
-            <point key="canvasLocation" x="-1691" y="1125"/>
+            <point key="canvasLocation" x="-693.75" y="1125"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Memes-->
         <scene sceneID="7FI-Bd-JPW">
             <objects>
                 <navigationController id="5Yu-dK-Lf3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Memes" image="List" id="MA3-6P-etR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dtp-Li-Tmq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -69,7 +70,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ae8-is-LA0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2564" y="1126"/>
+            <point key="canvasLocation" x="-1567.5" y="1125"/>
         </scene>
         <!--Meme Collection View Controller-->
         <scene sceneID="4go-MC-1BE">
@@ -93,7 +94,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KDO-Zz-h1Z">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KDO-Zz-h1Z">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgS-ce-XxJ" userLabel="Overlay" customClass="OverlayView" customModule="MemeMe" customModuleProvider="target">
@@ -129,7 +130,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8M-fv-53H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1691" y="1986"/>
+            <point key="canvasLocation" x="-693.75" y="1985"/>
         </scene>
         <!--Meme Editor View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -171,11 +172,11 @@
                                 <variation key="widthClass=compact" spacing="24"/>
                             </stackView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4F-nM-GMx" customClass="MemeView" customModule="MemeMe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3WO-JZ-hmf" userLabel="FocusOnTextView Stack View">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.91372549020000005" green="0.10980392160000001" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -227,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="244" y="1551"/>
+            <point key="canvasLocation" x="1241.25" y="1550"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="svQ-5n-mQU">
@@ -245,12 +246,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="So4-42-imV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-876" y="1550"/>
+            <point key="canvasLocation" x="120" y="1550"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Memes-->
         <scene sceneID="ybm-cZ-YCf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0VA-nU-gJg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Memes" image="Grid" id="of5-c0-zKE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fZD-RR-8Oh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -263,12 +265,33 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzZ-mZ-njB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2564" y="1987"/>
+            <point key="canvasLocation" x="-1567.5" y="1986.25"/>
+        </scene>
+        <!--Meme Tab Bar Controller-->
+        <scene sceneID="Ne3-Jf-tkF">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ORq-Jd-VHo" customClass="MemeTabBarController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="JkD-DJ-zhj">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="5Yu-dK-Lf3" kind="relationship" relationship="viewControllers" id="Kis-C3-UB7"/>
+                        <segue destination="0VA-nU-gJg" kind="relationship" relationship="viewControllers" id="cR6-hV-Y7L"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFw-KW-mq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2565" y="1555"/>
         </scene>
     </scenes>
     <resources>
         <image name="CloseBarButton" width="22" height="22"/>
         <image name="DoneBarButton" width="22" height="22"/>
+        <image name="Grid" width="22" height="22"/>
+        <image name="List" width="22" height="22"/>
         <image name="ShareBarButton" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>

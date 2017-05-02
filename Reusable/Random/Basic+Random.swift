@@ -1,3 +1,13 @@
+//
+//  Basic+Random.swift
+//  OnTheMap
+//
+//  Created by Shobhit Gupta on 10/12/16.
+//  Copyright © 2016 Shobhit Gupta. All rights reserved.
+//
+// Modified from: https://gist.github.com/jstn/f9d5437316879c9c448a and it's forks
+
+
 /*
  `arc4random_uniform` is very useful but limited to `UInt32`.
  
@@ -82,6 +92,9 @@ public extension Int32 {
 
 public extension UInt64 {
     public static func random(lower: UInt64 = min, upper: UInt64 = max) -> UInt64 {
+        guard lower < upper else {
+            return lower
+        }
         var m: UInt64
         let u = upper - lower
         var r = arc4random(UInt64.self)
@@ -140,8 +153,9 @@ public extension Bool {
     
     
     public static func randomWithLikeliness(likeliness: Double) -> Bool {
-        assert(likeliness > 0.0 && likeliness <= 1.0, "Likeliness percentage must be expressed with a value between 0.0 - 1.0")
+        assert(likeliness > 0.0 && likeliness <= 1.0, Error_.Random.LikelinessOutOfRange(value: likeliness).localizedDescription)
         return Double.random() <= likeliness
     }
     
 }
+

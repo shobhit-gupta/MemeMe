@@ -24,13 +24,14 @@ class ArrayTableViewDataSource<T: ArrayTableViewDataSourceController>: ArrayData
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return controller.source.count
+        return section == 0 ? controller.source.count : Default.ArrayDataSource.ItemsCount
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: controller.reusableCellIdentifier) as? T.CellType else {
-            print("1. Couldn't find UITableViewCell with reusable cell identifier: \(controller.reusableCellIdentifier) or, \n2. Couldn't downcast to \(T.CellType.self)")
+            let error = Error_.ArrayDataSource.DequeCellFailed(identifier: controller.reusableCellIdentifier, cellType: T.CellType.self)
+            print(error.localizedDescription)
             return T.CellType()
         }
         
@@ -39,6 +40,7 @@ class ArrayTableViewDataSource<T: ArrayTableViewDataSourceController>: ArrayData
     }
     
 }
+
 
 
 

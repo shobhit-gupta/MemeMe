@@ -11,7 +11,7 @@ import Foundation
 
 public extension String {
     
-    public enum RandomType {
+    public enum RandomType: CanGenerateRandomValues {
         case word
         case sentence
         case paragraph
@@ -20,7 +20,7 @@ public extension String {
     
     
     // Modified from: http://planetozh.com/blog/2012/10/generate-random-pronouceable-words/
-    public static func random(ofLength length: Int) -> String {
+    private static func random(ofLength length: Int) -> String {
         
         enum State {
             case consonant
@@ -67,7 +67,7 @@ public extension String {
         ]
         
         // Start with a vowel or consonant?
-        var currentState: State = Bool.randomWithLikeliness(likeliness: 0.5) ? .consonant : .vowel
+        var currentState: State = Bool.random() ? .consonant : .vowel
         var word = ""
         
         while word.length() < length {
@@ -96,21 +96,27 @@ public extension String {
             
         case .sentence:
             let randomWords = (1...length).map { _ in
-                random(.word, minLength: 2, maxLength: 10)
+                random(.word,
+                       minLength: Default.Random.Word.Length.Min,
+                       maxLength: Default.Random.Word.Length.Max)
             }
-            randomString = randomWords.joined(separator: " ").capitalizingFirstLetter() + "."
+            randomString = randomWords.joined(separator: Default.Random.Word.Separator).capitalizingFirstLetter() + Default.Random.Sentence.Finisher
             
         case .paragraph:
             let randomSentences = (1...length).map { _ in
-                random(.sentence, minLength: 3, maxLength: 10)
+                random(.sentence,
+                       minLength: Default.Random.Sentence.Length.Min,
+                       maxLength: Default.Random.Sentence.Length.Max)
             }
-            randomString = randomSentences.joined(separator: " ")
+            randomString = randomSentences.joined(separator: Default.Random.Sentence.Separator)
             
         case .essay:
             let randomParagraphs = (1...length).map { _ in
-                random(.paragraph, minLength: 4, maxLength: 10)
+                random(.paragraph,
+                       minLength: Default.Random.Paragraph.Length.Min,
+                       maxLength: Default.Random.Paragraph.Length.Max)
             }
-            randomString = randomParagraphs.joined(separator: "\n\n")
+            randomString = randomParagraphs.joined(separator: Default.Random.Paragraph.Separator)
         }
         
         return randomString
@@ -119,7 +125,7 @@ public extension String {
     
     public static func random(_ type: RandomType, minLength: Int, maxLength: Int) -> String {
         guard minLength > 0, maxLength > 0, minLength <= maxLength else {
-            print("Unexpected minLength: \(minLength), maxLength: \(maxLength) encountered while generating random string")
+            print(Error_.Random.UnexpectedStringLengths(min: minLength, max: maxLength).localizedDescription)
             return ""
         }
         
@@ -129,5 +135,34 @@ public extension String {
     }
     
     
+}
+
+
+public extension Default.Random {
+    
+    enum Word {
+        enum Length {
+            static let Min = 2
+            static let Max = 10
+        }
+        static let Separator = " "
+    }
+    
+    enum Sentence {
+        enum Length {
+            static let Min = 3
+            static let Max = 10
+        }
+        static let Separator = " "
+        static let Finisher = "."
+    }
+    
+    enum Paragraph {
+        enum Length {
+            static let Min = 4
+            static let Max = 10
+        }
+        static let Separator = "\n\n"
+    }
     
 }

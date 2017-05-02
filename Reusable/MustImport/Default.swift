@@ -19,41 +19,9 @@ public enum Default {
 
 public extension Default {
     
-    enum UIView_ {
-        
-    }
-
-//    enum FileManager_ {
-//        
-//    }
-//    
-//    enum Audio {
-//        
-//    }
+    enum UIView_ {}
+//    enum FileManager_ {}
+//    enum Audio {}
+    enum UIImage_ {}
     
 }
-
-
-//import AVFoundation
-//public extension Default.Audio {
-//    
-//        enum Default {
-//            static let Rate: Float = 1.0
-//            static let Pitch: Float = 1.0
-//            
-//            enum Distortion {
-//                static let Exist: Bool = false
-//                static let Preset: AVAudioUnitDistortionPreset = .multiEcho1
-//                static let PreGain: Float? = nil
-//                static let WetDryMix: Float? = nil
-//            }
-//            
-//            enum Reverb {
-//                static let Exist: Bool = false
-//                static let Preset: AVAudioUnitReverbPreset = .cathedral
-//                static let WetDryMix: Float? = 50.0
-//            }
-//            
-//        }
-//        
-//}

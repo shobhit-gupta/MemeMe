@@ -24,13 +24,14 @@ class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceControll
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return controller.source.count
+        return section == 0 ? controller.source.count : Default.ArrayDataSource.ItemsCount
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: controller.reusableCellIdentifier) as? T.CellType else {
-            print("1. Couldn't find UITableViewCell with reusable cell identifier: \(controller.reusableCellIdentifier) or, \n2. Couldn't downcast to \(T.CellType.self)")
+            let error = Error_.ArrayDataSource.DequeCellFailed(identifier: controller.reusableCellIdentifier, cellType: T.CellType.self)
+            print(error.localizedDescription)
             return T.CellType()
         }
         
@@ -51,8 +52,8 @@ class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceControll
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            controller.source.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.controller.source.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: Default.TableView.DeleteRowAnimation)
         }
     }
     
@@ -61,4 +62,11 @@ class MutableArrayTableViewDataSource<T: MutableArrayTableViewDataSourceControll
         controller.source.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
+}
+
+
+public extension Default {
+    enum TableView {
+        static let DeleteRowAnimation: UITableViewRowAnimation = .fade
+    }
 }

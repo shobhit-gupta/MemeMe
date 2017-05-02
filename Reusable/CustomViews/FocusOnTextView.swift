@@ -19,8 +19,8 @@ class FocusOnTextView: FocusOnContentView {
     public override var displayRect: CGRect {
         let container = _availableSpace
         let midPoint = container.midPoint
-        let width = container.width - 16.0
-        let height = min(100.0 + 0.1 * container.height, container.height)
+        let width = container.width - (2 * Default.FocusOnTextView.LeftRightMargin)
+        let height = min(Default.FocusOnTextView.BaseHeight + Default.FocusOnTextView.HeightMultiplier * container.height, container.height)
         return CGRect(midPoint: midPoint, size: CGSize(width: width, height: height))
     }
     
@@ -100,10 +100,10 @@ class FocusOnTextView: FocusOnContentView {
 extension FocusOnTextView {
     
     fileprivate func setupTextView() {
-        textView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
-        textView.textColor = UIColor.white
-        textView.layer.cornerRadius = 2.0
-        textView.keyboardAppearance = .dark
+        textView.backgroundColor = Default.FocusOnTextView.TextViewBackgroundColor
+        textView.textColor = Default.FocusOnTextView.TextColor
+        textView.layer.cornerRadius = Default.FocusOnTextView.CornerRadius
+        textView.keyboardAppearance = Default.FocusOnTextView.KeyboardAppearance
     }
 
 }
@@ -147,7 +147,17 @@ extension FocusOnTextView {
 }
 
 
-
+public extension Default {
+    enum FocusOnTextView {
+        static let LeftRightMargin: CGFloat = 8.0
+        static let BaseHeight: CGFloat = 100.0
+        static let HeightMultiplier: CGFloat = 0.1
+        static let CornerRadius: CGFloat = 2.0
+        static let TextViewBackgroundColor = UIColor.white.withAlphaComponent(0.1)
+        static let TextColor = UIColor.white
+        static let KeyboardAppearance: UIKeyboardAppearance = .dark
+    }
+}
 
 
 

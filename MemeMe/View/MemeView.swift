@@ -13,7 +13,7 @@ import PureLayout
 @objc
 protocol MemeViewDelegate: class {
     func closeImageButtonPressed()
-    func memeLabelTapped(sender: UITapGestureRecognizer)
+    func memeLabelTapped(sender: UILabel)
 }
 
 
@@ -28,22 +28,27 @@ class MemeView: DynamicImageView {
     public var isReady: Bool {
         return (topText != nil) && (bottomText != nil) && (image != nil)
     }
-    
-    // MARK: Private variables and types
-    fileprivate let augmentedStackView = UIStackView(frame: CGRect.zero)
+
     public let top = UILabel(frame: CGRect.zero)
     public let bottom = UILabel(frame: CGRect.zero)
     public let closeImageButton = ArtKitButton(frame: CGRect.zero)
-    private var shouldSetupConstraints = true
     
-    fileprivate var textAttributes: [String : Any] {
+    
+    // MARK: Private variables and types
+    fileprivate let augmentedStackView = UIStackView(frame: CGRect.zero)
+    fileprivate var topStackView: UIStackView?
+    fileprivate var bottomStackView: UIStackView?
+    
+    public var textAttributes: [String : Any] {
         var attributes = [String : Any]()
-        attributes[NSStrokeColorAttributeName] = UIColor.black
-        attributes[NSStrokeWidthAttributeName] = -3.0
-        attributes[NSForegroundColorAttributeName] = UIColor.white
-        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
+        attributes[NSStrokeColorAttributeName] = Default.Meme.Text.StrokeColor
+        attributes[NSStrokeWidthAttributeName] = Default.Meme.Text.StrokeWidth
+        attributes[NSForegroundColorAttributeName] = Default.Meme.Text.ForegroundColor
+        attributes[NSFontAttributeName] = Default.Meme.Text.Font
         return attributes
     }
+    
+    private var shouldSetupConstraints = true
     
     
     // MARK: Initializers
@@ -126,15 +131,17 @@ extension MemeView {
     
     
     fileprivate func setupLabel(_ label: UILabel) {
-        label.textColor = UIColor.white
-        label.textAlignment = .center
+        //label.textColor = UIColor.white
+        label.textAlignment = Default.Meme.Text.Alignment
         label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = Default.Meme.Text.AdjustFontSizeToFitWidth
+        label.minimumScaleFactor = Default.Meme.Text.MinimumFontScaleFactor
     }
     
     
     fileprivate func resetLabelsText() {
-        resetLabel(top, withText: topText ?? "TOP")
-        resetLabel(bottom, withText: bottomText ?? "BOTTOM")
+        resetLabel(top, withText: topText ?? Default.Meme.Text.Top)
+        resetLabel(bottom, withText: bottomText ?? Default.Meme.Text.Bottom)
     }
     
     
@@ -148,11 +155,11 @@ extension MemeView {
         augmentedStackView.alignment = .center
         augmentedStackView.distribution = .fillEqually
         
-        let topStackView = top.encompassInStackView(axis: .horizontal, alignment: .fill)
+        topStackView = top.encompassInStackView(axis: .horizontal, alignment: .top).encompassInStackView(axis: .horizontal, alignment: .fill)
         let closeImageButtonStackView = closeImageButton.encompassInStackView(axis: .horizontal, alignment: .center)
-        let bottomStackView = bottom.encompassInStackView(axis: .horizontal, alignment: .fill)
+        bottomStackView = bottom.encompassInStackView(axis: .horizontal, alignment: .bottom).encompassInStackView(axis: .horizontal, alignment: .fill)
         
-        [topStackView, closeImageButtonStackView, bottomStackView].forEach() { augmentedStackView.addArrangedSubview($0) }
+        [topStackView!, closeImageButtonStackView, bottomStackView!].forEach() { augmentedStackView.addArrangedSubview($0) }
         addSubview(augmentedStackView)
         
     }
@@ -160,19 +167,44 @@ extension MemeView {
     
     fileprivate func setupcloseImageButton() {
         closeImageButton.kind = .closeImage
+        closeImageButton.backgroundColor = Default.Meme.CloseImageButtonBackgroundColor
     }
     
     
     fileprivate func setupDelegate() {
-        if let delegate = delegate {
-            for label in [top, bottom] {
-                label.isUserInteractionEnabled = true
-                let tap = UITapGestureRecognizer(target: delegate, action: #selector(MemeViewDelegate.memeLabelTapped(sender:)))
-                label.addGestureRecognizer(tap)
+        if let delegate = delegate,
+            let topStackView = topStackView,
+            let bottomStackView = bottomStackView  {
+            
+            for stackView in [topStackView, bottomStackView] {
+                stackView.isUserInteractionEnabled = true
+                let tap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped(sender:)))
+                stackView.addGestureRecognizer(tap)
             }
             closeImageButton.addTarget(delegate, action: #selector(MemeViewDelegate.closeImageButtonPressed), for: .touchUpInside)
             
         }
+    }
+    
+    
+    @objc fileprivate func stackViewTapped(sender: UITapGestureRecognizer) {
+        if let stackView = sender.view as? UIStackView {
+            if stackView === topStackView {
+                delegate?.memeLabelTapped(sender: top)
+            } else if stackView === bottomStackView {
+                delegate?.memeLabelTapped(sender: bottom)
+            }
+        }
+    }
+}
+
+
+extension MemeView {
+    
+    public func setProperties(topText: String, bottomText: String, image: UIImage) {
+        self.image = image
+        set(text: topText, for: top)
+        set(text: bottomText, for: bottom)
     }
     
 }
