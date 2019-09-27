@@ -9,6 +9,6 @@ For making & sharing memes.
 
 ## Output
 
-!(Collection View)[Output1.png]
+![Collection View](Output1.png)
 
-!(Edit Meme)[Output2.png]
+![Edit Meme](Output2.png)
