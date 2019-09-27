@@ -22,6 +22,7 @@ public extension Default {
     enum UIView_ {}
 //    enum FileManager_ {}
 //    enum Audio {}
+    enum Network {}
     enum UIImage_ {}
     
 }

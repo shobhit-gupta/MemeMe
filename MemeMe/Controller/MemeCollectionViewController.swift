@@ -18,7 +18,7 @@ class MemeCollectionViewController: UICollectionViewController {
     // MARK: Private variables and types
     fileprivate var space: CGFloat {
         // space = 1.0 for minimum width on iOS
-        return round((collectionView?.bounds.width ?? 0.0) / Default.General.iOSMinWidth)
+        return round((collectionView?.bounds.width ?? 1.0) / Default.General.iOSMinWidth)
     }
     
     fileprivate var numCellsOnSmallerSide: Int {
@@ -292,7 +292,7 @@ extension MemeCollectionViewController: UICollectionViewDelegateFlowLayout {
                 height /= aspectRatio
             
             } else if aspectRatio < Default.GridViewCell.AspectRatio.TooNarrow {
-                width *= 0.5
+                width *= Default.GridViewCell.AspectRatio.TooNarrow
             
             } else {
                 width *= aspectRatio

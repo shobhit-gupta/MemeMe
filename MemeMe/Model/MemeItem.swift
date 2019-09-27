@@ -24,7 +24,7 @@ class MemeItem: SelectableItem {
     public func save(byReplacing idx: Int? = nil) -> Bool {
         var isSaved = false
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            print(Error_.General.DowncastMismatch(for: UIApplication.shared.delegate!, as: AppDelegate.self))
+            print(Error_.General.DowncastMismatch(for: UIApplication.shared.delegate!, as: AppDelegate.self as AnyClass as! AnyClass.Type))
             return isSaved
         }
         

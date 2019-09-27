@@ -58,7 +58,7 @@ public extension UIImage {
         let _category = category ?? ImageCategory.random()
         
         let url = loremPixelURL(width: _width, height: _height, category: _category)
-        asyncGetImage(from: url, completion: completion)
+        Network.getImage(from: url, completion: completion)
         
     }
     
@@ -107,16 +107,16 @@ extension UIImage {
         case ultraPanavision70
         
         // Randomly generate aspect ratio
-        case any
-        case outOfWhack // Extreme or unbalanced aspect reatio (e.g. a banner)
+        //case any
+        //case outOfWhack // Extreme or unbalanced aspect reatio (e.g. a banner)
         
         
         public func randomSize(in orientation: Orientation) -> CGSize {
             let ratio = value()
             var size: CGSize!
             switch self {
-            case .any:
-                size = CGSize(width: ratio.widthFactor, height: ratio.heightFactor)
+//            case .any:
+//                size = CGSize(width: ratio.widthFactor, height: ratio.heightFactor)
                 
             default:
                 size = randomSize(widthFactor: ratio.widthFactor, heightFactor: ratio.heightFactor)
@@ -202,32 +202,32 @@ extension UIImage {
             case .ultraPanavision70:
                 val = (widthFactor: 69, heightFactor: 25)
             
-            case .any:
-                let width = Int.random(lower: Default.UIImage_.Random.Width.Min,
-                                       upper: Default.UIImage_.Random.Width.Max)
-                
-                let height = Int.random(lower: Default.UIImage_.Random.Height.Min,
-                                        upper: Default.UIImage_.Random.Height.Max)
-                
-                val = (widthFactor: width, heightFactor: height)
-            
-            case .outOfWhack:
-                // Note: By default this generates an outOfWhack landscape image
-                // Use randomSize(in orientation: .portrait) to get outOfWhack portrait image.
-                
-                let widthGap = Default.UIImage_.Random.Width.Max - Default.UIImage_.Random.Width.Min
-                let heightGap = Default.UIImage_.Random.Height.Max - Default.UIImage_.Random.Height.Min
-                
-                let upperHeightLimitFactor = min(widthGap / 64, heightGap)
-                
-                // Multiply widthFactor's lower limit by 3 > 2.76 (ratio for ultraPanavision70) for really wide aspect ratio.
-                let widthFactor = Int.random(lower: upperHeightLimitFactor * 3,
-                                             upper: Default.UIImage_.Random.Width.Max / 4)
-                
-                let heightFactor = Int.random(lower: 1,
-                                              upper: upperHeightLimitFactor)
-                
-                val = (widthFactor: widthFactor, heightFactor: heightFactor)
+//            case .any:
+//                let width = Int.random(lower: Default.UIImage_.Random.Width.Min,
+//                                       upper: Default.UIImage_.Random.Width.Max)
+//                
+//                let height = Int.random(lower: Default.UIImage_.Random.Height.Min,
+//                                        upper: Default.UIImage_.Random.Height.Max)
+//                
+//                val = (widthFactor: width, heightFactor: height)
+//            
+//            case .outOfWhack:
+//                // Note: By default this generates an outOfWhack landscape image
+//                // Use randomSize(in orientation: .portrait) to get outOfWhack portrait image.
+//                
+//                let widthGap = Default.UIImage_.Random.Width.Max - Default.UIImage_.Random.Width.Min
+//                let heightGap = Default.UIImage_.Random.Height.Max - Default.UIImage_.Random.Height.Min
+//                
+//                let upperHeightLimitFactor = min(widthGap / 64, heightGap)
+//                
+//                // Multiply widthFactor's lower limit by 3 > 2.76 (ratio for ultraPanavision70) for really wide aspect ratio.
+//                let widthFactor = Int.random(lower: upperHeightLimitFactor * 3,
+//                                             upper: Default.UIImage_.Random.Width.Max / 4)
+//                
+//                let heightFactor = Int.random(lower: 1,
+//                                              upper: upperHeightLimitFactor)
+//                
+//                val = (widthFactor: widthFactor, heightFactor: heightFactor)
             
             }
             

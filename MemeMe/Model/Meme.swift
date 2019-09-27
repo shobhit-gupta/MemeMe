@@ -56,28 +56,32 @@ extension Meme {
     public static func random(completion: @escaping (Meme?) -> Void) {
         
         UIImage.random { (image, error) in
-            if let error = error as? Error_.Network.Get.Image {
+            
+            if let error = error as? Error_.Network.Response {
                 print(error.localizedDescription)
             } else if let error = error {
                 print(error.info())
             }
+
+            DispatchQueue.main.async {
+                let image = image ?? Default.Random.Meme.Image
+                
+                let topText = String.random(.sentence,
+                                            minLength: Default.Random.Meme.TopText.Length.Min,
+                                            maxLength: Default.Random.Meme.TopText.Length.Max)
+                
+                let bottomText = String.random(.sentence,
+                                               minLength: Default.Random.Meme.BottomText.Length.Min,
+                                               maxLength: Default.Random.Meme.BottomText.Length.Min)
+                
+                let meme = Meme(topText: topText,
+                                bottomText: bottomText,
+                                originalImage: image,
+                                size: Default.Random.Meme.Size)
+                
+                completion(meme)
+            }
             
-            let image = image ?? Default.Random.Meme.Image
-            
-            let topText = String.random(.sentence,
-                                        minLength: Default.Random.Meme.TopText.Length.Min,
-                                        maxLength: Default.Random.Meme.TopText.Length.Max)
-            
-            let bottomText = String.random(.sentence,
-                                           minLength: Default.Random.Meme.BottomText.Length.Min,
-                                           maxLength: Default.Random.Meme.BottomText.Length.Min)
-            
-            let meme = Meme(topText: topText,
-                            bottomText: bottomText,
-                            originalImage: image,
-                            size: Default.Random.Meme.Size)
-            
-            completion(meme)
             
         }
     }
