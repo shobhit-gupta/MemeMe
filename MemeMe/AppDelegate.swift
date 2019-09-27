@@ -12,12 +12,36 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var memeItems = [MemeItem]()
+    let numMemes = Int.random(lower: Default.Random.Meme.Download.Min,
+                              upper: Default.Random.Meme.Download.Max)
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        ArtKit.setupAppearance()
+        generateRandomMemes(stop: numMemes)
         return true
     }
+    
+    
+    func generateRandomMemes(stop: Int) {
+        if stop <= 0 {
+            return
+        }
+        Meme.random() { (meme) in
+            if let meme = meme {
+                self.memeItems.append(MemeItem(with: meme))
+                // fix: Send this notification from here instead of the didSet observer in memeItems property.
+                // Doing otherwise crashes table view when deleting a row.
+                let notification = Notification(name: Notification.Name(rawValue: Default.Notification.MemesModified.rawValue),
+                                                object: nil,
+                                                userInfo: nil)
+                NotificationCenter.default.post(notification)
+                self.generateRandomMemes(stop: stop - 1)
+            }
+        }
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
